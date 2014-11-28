@@ -50,4 +50,8 @@ public class RunningPlayer : MonoBehaviour {
 		pos.x += deltaX;
 		transform.position = pos;
 	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		gameObject.SetActive(false);
+	}
 }
