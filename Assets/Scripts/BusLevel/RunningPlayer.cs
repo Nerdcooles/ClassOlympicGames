@@ -8,9 +8,16 @@ public class RunningPlayer : MonoBehaviour {
 	public GameObject right_btn;
 
 	public float deltaX = 1;
+	public GameManager.ePlayers player;
 
 	bool left_pressed = true;
 	bool right_pressed = false;
+
+	public BusLevelManager levelManager;
+	
+	void Start () {
+		levelManager = GameObject.Find("LevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
+	}
 
 	private void OnEnable()
 	{
@@ -52,6 +59,7 @@ public class RunningPlayer : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		levelManager.Finish(this.player);
 		gameObject.SetActive(false);
 	}
 }
