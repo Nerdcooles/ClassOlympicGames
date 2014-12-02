@@ -13,7 +13,7 @@ public class RunningPlayer : MonoBehaviour {
 	bool left_pressed = true;
 	bool right_pressed = false;
 
-	public BusLevelManager levelManager;
+	private BusLevelManager levelManager;
 	
 	void Start () {
 		levelManager = GameObject.Find("LevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
@@ -60,6 +60,6 @@ public class RunningPlayer : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		levelManager.Finish(this.player);
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 }
