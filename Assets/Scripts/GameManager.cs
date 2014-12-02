@@ -2,7 +2,7 @@
 
 public class GameManager : Singleton<GameManager> {
 
-	private int num_player = 1;
+	private int num_player = 4;
 
 	Player Player1 = new Player(ePlayers.p01);
 	Player Player2 = new Player(ePlayers.p02);
