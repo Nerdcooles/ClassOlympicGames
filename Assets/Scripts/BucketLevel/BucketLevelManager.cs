@@ -8,9 +8,10 @@ public class BucketLevelManager : MonoBehaviour {
 	public int num_players = 4;
 	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
 	
-	public float seconds = 10;
+	public float seconds = 30;
 	
 	void Start() {
+		Debug.Log("BUCKET LEVEL");
 		if(GameManager.Instance.getNumPlayer()==0)
 			GameManager.Instance.startGame(num_players);
 		num_players = GameManager.Instance.getNumPlayer();
