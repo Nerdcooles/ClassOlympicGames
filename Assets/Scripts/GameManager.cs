@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager> {
 	protected GameManager () {} // guarantee this will be always a singleton only - can't use the constructor!
 
 	public void startGame(int num_players) {
+		Debug.Log("NEW GAME");
 		players = new Dictionary<ePlayers, Player>();
 		for(int i=0; i<num_players; i++)
 			players.Add((ePlayers)i, new Player());

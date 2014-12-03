@@ -7,11 +7,10 @@ public class BusLevelManager : MonoBehaviour {
 	int player_pos;
 		
 	void Start() {
-		/* TEST SINGLE SCENE*/
-		GameManager.Instance.startGame(num_players);
-		/* END */
-
-		//num_players = GameManager.Instance.getNumPlayer();
+		Debug.Log("BUS LEVEL");
+		if(GameManager.Instance.getNumPlayer()==0)
+			GameManager.Instance.startGame(num_players);
+		num_players = GameManager.Instance.getNumPlayer();
 		player_pos = 1;
 	}
 

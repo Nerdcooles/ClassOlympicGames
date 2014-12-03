@@ -11,11 +11,10 @@ public class BucketLevelManager : MonoBehaviour {
 	public float seconds = 10;
 	
 	void Start() {
-		/* TEST SINGLE SCENE*/
-		GameManager.Instance.startGame(num_players);
-		/* END */
-
+		if(GameManager.Instance.getNumPlayer()==0)
+			GameManager.Instance.startGame(num_players);
 		num_players = GameManager.Instance.getNumPlayer();
+
 		for(int i=0; i<num_players; i++) {
 			points.Add((GameManager.ePlayers)i, 0); 
 		}
@@ -50,6 +49,6 @@ public class BucketLevelManager : MonoBehaviour {
 	private void GameOver() {
 		Debug.Log("GAME OVER");
 		GameManager.Instance.printMedals();
-		Application.LoadLevel("Bus");
+		Application.LoadLevel("Menu");
 	}
 }
