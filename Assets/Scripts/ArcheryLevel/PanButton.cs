@@ -1,33 +1,37 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
+using TouchScript.Gestures.Simple;
 using TouchScript.Utils;
 using System;
 
 public class PanButton : MonoBehaviour {
 
-	public float y_top = -2.4f;
-	public float y_bottom = -4.3f;
+	public GameObject player;
 
 	private Vector3 position;
-	private float pos_x;
+	private float x;
+	private float center;
+	private float y_new;
 	private float direction;
+	
+	private float range = 1;
 	
 	void Start()
 	{
-		position = transform.position;
-		pos_x = position.x;
+		x = transform.position.x;
+		center = transform.position.y;
 	}
 	
 	private void OnEnable()
 	{
-		gameObject.GetComponent<PanGesture>().StateChanged += onStateChangeHandler;
+		gameObject.GetComponent<SimplePanGesture>().Panned += onStateChangeHandler;
 		gameObject.GetComponent<ReleaseGesture>().Released += shoot;
 	}
 	
 	private void OnDisable()
 	{
 		try{
-			gameObject.GetComponent<PanGesture>().StateChanged -= onStateChangeHandler;
+			gameObject.GetComponent<SimplePanGesture>().Panned -= onStateChangeHandler;
 			gameObject.GetComponent<ReleaseGesture>().Released -= shoot;
 		}catch{ }
 	}
@@ -35,18 +39,19 @@ public class PanButton : MonoBehaviour {
 	private void onStateChangeHandler(object sender, EventArgs e)
 	{
 		position = transform.position;
-		position.x = pos_x;
-		if(position.y < y_top && position.y >y_bottom)
-			direction = position.y;
+		position.x = x;
+		y_new = transform.position.y;
+		if(y_new < (center + range) && y_new > (center - range))
+			direction = y_new;
 		position.y = direction;
 		transform.position = position;
 		
-		Debug.Log(position);	
+		player.GetComponent<ArcheryPlayer>().setDirection(direction - center);
 	}
 
 	private void shoot(object sender, EventArgs e)
 	{
-		Debug.Log("SHOOT");
+		player.GetComponent<ArcheryPlayer>().shoot();
 	}
 }
 

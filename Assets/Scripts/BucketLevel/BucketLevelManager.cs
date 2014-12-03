@@ -50,6 +50,6 @@ public class BucketLevelManager : MonoBehaviour {
 	private void GameOver() {
 		Debug.Log("GAME OVER");
 		GameManager.Instance.printMedals();
-		Application.LoadLevel("Menu");
+		Application.LoadLevel("Archery");
 	}
 }
