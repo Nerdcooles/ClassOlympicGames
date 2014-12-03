@@ -1,14 +1,11 @@
 ﻿
 public class Player{
 
-	GameManager.ePlayers player;
-
 	int gold;
 	int silver;
 	int bronze;
 
-	public Player(GameManager.ePlayers player) {
-		this.player = player;
+	public Player() {
 		gold = 0;
 		silver = 0;
 		bronze = 0;

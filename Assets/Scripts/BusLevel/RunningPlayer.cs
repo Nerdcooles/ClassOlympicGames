@@ -30,8 +30,10 @@ public class RunningPlayer : MonoBehaviour {
 	private void OnDisable()
 	{
 		// don't forget to unsubscribe
+		try{
 		left_btn.GetComponent<TapGesture>().Tapped -= tapLeft;
 		right_btn.GetComponent<TapGesture>().Tapped -= tapRight;
+		}catch{}
 	}
 
 	private void tapLeft(object sender, EventArgs e)

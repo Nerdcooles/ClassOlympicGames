@@ -30,8 +30,13 @@ public class BucketPlayer : MonoBehaviour {
 	private void OnDisable()
 	{
 		// don't forget to unsubscribe
-		shoot_btn.GetComponent<PressGesture>().Pressed += startPower;
-		shoot_btn.GetComponent<ReleaseGesture>().Released += shoot;
+		try{
+		shoot_btn.GetComponent<PressGesture>().Pressed -= startPower;
+		shoot_btn.GetComponent<ReleaseGesture>().Released -= shoot;
+		}
+		catch
+		{
+		}
 	}
 
 	// Update is called once per frame
