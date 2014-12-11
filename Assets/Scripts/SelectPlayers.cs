@@ -3,12 +3,19 @@ using System;
 using TouchScript.Gestures;
 
 
-public class Menu : MonoBehaviour {
+public class SelectPlayers : MonoBehaviour {
 
 	public GameObject p1;
 	public GameObject p2;
 	public GameObject p3;
 	public GameObject p4;
+
+	void Start() {
+		switch(GameManager.Instance.getGameMode()) {
+		case GameManager.eGameMode.CLASSIC: p1.SetActive(false); break;
+		case GameManager.eGameMode.TRAINING: p1.SetActive(true); break;
+		}
+	}
 
 	private void OnEnable()
 	{
@@ -32,32 +39,24 @@ public class Menu : MonoBehaviour {
 	private void start1(object sender, EventArgs e)
 	{
 		Debug.Log("START 1 PLAYER");
-		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(1);
-		Application.LoadLevel("Bus");
 	}
 	
 	private void start2(object sender, EventArgs e)
 	{
 		Debug.Log("START 2 PLAYERS");
-		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(2);
-		Application.LoadLevel("Bus");
 	}
 	
 	private void start3(object sender, EventArgs e)
 	{
 		Debug.Log("START 3 PLAYERS");
-		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(3);
-		Application.LoadLevel("Bus");
 	}
 	
 	private void start4(object sender, EventArgs e)
 	{
 		Debug.Log("START 4 PLAYERS");
-		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(4);
-		Application.LoadLevel("Bus");
 	}
 }

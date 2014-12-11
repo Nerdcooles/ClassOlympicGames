@@ -13,15 +13,8 @@ public class GameManager : Singleton<GameManager> {
 		
 	protected GameManager () {} // guarantee this will be always a singleton only - can't use the constructor!
 
-	public void startMode(eGameMode mode) {
-		this.gameMode = mode;
-	}
-
-	public void startGame(int num_players) {
-		Debug.Log("NEW GAME");
-		players = new Dictionary<ePlayers, Player>();
-		for(int i=0; i<num_players; i++)
-			players.Add((ePlayers)i, new Player());
+	public eGameMode getGameMode() {
+		return gameMode;
 	}
 
 	public int getNumPlayer() {
@@ -49,12 +42,41 @@ public class GameManager : Singleton<GameManager> {
 			switch(level) {
 			case eLevels.Bus: 		Application.LoadLevel("Bucket"); break;
 			case eLevels.Bucket: 	Application.LoadLevel("Archery"); break;
-			case eLevels.Archery: 	Application.LoadLevel("Menu"); break;
-				
+			case eLevels.Archery: 	Application.LoadLevel("Menu"); break;	
 			}
 		}else{
-			Application.LoadLevel("Menu");
+			newGame();
+		}	
+	}
+
+	public void newGame() {
+		Application.LoadLevel("NewGame");
+	}
+
+	public void startMode(eGameMode mode) {
+		this.gameMode = mode;
+	}
+	
+	public void selectPlayers() {
+		Application.LoadLevel("SelectPlayers");
+	}
+	
+	public void startGame(int num_players) {
+		players = new Dictionary<ePlayers, Player>();
+		for(int i=0; i<num_players; i++)
+			players.Add((ePlayers)i, new Player());
+
+		
+		switch(gameMode) {
+		case eGameMode.CLASSIC: Application.LoadLevel("Bus"); break;
+		case eGameMode.TRAINING: Application.LoadLevel("SelectLevel"); break;
 		}
-			
+	}
+	
+	public void startLevel(eLevels level) {
+		switch(level) {
+		case eLevels.Bus: Application.LoadLevel("Bus"); break;
+		case eLevels.Bucket: Application.LoadLevel("Bucket"); break;
+		}
 	}
 }
