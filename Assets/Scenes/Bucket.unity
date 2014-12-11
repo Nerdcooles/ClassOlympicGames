@@ -218,18 +218,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9243d21c62b443f0b27c96468dd1f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1:
+  p1_fixed:
   - {fileID: 860022996}
-  - {fileID: 1234114168}
-  p2:
+  p1_btns: {fileID: 1234114168}
+  p2_fixed:
   - {fileID: 532821055}
-  - {fileID: 691081584}
-  p3:
-  - {fileID: 275750052}
+  p2_btns: {fileID: 691081584}
+  p3_fixed:
   - {fileID: 810330814}
-  p4:
+  p3_btns: {fileID: 275750052}
+  p4_fixed:
   - {fileID: 1543739428}
-  - {fileID: 379076709}
+  p4_btns: {fileID: 379076709}
+  size_x: 3.20000005
 --- !u!1 &149670400
 GameObject:
   m_ObjectHideFlags: 0

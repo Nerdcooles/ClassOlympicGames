@@ -1321,18 +1321,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9243d21c62b443f0b27c96468dd1f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1:
-  - {fileID: 0}
-  - {fileID: 0}
-  p2:
-  - {fileID: 0}
-  - {fileID: 0}
-  p3:
-  - {fileID: 0}
-  - {fileID: 0}
-  p4:
-  - {fileID: 0}
-  - {fileID: 0}
+  p1_fixed:
+  - {fileID: 2085217709}
+  p1_btns: {fileID: 1559235306}
+  p2_fixed:
+  - {fileID: 1974511305}
+  p2_btns: {fileID: 117381614}
+  p3_fixed:
+  - {fileID: 1848640757}
+  p3_btns: {fileID: 193473106}
+  p4_fixed:
+  - {fileID: 224064504}
+  p4_btns: {fileID: 884495508}
+  size_x: 0
 --- !u!4 &1445548793
 Transform:
   m_ObjectHideFlags: 0

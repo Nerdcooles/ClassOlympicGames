@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181d5011d44da4348b14179803f39a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  num_players: 4
 --- !u!4 &102525365
 Transform:
   m_ObjectHideFlags: 0
@@ -361,18 +362,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9243d21c62b443f0b27c96468dd1f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1:
-  - {fileID: 0}
-  - {fileID: 0}
-  p2:
+  p1_fixed:
+  - {fileID: 192432594}
+  p1_btns: {fileID: 1062873643}
+  p2_fixed:
   - {fileID: 648374094}
-  - {fileID: 1608435622}
-  p3:
+  p2_btns: {fileID: 1608435622}
+  p3_fixed:
   - {fileID: 87522342}
-  - {fileID: 250364050}
-  p4:
+  p3_btns: {fileID: 250364050}
+  p4_fixed:
   - {fileID: 805625080}
-  - {fileID: 1129633868}
+  p4_btns: {fileID: 1129633868}
+  size_x: 3.20000005
 --- !u!1 &192432594
 GameObject:
   m_ObjectHideFlags: 0
