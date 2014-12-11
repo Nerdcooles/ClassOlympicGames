@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ public class BucketLevelManager : MonoBehaviour {
 	
 	public int num_players = 4;
 	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
+	public Text[] text_score;
 	
 	public float seconds = 30;
 	
@@ -44,6 +46,7 @@ public class BucketLevelManager : MonoBehaviour {
 	
 	public void score(GameManager.ePlayers player) {
 		points[player]++;
+		text_score[player.GetHashCode()].text = points[player].ToString();
 		Debug.Log(player + " score " + points[player]);
 	}
 
