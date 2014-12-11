@@ -32,6 +32,7 @@ public class Menu : MonoBehaviour {
 	private void start1(object sender, EventArgs e)
 	{
 		Debug.Log("START 1 PLAYER");
+		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(1);
 		Application.LoadLevel("Bus");
 	}
@@ -39,6 +40,7 @@ public class Menu : MonoBehaviour {
 	private void start2(object sender, EventArgs e)
 	{
 		Debug.Log("START 2 PLAYERS");
+		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(2);
 		Application.LoadLevel("Bus");
 	}
@@ -46,6 +48,7 @@ public class Menu : MonoBehaviour {
 	private void start3(object sender, EventArgs e)
 	{
 		Debug.Log("START 3 PLAYERS");
+		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(3);
 		Application.LoadLevel("Bus");
 	}
@@ -53,6 +56,7 @@ public class Menu : MonoBehaviour {
 	private void start4(object sender, EventArgs e)
 	{
 		Debug.Log("START 4 PLAYERS");
+		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
 		GameManager.Instance.startGame(4);
 		Application.LoadLevel("Bus");
 	}
