@@ -41,8 +41,8 @@ public class GameManager : Singleton<GameManager> {
 		if(gameMode == eGameMode.CLASSIC) {
 			switch(level) {
 			case eLevels.Bus: 		Application.LoadLevel("Bucket"); break;
-			case eLevels.Bucket: 	Application.LoadLevel("Archery"); break;
-			case eLevels.Archery: 	Application.LoadLevel("Menu"); break;	
+			case eLevels.Bucket: 	Application.LoadLevel("NewGame"); break;
+			case eLevels.Archery: 	Application.LoadLevel("NewGame"); break;	
 			}
 		}else{
 			newGame();
