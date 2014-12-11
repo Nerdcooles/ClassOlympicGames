@@ -5,11 +5,17 @@ using System.Linq;
 public class GameManager : Singleton<GameManager> {
 
 	public enum ePlayers {p01, p02, p03, p04};
+	public enum eGameMode {CLASSIC, TRAINING};
+	public enum eLevels {Bus, Bucket, Archery};
 	
 	Dictionary<ePlayers, Player> players = new Dictionary<ePlayers, Player>();
-	private int num;
+	private eGameMode gameMode;
 		
 	protected GameManager () {} // guarantee this will be always a singleton only - can't use the constructor!
+
+	public void startMode(eGameMode mode) {
+		this.gameMode = mode;
+	}
 
 	public void startGame(int num_players) {
 		Debug.Log("NEW GAME");
@@ -38,9 +44,17 @@ public class GameManager : Singleton<GameManager> {
 		
 	}
 
-	public void printMedals() {
-		var list = players.Keys.ToList();
-		foreach(ePlayers p in list)
-			Debug.Log(p + " GOLD " + players[p].getGold() + " SILVER " + players[p].getSilver() + " BRONZE " + players[p].getBronze());
+	public void gameOver(eLevels level) {
+		if(gameMode == eGameMode.CLASSIC) {
+			switch(level) {
+			case eLevels.Bus: 		Application.LoadLevel("Bucket"); break;
+			case eLevels.Bucket: 	Application.LoadLevel("Archery"); break;
+			case eLevels.Archery: 	Application.LoadLevel("Menu"); break;
+				
+			}
+		}else{
+			Application.LoadLevel("Menu");
+		}
+			
 	}
 }

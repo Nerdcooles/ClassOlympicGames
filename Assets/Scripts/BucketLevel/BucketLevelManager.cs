@@ -6,6 +6,8 @@ using System.Linq;
 
 public class BucketLevelManager : MonoBehaviour {
 	
+	private GameManager.eLevels level = GameManager.eLevels.Bucket;
+	
 	public int num_players = 4;
 	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
 	public Text[] text_score;
@@ -14,8 +16,10 @@ public class BucketLevelManager : MonoBehaviour {
 	
 	void Start() {
 		Debug.Log("BUCKET LEVEL");
-		if(GameManager.Instance.getNumPlayer()==0)
+		if(GameManager.Instance.getNumPlayer()==0) {
+			GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
 			GameManager.Instance.startGame(num_players);
+		}
 		num_players = GameManager.Instance.getNumPlayer();
 
 		for(int i=0; i<num_players; i++) {

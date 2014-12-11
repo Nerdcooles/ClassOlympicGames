@@ -3,13 +3,17 @@ using System.Collections;
 
 public class BusLevelManager : MonoBehaviour {
 	
+	private GameManager.eLevels level = GameManager.eLevels.Bus;
+
 	public int num_players = 4;
 	int player_pos;
 		
 	void Start() {
 		Debug.Log("BUS LEVEL");
-		if(GameManager.Instance.getNumPlayer()==0)
+		if(GameManager.Instance.getNumPlayer()==0) {
+			GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
 			GameManager.Instance.startGame(num_players);
+		}
 		num_players = GameManager.Instance.getNumPlayer();
 		player_pos = 1;
 	}
@@ -28,7 +32,6 @@ public class BusLevelManager : MonoBehaviour {
 
 	private void GameOver() {
 		Debug.Log("GAME OVER");
-		GameManager.Instance.printMedals();
-		Application.LoadLevel("Bucket");
+		GameManager.Instance.gameOver(this.level);
 	}
 }
