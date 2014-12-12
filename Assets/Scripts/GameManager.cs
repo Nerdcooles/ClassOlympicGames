@@ -5,6 +5,7 @@ using System.Linq;
 public class GameManager : Singleton<GameManager> {
 
 	public enum ePlayers {p01, p02, p03, p04};
+	public enum eMedals {Gold, Silver, Bronze};
 	public enum eGameMode {CLASSIC, TRAINING};
 	public enum eLevels {Bus, Bucket, Archery};
 	
@@ -21,20 +22,15 @@ public class GameManager : Singleton<GameManager> {
 		return players.Count;
 	}
 
-	public void addGold(ePlayers player) {
+	public void addMedal(ePlayers player, eMedals medal) {
 		if (players.ContainsKey(player))
-			players[player].addGold();
-	}
-	
-	public void addSilver(ePlayers player) {
-		if (players.ContainsKey(player))	
-			players[player].addSilver();
+			players[player].addMedal(medal);
 	}
 
-	public void addBronze(ePlayers player) {
+	public int getMedal(ePlayers player, eMedals medal) {
 		if (players.ContainsKey(player))
-			players[player].addBronze();
-		
+			return players[player].getMedals(medal);
+		return 0;
 	}
 
 	public void gameOver(eLevels level) {
@@ -66,7 +62,6 @@ public class GameManager : Singleton<GameManager> {
 		for(int i=0; i<num_players; i++)
 			players.Add((ePlayers)i, new Player());
 
-		
 		switch(gameMode) {
 		case eGameMode.CLASSIC: Application.LoadLevel("Bus"); break;
 		case eGameMode.TRAINING: Application.LoadLevel("SelectLevel"); break;

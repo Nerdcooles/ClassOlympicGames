@@ -4,34 +4,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class BucketLevelManager : MonoBehaviour {
-	
-	private GameManager.eLevels level = GameManager.eLevels.Bucket;
-	
-	public int num_players = 4;
+public class BucketLevelManager : LevelManager {
+		
 	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
 	public Text[] text_score;
-	public GameObject panel_GameOver;
-	public Text UIgold;
-	public Text UIsilver;
-	public Text UIbronze;
-	public GameObject panel_Scores;
-	public Text[] UIpts;
 	
 	public float seconds = 30;
 	private bool finished;
 	
 	void Start() {
+		_start();
 		Debug.Log("BUCKET LEVEL");
+		level = GameManager.eLevels.Bucket;
 		finished = false;
-		panel_GameOver.SetActive(false);
-		panel_Scores.SetActive(false);
-		if(GameManager.Instance.getNumPlayer()==0) {
-			GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
-			GameManager.Instance.startGame(num_players);
-		}
-		num_players = GameManager.Instance.getNumPlayer();
-
 		for(int i=0; i<num_players; i++) {
 			points.Add((GameManager.ePlayers)i, 0); 
 		}
@@ -43,17 +28,18 @@ public class BucketLevelManager : MonoBehaviour {
 		var player = from pair in points
 			orderby pair.Value descending
 				select pair;
-		int pos = 1;
+		int player_pos = 0;
 		foreach (KeyValuePair<GameManager.ePlayers, int> pair in player)
 		{
-			Debug.Log(pair.Key + " POINTS " + pair.Value);
-			switch(pos) {
-			case 1: GameManager.Instance.addGold(pair.Key); UIgold.text = pair.Key.ToString(); break;
-			case 2: GameManager.Instance.addSilver(pair.Key); UIsilver.text = pair.Key.ToString(); break;
-			case 3: GameManager.Instance.addBronze(pair.Key); UIbronze.text = pair.Key.ToString(); break;
+			if(player_pos < 3){
+				GameManager.Instance.addMedal(pair.Key, (GameManager.eMedals)player_pos);
+				levelUI.medal(pair.Key, (GameManager.eMedals)player_pos);
+			}else {
+				break;
 			}
-			pos++;
+			player_pos++;
 		}
+		finished = true;
 		StartCoroutine(GameOver());
 	}
 	
@@ -61,19 +47,7 @@ public class BucketLevelManager : MonoBehaviour {
 		if(!finished){
 			points[player]++;
 			text_score[player.GetHashCode()].text = points[player].ToString();
-			UIpts[player.GetHashCode()].text = points[player].ToString();
-			Debug.Log(player + " score " + points[player]);
+			levelUI.score(player, points[player].ToString());
 		}
-	}
-	
-	IEnumerator GameOver() {
-		Debug.Log("GAME OVER");
-		finished = true;
-		panel_GameOver.SetActive(true);
-		yield return new WaitForSeconds(10f);
-		panel_GameOver.SetActive(false);
-		panel_Scores.SetActive(true);
-		yield return new WaitForSeconds(10f);
-		GameManager.Instance.gameOver(this.level);
 	}
 }
