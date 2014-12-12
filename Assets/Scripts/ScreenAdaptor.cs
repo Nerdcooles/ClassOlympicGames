@@ -15,8 +15,6 @@ public class ScreenAdaptor : MonoBehaviour {
 	
 	public GameObject[] p4_fixed;
 	public GameObject p4_btns;
-
-	public float size_x;
 	
 	void Start () {
 		int num_players = GameManager.Instance.getNumPlayer();

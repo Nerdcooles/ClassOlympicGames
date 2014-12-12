@@ -22,14 +22,14 @@ public class LevelManager : MonoBehaviour {
 	protected IEnumerator GameOver() {
 		Debug.Log("GAME OVER");
 		levelUI.show(LevelUI.ePanel.Scores);
-		yield return new WaitForSeconds(10f);
+		yield return new WaitForSeconds(5f);
 		if(GameManager.Instance.getGameMode()==GameManager.eGameMode.CLASSIC) {
 			levelUI.hide(LevelUI.ePanel.Scores);
 			levelUI.show(LevelUI.ePanel.Podium);
-			yield return new WaitForSeconds(10f);
+			yield return new WaitForSeconds(5f);
 			levelUI.hide(LevelUI.ePanel.Podium);
 			levelUI.show(LevelUI.ePanel.Medals);
-			yield return new WaitForSeconds(10f);
+			yield return new WaitForSeconds(5f);
 		}
 		GameManager.Instance.gameOver(this.level);
 	}
