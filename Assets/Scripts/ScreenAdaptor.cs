@@ -60,28 +60,45 @@ public class ScreenAdaptor : MonoBehaviour {
 	
 	private void shift1p() {
 		Vector3 _pos = p1_btns.transform.position;
-		_pos.x = _pos.x + (size_x/2f);
+		_pos.x = 0.0f;
 		p1_btns.transform.position = _pos;
+
+		Vector3 _scale = new Vector3(4f,1,1);
+		p1_btns.transform.localScale = _scale;
+		
 	}
 
 	private void shift2p() {
 		Vector3 _pos1 = p1_btns.transform.position;
-		_pos1.x = _pos1.x - (size_x/2f);
-		Vector3 _pos2 = p2_btns.transform.position;
-		_pos2.x = _pos2.x + (size_x/2f);
+		_pos1.x = -3.5f;
 		p1_btns.transform.position = _pos1;
+
+		Vector3 _pos2 = p2_btns.transform.position;
+		_pos2.x = 3.5f;
 		p2_btns.transform.position = _pos2;
+
+		Vector3 _scale = new Vector3(2f,1,1);
+		p1_btns.transform.localScale = _scale;
+		p2_btns.transform.localScale = _scale;
 	}
 	
 	private void shift3p() {
 		Vector3 _pos1 = p1_btns.transform.position;
-		_pos1.x = _pos1.x - (size_x/2f);
-		Vector3 _pos2 = p2_btns.transform.position;
-		_pos2.x = _pos2.x - (size_x/2f);
-		Vector3 _pos3 = p3_btns.transform.position;
-		_pos3.x = _pos3.x - (size_x/2f);
+		_pos1.x = -4.45f;
 		p1_btns.transform.position = _pos1;
+		
+		Vector3 _pos2 = p2_btns.transform.position;
+		_pos2.x = 0.0f;
 		p2_btns.transform.position = _pos2;
+		
+		Vector3 _pos3 = p3_btns.transform.position;
+		_pos3.x = +4.45f;
 		p3_btns.transform.position = _pos3;
+
+		Vector3 _scale = new Vector3(1.33f,1,1);
+		p1_btns.transform.localScale = _scale;
+		p2_btns.transform.localScale = _scale;
+		p3_btns.transform.localScale = _scale;
+		
 	}
 }

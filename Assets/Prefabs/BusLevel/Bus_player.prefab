@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left_btn: {fileID: 0}
   right_btn: {fileID: 0}
-  deltaX: 1
+  deltaX: .200000003
   player: 0
 --- !u!212 &21200000
 SpriteRenderer:

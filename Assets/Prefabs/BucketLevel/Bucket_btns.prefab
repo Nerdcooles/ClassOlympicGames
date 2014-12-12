@@ -46,7 +46,7 @@ GameObject:
   - 222: {fileID: 22200000}
   - 114: {fileID: 11400004}
   m_Layer: 5
-  m_Name: Player1_score
+  m_Name: Player_score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.55999994, y: -3.71000004, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0577631, y: .303512573, z: 1}
+  m_LocalPosition: {x: -3.05999994, y: -3.50999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -246,7 +246,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b2442bee7f35848c484803c09dfe306b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe977dda22f6e4d9da237027a3f478b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!222 &22200000
 CanvasRenderer:
@@ -285,7 +285,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -57.0999985, y: 197}
+  m_AnchoredPosition: {x: 0, y: 370}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400002
@@ -303,7 +303,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3.0577631, y: -.303512573}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 627, y: 470}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
