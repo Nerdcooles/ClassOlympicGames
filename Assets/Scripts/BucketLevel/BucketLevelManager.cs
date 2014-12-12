@@ -15,12 +15,17 @@ public class BucketLevelManager : MonoBehaviour {
 	public Text UIgold;
 	public Text UIsilver;
 	public Text UIbronze;
+	public GameObject panel_Scores;
+	public Text[] UIpts;
 	
 	public float seconds = 30;
+	private bool finished;
 	
 	void Start() {
 		Debug.Log("BUCKET LEVEL");
+		finished = false;
 		panel_GameOver.SetActive(false);
+		panel_Scores.SetActive(false);
 		if(GameManager.Instance.getNumPlayer()==0) {
 			GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
 			GameManager.Instance.startGame(num_players);
@@ -53,14 +58,21 @@ public class BucketLevelManager : MonoBehaviour {
 	}
 	
 	public void score(GameManager.ePlayers player) {
-		points[player]++;
-		text_score[player.GetHashCode()].text = points[player].ToString();
-		Debug.Log(player + " score " + points[player]);
+		if(!finished){
+			points[player]++;
+			text_score[player.GetHashCode()].text = points[player].ToString();
+			UIpts[player.GetHashCode()].text = points[player].ToString();
+			Debug.Log(player + " score " + points[player]);
+		}
 	}
 	
 	IEnumerator GameOver() {
 		Debug.Log("GAME OVER");
+		finished = true;
 		panel_GameOver.SetActive(true);
+		yield return new WaitForSeconds(10f);
+		panel_GameOver.SetActive(false);
+		panel_Scores.SetActive(true);
 		yield return new WaitForSeconds(10f);
 		GameManager.Instance.gameOver(this.level);
 	}
