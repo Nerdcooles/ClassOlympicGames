@@ -6,6 +6,11 @@ public class LevelUI : MonoBehaviour {
 
 	public enum ePanel {Scores, Podium, Medals}
 	
+	public Text[] p1_name;
+	public Text[] p2_name;
+	public Text[] p3_name;
+	public Text[] p4_name;
+
 	public GameObject panel_Scores;
 	public Text[] txt_score;
 	public GameObject panel_Podium;
@@ -14,13 +19,25 @@ public class LevelUI : MonoBehaviour {
 	public Text[] p1_medals;
 	public Text[] p2_medals; 
 	public Text[] p3_medals; 
-	public Text[] p4_medals; 
+	public Text[] p4_medals;
 	
 
 	void Start() {
 		panel_Scores.SetActive(false);
 		panel_Podium.SetActive(false);
 		panel_Medals.SetActive(false);
+		setNames();
+	}
+
+	private void setNames() {
+		foreach(Text name in p1_name)
+			name.text = GameManager.Instance.getName(GameManager.ePlayers.p01);
+		foreach(Text name in p2_name)
+			name.text = GameManager.Instance.getName(GameManager.ePlayers.p02);
+		foreach(Text name in p3_name)
+			name.text = GameManager.Instance.getName(GameManager.ePlayers.p03);
+		foreach(Text name in p4_name)
+			name.text = GameManager.Instance.getName(GameManager.ePlayers.p04);
 	}
 
 	public void show(ePanel panel) {
@@ -44,7 +61,7 @@ public class LevelUI : MonoBehaviour {
 	}
 
 	public void medal(GameManager.ePlayers player, GameManager.eMedals medal) {
-		txt_medal[medal.GetHashCode()].text = player.ToString();
+		txt_medal[medal.GetHashCode()].text = GameManager.Instance.getName(player);
 	}
 
 	private void loadMedals() {

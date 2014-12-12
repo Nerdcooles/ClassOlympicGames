@@ -33,6 +33,12 @@ public class GameManager : Singleton<GameManager> {
 		return 0;
 	}
 
+	public string getName(ePlayers player) {
+		if (players.ContainsKey(player))
+			return players[player].getName();
+		return "";
+	}
+
 	public void gameOver(eLevels level) {
 		if(gameMode == eGameMode.CLASSIC) {
 			switch(level) {
@@ -59,8 +65,12 @@ public class GameManager : Singleton<GameManager> {
 	
 	public void startGame(int num_players) {
 		players = new Dictionary<ePlayers, Player>();
-		for(int i=0; i<num_players; i++)
-			players.Add((ePlayers)i, new Player());
+
+		for(int i=0; i<num_players; i++){
+			Player _player = new Player();
+			_player.setName("Player " + i);
+			players.Add((ePlayers)i, _player);
+		}
 
 		switch(gameMode) {
 		case eGameMode.CLASSIC: Application.LoadLevel("Bus"); break;
