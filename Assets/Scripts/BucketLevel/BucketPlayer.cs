@@ -31,7 +31,7 @@ public class BucketPlayer : MonoBehaviour {
 		can_shoot = false;
 		switch(player) {
 		case GameManager.ePlayers.p01:  
-		case GameManager.ePlayers.p02:direction = (Quaternion.AngleAxis(50, transform.forward) * transform.right) * alpha; break;
+		case GameManager.ePlayers.p02:direction = (Quaternion.AngleAxis(60, transform.forward) * transform.right) * alpha; break;
 		case GameManager.ePlayers.p03:
 		case GameManager.ePlayers.p04:direction = (Quaternion.AngleAxis(40, transform.forward) * transform.right) * alpha; break;
 		}
