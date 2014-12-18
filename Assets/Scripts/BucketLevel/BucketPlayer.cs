@@ -17,12 +17,16 @@ public class BucketPlayer : MonoBehaviour {
 	private Animator animator;
 	private bool can_shoot;
 
+	public Sprite btn_pressed;
+	public Sprite btn_released;
+
 	
 	
 	
 	// Use this for initialization
 	void Start () {
 		levelManager = GameObject.Find("LevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
+		shoot_btn.GetComponent<SpriteRenderer>().sprite = btn_released;
 		animator = GetComponent<Animator>();
 		can_shoot = false;
 		switch(player) {
@@ -60,10 +64,11 @@ public class BucketPlayer : MonoBehaviour {
 
 	private void startPower(object sender, EventArgs e) {
 		if(levelManager.isStarted() && !levelManager.isGameover()) {
-		can_shoot=true;
-		press_time = Time.time;	
-		animator.SetBool("isLoading", true);
-		animator.SetBool("isShooting", true);
+			shoot_btn.GetComponent<SpriteRenderer>().sprite = btn_pressed;
+			can_shoot=true;
+			press_time = Time.time;	
+			animator.SetBool("isLoading", true);
+			animator.SetBool("isShooting", true);
 		}else{
 			can_shoot=false;
 		}
@@ -71,6 +76,7 @@ public class BucketPlayer : MonoBehaviour {
 
 	private void shoot(object sender, EventArgs e) {
 		if(can_shoot) {
+			shoot_btn.GetComponent<SpriteRenderer>().sprite = btn_released;
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
 			StartCoroutine(waitAnimation());
@@ -79,7 +85,7 @@ public class BucketPlayer : MonoBehaviour {
 	}
 	
 	private IEnumerator waitAnimation() {
-		yield return new WaitForSeconds(0.3f);
+		yield return new WaitForSeconds(0.2f);
 		GameObject ballInstance = Instantiate(ballPrefab, transform.position, transform.rotation) as GameObject;
 		ballInstance.GetComponent<BucketBall>().setPlayer(player);
 		ballInstance.rigidbody2D.AddForce(direction * force);
