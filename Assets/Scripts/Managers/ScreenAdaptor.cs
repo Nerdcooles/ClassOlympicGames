@@ -39,18 +39,21 @@ public class ScreenAdaptor : MonoBehaviour {
 
 	private void disable2p() {
 		p2_btns.SetActive(false);
+//		live_score[1].SetActive(false);
 		foreach(GameObject obj in p2_fixed)
 			obj.SetActive(false);
 	}
 	
 	private void disable3p() {
 		p3_btns.SetActive(false);
+//		live_score[2].SetActive(false);
 		foreach(GameObject obj in p3_fixed)
 			obj.SetActive(false);
 	}
 	
 	private void disable4p() {
 		p4_btns.SetActive(false);
+//		live_score[3].SetActive(false);
 		foreach(GameObject obj in p4_fixed)
 			obj.SetActive(false);
 	}
@@ -61,8 +64,10 @@ public class ScreenAdaptor : MonoBehaviour {
 		_pos.x = 0.0f;
 		p1_btns.transform.position = _pos;
 
-		Vector3 _scale = new Vector3(4f,1,1);
-		p1_btns.transform.localScale = _scale;
+//		panel_scoreboard.transform.position += transform.right * 2.5f;
+
+//		Vector3 _scale = new Vector3(4f,1,1);
+//		p1_btns.transform.localScale = _scale;
 		
 	}
 
@@ -75,9 +80,11 @@ public class ScreenAdaptor : MonoBehaviour {
 		_pos2.x = 3.5f;
 		p2_btns.transform.position = _pos2;
 
-		Vector3 _scale = new Vector3(2f,1,1);
-		p1_btns.transform.localScale = _scale;
-		p2_btns.transform.localScale = _scale;
+//		panel_scoreboard.transform.position += transform.right * 1.5f;
+		
+//		Vector3 _scale = new Vector3(2f,1,1);
+//		p1_btns.transform.localScale = _scale;
+//		p2_btns.transform.localScale = _scale;
 	}
 	
 	private void shift3p() {
@@ -93,10 +100,12 @@ public class ScreenAdaptor : MonoBehaviour {
 		_pos3.x = +4.45f;
 		p3_btns.transform.position = _pos3;
 
-		Vector3 _scale = new Vector3(1.33f,1,1);
-		p1_btns.transform.localScale = _scale;
-		p2_btns.transform.localScale = _scale;
-		p3_btns.transform.localScale = _scale;
+//		panel_scoreboard.transform.position += transform.right * 0.7f;
+		
+//		Vector3 _scale = new Vector3(1.33f,1,1);
+//		p1_btns.transform.localScale = _scale;
+//		p2_btns.transform.localScale = _scale;
+//		p3_btns.transform.localScale = _scale;
 		
 	}
 }

@@ -24,13 +24,27 @@ public class LevelUI : MonoBehaviour {
 	public Text three;
 	public Text two;
 	public Text one;
+	public GameObject panel_Scoreboard;
+	public Text[] live_score;
 	
 	void Start() {
+		disablePlayers();
 		panel_Scores.SetActive(false);
 		panel_Podium.SetActive(false);
 		panel_Medals.SetActive(false);
 		panel_Countdown.SetActive(true);
 		setNames();
+	}
+
+	private void disablePlayers() {
+		int num_players = GameManager.Instance.getNumPlayer();
+		float padding = 0;
+		switch(num_players) {
+			case 1: if(padding==0) padding = 2.5f; live_score[1].gameObject.SetActive(false);foreach(Text txt in p2_name) txt.gameObject.SetActive(false); goto case 2;
+			case 2: if(padding==0) padding = 1.5f; live_score[2].gameObject.SetActive(false);foreach(Text txt in p3_name) txt.gameObject.SetActive(false); goto case 3;
+			case 3: if(padding==0) padding = 0.7f; live_score[3].gameObject.SetActive(false);foreach(Text txt in p4_name) txt.gameObject.SetActive(false); break;
+		}
+		panel_Scoreboard.transform.position += transform.right * padding;
 	}
 
 	private void setNames() {
@@ -72,6 +86,7 @@ public class LevelUI : MonoBehaviour {
 
 	public void score(GameManager.ePlayers player, string score) {
 		txt_score[player.GetHashCode()].text = score;
+		live_score[player.GetHashCode()].text = score;
 	}
 
 	public void medal(GameManager.ePlayers player, GameManager.eMedals medal) {

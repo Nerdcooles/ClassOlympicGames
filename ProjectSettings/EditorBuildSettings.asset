@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Bus.unity
   - enabled: 1
     path: Assets/Scenes/Bucket.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/_arch.unity
   - enabled: 1
     path: Assets/Scenes/Archery.unity
