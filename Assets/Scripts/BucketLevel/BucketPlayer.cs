@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using TouchScript.Gestures;
 
@@ -9,14 +10,27 @@ public class BucketPlayer : MonoBehaviour {
 	public GameObject ballPrefab;
 	public int alpha = 500;
 	
+	private BucketLevelManager levelManager;
 	private float force;
 	private float press_time;
 	private Vector3 direction;
+	private Animator animator;
+	private bool can_shoot;
+
+	
 	
 	
 	// Use this for initialization
 	void Start () {
-		direction = (Quaternion.AngleAxis(45, transform.forward) * transform.right) * alpha;
+		levelManager = GameObject.Find("LevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
+		animator = GetComponent<Animator>();
+		can_shoot = false;
+		switch(player) {
+		case GameManager.ePlayers.p01:  
+		case GameManager.ePlayers.p02:direction = (Quaternion.AngleAxis(50, transform.forward) * transform.right) * alpha; break;
+		case GameManager.ePlayers.p03:
+		case GameManager.ePlayers.p04:direction = (Quaternion.AngleAxis(40, transform.forward) * transform.right) * alpha; break;
+		}
 	}
 	
 	private void OnEnable()
@@ -45,13 +59,33 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	private void startPower(object sender, EventArgs e) {
-		press_time = Time.time;		
+		if(levelManager.isStarted() && !levelManager.isGameover()) {
+		can_shoot=true;
+		press_time = Time.time;	
+		animator.SetBool("isLoading", true);
+		animator.SetBool("isShooting", true);
+		}else{
+			can_shoot=false;
+		}
 	}
 
 	private void shoot(object sender, EventArgs e) {
-		force = Time.time - press_time;
+		if(can_shoot) {
+			animator.SetBool("isLoading", false);
+			animator.SetBool("isShooting", true);
+			StartCoroutine(waitAnimation());
+			force = Time.time - press_time;
+		}
+	}
+	
+	private IEnumerator waitAnimation() {
+		yield return new WaitForSeconds(0.3f);
 		GameObject ballInstance = Instantiate(ballPrefab, transform.position, transform.rotation) as GameObject;
 		ballInstance.GetComponent<BucketBall>().setPlayer(player);
 		ballInstance.rigidbody2D.AddForce(direction * force);
+	}
+
+	public void endShooting() {
+		animator.SetBool("isShooting",false);
 	}
 }

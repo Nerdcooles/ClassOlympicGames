@@ -19,13 +19,6 @@ public class BucketBall : MonoBehaviour {
 
 	public void setPlayer(GameManager.ePlayers player) {
 		this.player = player;
-		switch(player) {
-		case GameManager.ePlayers.p01: gameObject.GetComponent<SpriteRenderer>().sprite = p1_sprite; break;
-		case GameManager.ePlayers.p02: gameObject.GetComponent<SpriteRenderer>().sprite = p2_sprite; break;
-		case GameManager.ePlayers.p03: gameObject.GetComponent<SpriteRenderer>().sprite = p3_sprite; break;
-		case GameManager.ePlayers.p04: gameObject.GetComponent<SpriteRenderer>().sprite = p4_sprite; break;
-			
-		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

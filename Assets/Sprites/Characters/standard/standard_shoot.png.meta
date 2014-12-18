@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 6eac40991cc4e4dc58dcff6cd80f567e
+guid: 716dd937aff6d4be296107d2d9037dd7
 TextureImporter:
   fileIDToRecycleName:
-    21300000: trash_0
-    21300002: trash_1
-    21300004: trash_2
-    21300006: trash_3
+    21300000: standard_shoot_0
+    21300002: standard_shoot_1
+    21300004: standard_shoot_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,45 +46,35 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: trash_0
+    - name: standard_shoot_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 90
-        height: 108
+        x: 3
+        y: 3
+        width: 79
+        height: 102
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: trash_1
+    - name: standard_shoot_1
       rect:
         serializedVersion: 2
-        x: 90
-        y: 0
-        width: 90
-        height: 108
+        x: 94
+        y: 3
+        width: 82
+        height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: trash_2
+    - name: standard_shoot_2
       rect:
         serializedVersion: 2
-        x: 180
-        y: 0
-        width: 90
-        height: 108
+        x: 186
+        y: 3
+        width: 67
+        height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: trash_3
-      rect:
-        serializedVersion: 2
-        x: 270
-        y: 0
-        width: 90
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
