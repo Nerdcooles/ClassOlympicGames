@@ -13,9 +13,9 @@ public class BucketLevelManager : LevelManager {
 	private bool finished;
 	
 	void Start() {
-		_start();
-		Debug.Log("BUCKET LEVEL");
 		level = GameManager.eLevels.Bucket;
+		_start(level);
+		Debug.Log("BUCKET LEVEL");
 		finished = false;
 		for(int i=0; i<num_players; i++) {
 			points.Add((GameManager.ePlayers)i, 0); 

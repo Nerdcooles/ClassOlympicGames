@@ -55,9 +55,11 @@ public class RunningPlayer : MonoBehaviour {
 	}
 
 	private void move() {
-		Vector2 pos = transform.position;
-		pos.x += deltaX;
-		transform.position = pos;
+		if(levelManager.isStarted()) {
+			Vector2 pos = transform.position;
+			pos.x += deltaX;
+			transform.position = pos;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

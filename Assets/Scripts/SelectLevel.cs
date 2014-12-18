@@ -7,11 +7,13 @@ public class SelectLevel : MonoBehaviour {
 
 	public GameObject bus;
 	public GameObject bucket;
+	public GameObject archery;
 
 	private void OnEnable()
 	{
 		bus.GetComponent<TapGesture>().Tapped += startBus;
 		bucket.GetComponent<TapGesture>().Tapped += startBucket;
+		archery.GetComponent<TapGesture>().Tapped += startArchery;
 	}
 	
 	private void OnDisable()
@@ -20,6 +22,7 @@ public class SelectLevel : MonoBehaviour {
 		try{
 			bus.GetComponent<TapGesture>().Tapped -= startBus;
 			bucket.GetComponent<TapGesture>().Tapped -= startBucket;
+			archery.GetComponent<TapGesture>().Tapped -= startArchery;
 		}catch{}
 	}
 	
@@ -33,5 +36,11 @@ public class SelectLevel : MonoBehaviour {
 	{
 		Debug.Log("TRAINING BUCKET");
 		GameManager.Instance.startLevel(GameManager.eLevels.Bucket);
+	}
+	
+	private void startArchery(object sender, EventArgs e)
+	{
+		Debug.Log("TRAINING ARCHERY");
+		GameManager.Instance.startLevel(GameManager.eLevels.Archery);
 	}
 }

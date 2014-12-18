@@ -9,15 +9,15 @@ public class BusLevelManager : LevelManager {
 	private float finish_time;
 		
 	void Start() {
-		_start();
-		Debug.Log("BUS LEVEL");
 		level = GameManager.eLevels.Bus;
+		_start(level);
+		Debug.Log("BUS LEVEL");
 		player_pos = 0;
 		start_time = Time.time;
 	}
 
 	public void Finish(GameManager.ePlayers player) {
-		finish_time = Time.time - start_time;
+		finish_time = Time.time - start_time - 3;
 		levelUI.score(player, finish_time.ToString("0.00"));
 		if(player_pos < 3){
 			GameManager.Instance.addMedal(player, (GameManager.eMedals)player_pos);

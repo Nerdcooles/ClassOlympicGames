@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9be212b4a0e54b26826aad6736a9280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num_players: 3
+  num_players: 4
   text_score:
   - {fileID: 893838119}
   - {fileID: 732419238}
@@ -1376,7 +1376,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7173c20c3210f4d85bb2db96e223a74b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28dbb088f0cb744babbeacf5728ed21e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &382057269
 GameObject:
