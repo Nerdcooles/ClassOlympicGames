@@ -7,7 +7,6 @@ using System.Linq;
 public class ArcheryLevelManager : LevelManager {
 	
 	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
-	public Text[] text_score;
 	
 	public float seconds = 30;
 	private bool finished;
@@ -15,6 +14,7 @@ public class ArcheryLevelManager : LevelManager {
 	void Start() {
 		level = GameManager.eLevels.Archery;
 		_start(level);
+		levelUI.show(LevelUI.ePanel.Scoreboard);
 		Debug.Log("ARCHERY LEVEL");
 		finished = false;
 		for(int i=0; i<num_players; i++) {
@@ -46,7 +46,6 @@ public class ArcheryLevelManager : LevelManager {
 	public void score(GameManager.ePlayers player) {
 		if(!finished){
 			points[player]++;
-			text_score[player.GetHashCode()].text = points[player].ToString();
 			levelUI.score(player, points[player].ToString());
 		}
 	}

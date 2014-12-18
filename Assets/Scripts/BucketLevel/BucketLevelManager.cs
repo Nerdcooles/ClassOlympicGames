@@ -14,6 +14,7 @@ public class BucketLevelManager : LevelManager {
 	void Start() {
 		level = GameManager.eLevels.Bucket;
 		_start(level);
+		levelUI.show(LevelUI.ePanel.Scoreboard);
 		Debug.Log("BUCKET LEVEL");
 		finished = false;
 		for(int i=0; i<num_players; i++) {
