@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using TouchScript.Gestures;
 
@@ -14,9 +15,15 @@ public class RunningPlayer : MonoBehaviour {
 	bool right_pressed = false;
 
 	private BusLevelManager levelManager;
-	
+	private Animator animator;
+	private bool finished;
+	private int last;
+
 	void Start () {
 		levelManager = GameObject.Find("LevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
+		animator = GetComponent<Animator>();
+		finished = false;
+		last = GameManager.Instance.getNumPlayer();
 	}
 
 	private void OnEnable()
@@ -55,15 +62,25 @@ public class RunningPlayer : MonoBehaviour {
 	}
 
 	private void move() {
-		if(levelManager.isStarted()) {
-			Vector2 pos = transform.position;
+		if(levelManager.isStarted() && !finished) {
+			StopAllCoroutines();
+			Vector3 pos = transform.position;
 			pos.x += deltaX;
 			transform.position = pos;
+			animator.SetBool("isMoving", true);
+			StartCoroutine(animation());
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
-		levelManager.Finish(this.player);
-		Destroy(gameObject);
+	private IEnumerator animation() {
+		yield return new WaitForSeconds(0.5f);
+		animator.SetBool("isMoving",false);
+	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		int pos = levelManager.Finish(this.player)+1;
+		if(pos!=last || last==1) animator.SetBool("isWinner", true);
+		else animator.SetBool("isLoser", true);
+		finished = true;
 	}
 }
