@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System;
 using TouchScript.Gestures;
+using System;
 
 
 public class Home : MonoBehaviour {
@@ -8,66 +8,55 @@ public class Home : MonoBehaviour {
 	public GameObject start_btn;
 	public Sprite start_btn_released;
 	public Sprite start_btn_pressed;
+	
+	public GameObject credits_btn;
+	public Sprite credits_btn_released;
+	public Sprite credits_btn_pressed;
 
-//	public GameObject classic;
-//	public GameObject training;
-//	public GameObject bestScores;
-//
 	
 	void Awake() {
 		start_btn.GetComponent<SpriteRenderer>().sprite = start_btn_released;
+		credits_btn.GetComponent<SpriteRenderer>().sprite = credits_btn_released;
 	}
 	
 	private void OnEnable()
 	{
-		start_btn.GetComponent<PressGesture>().Pressed += Pressed;
-		start_btn.GetComponent<ReleaseGesture>().Released += Released;
-//		classic.GetComponent<TapGesture>().Tapped += loadClassic;
-//		training.GetComponent<TapGesture>().Tapped += loadTraining;
-//		bestScores.GetComponent<TapGesture>().Tapped += loadBestScores;
+		start_btn.GetComponent<PressGesture>().Pressed += startPressed;
+		start_btn.GetComponent<ReleaseGesture>().Released += startReleased;
+		credits_btn.GetComponent<PressGesture>().Pressed += creditsPressed;
+		credits_btn.GetComponent<ReleaseGesture>().Released += creditsReleased;
 	}
 
-
-//	
 	private void OnDisable()
 	{
 		try{
-			start_btn.GetComponent<PressGesture>().Pressed -= Pressed;
-			start_btn.GetComponent<ReleaseGesture>().Released -= Released;
-//			classic.GetComponent<TapGesture>().Tapped -= loadClassic;
-//			training.GetComponent<TapGesture>().Tapped -= loadTraining;
-//			bestScores.GetComponent<TapGesture>().Tapped -= loadBestScores;
+			start_btn.GetComponent<PressGesture>().Pressed -= startPressed;
+			start_btn.GetComponent<ReleaseGesture>().Released -= startReleased;
+			credits_btn.GetComponent<PressGesture>().Pressed -= creditsPressed;
+			credits_btn.GetComponent<ReleaseGesture>().Released -= creditsReleased;
 		}catch{}
 	}
 
-	void Pressed (object sender, EventArgs e)
+	void startPressed (object sender, EventArgs e)
 	{
 		start_btn.GetComponent<SpriteRenderer>().sprite = start_btn_pressed;
 	}
 
-	void Released (object sender, EventArgs e)
+	void startReleased (object sender, EventArgs e)
 	{
-		start_btn.GetComponent<SpriteRenderer>().sprite = start_btn_released;
-		GameManager.Instance.selectMode();
+		//start_btn.GetComponent<SpriteRenderer>().sprite = start_btn_released;
+		MenuManager.selectMode();
 	}
-
-//	private void loadClassic(object sender, EventArgs e)
-//	{
-//		Debug.Log("LOAD CLASSIC MODE");
-//		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
-//		GameManager.Instance.selectPlayers();
-//	}
-//	
-//	private void loadTraining(object sender, EventArgs e)
-//	{
-//		Debug.Log("LOAD TRAINING MODE");
-//		GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
-//		GameManager.Instance.selectPlayers();
-//	}
-//	
-//	private void loadBestScores(object sender, EventArgs e)
-//	{
-//		Debug.Log("LOAD BEST SCORES");
-//	}
+	
+	void creditsPressed (object sender, EventArgs e)
+	{
+		credits_btn.GetComponent<SpriteRenderer>().sprite = credits_btn_pressed;
+	}
+	
+	void creditsReleased (object sender, EventArgs e)
+	{
+		//credits_btn.GetComponent<SpriteRenderer>().sprite = credits_btn_released;
+		MenuManager.credits();
+	}
 	
 }

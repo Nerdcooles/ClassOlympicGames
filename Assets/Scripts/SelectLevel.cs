@@ -29,18 +29,18 @@ public class SelectLevel : MonoBehaviour {
 	private void startBus(object sender, EventArgs e)
 	{
 		Debug.Log("TRAINING BUS");
-		GameManager.Instance.startLevel(GameManager.eLevels.Bus);
+		MenuManager.startLevel(GameManager.eLevels.Bus);
 	}
 	
 	private void startBucket(object sender, EventArgs e)
 	{
 		Debug.Log("TRAINING BUCKET");
-		GameManager.Instance.startLevel(GameManager.eLevels.Bucket);
+		MenuManager.startLevel(GameManager.eLevels.Bucket);
 	}
 	
 	private void startArchery(object sender, EventArgs e)
 	{
 		Debug.Log("TRAINING ARCHERY");
-		GameManager.Instance.startLevel(GameManager.eLevels.Archery);
+		MenuManager.startLevel(GameManager.eLevels.Archery);
 	}
 }

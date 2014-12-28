@@ -3,28 +3,29 @@ using System.Collections;
 
 public class BucketBall : MonoBehaviour {
 
-	public Sprite p1_sprite, p2_sprite, p3_sprite, p4_sprite;
-
 	private GameManager.ePlayers player;
 	private BucketLevelManager levelManager;
+	private bool inTrash;
 	
 	void Start () {
+		inTrash = false;
 		levelManager = GameObject.Find("LevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	public void setPlayer(GameManager.ePlayers player) {
 		this.player = player;
 	}
 
+	public GameManager.ePlayers getPlayer() {
+		return player;
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.name == "trash") {
+		if(other.name == "trash" && !inTrash) {
+			inTrash = true;
 			levelManager.score(this.player);
-			Destroy(gameObject);
+			GetComponent<Animator>().enabled = false;
+			transform.localScale = new Vector3(1f, 1f, 1f);		
 		}
 		if(other.name == "bound") {
 			Destroy(gameObject);

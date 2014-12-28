@@ -16,7 +16,8 @@ public class SelectMode : MonoBehaviour {
 	public GameObject score_btn;
 	public Sprite score_btn_released;
 	public Sprite score_btn_pressed;
-//
+
+	public GameObject back_btn;
 	
 	void Awake() {
 		classic_btn.GetComponent<SpriteRenderer>().sprite = classic_btn_released;
@@ -32,6 +33,7 @@ public class SelectMode : MonoBehaviour {
 		training_btn.GetComponent<ReleaseGesture>().Released += TrainingReleased;
 		score_btn.GetComponent<PressGesture>().Pressed += ScorePressed;
 		score_btn.GetComponent<ReleaseGesture>().Released += ScoreReleased;
+		back_btn.GetComponent<TapGesture>().Tapped += Back;
 	}
 
 
@@ -45,6 +47,7 @@ public class SelectMode : MonoBehaviour {
 			training_btn.GetComponent<ReleaseGesture>().Released -= TrainingReleased;
 			score_btn.GetComponent<PressGesture>().Pressed -= ScorePressed;
 			score_btn.GetComponent<ReleaseGesture>().Released -= ScoreReleased;
+			back_btn.GetComponent<TapGesture>().Tapped -= Back;
 		}catch{}
 	}
 
@@ -55,11 +58,11 @@ public class SelectMode : MonoBehaviour {
 
 	void ClassicReleased (object sender, EventArgs e)
 	{
-		classic_btn.GetComponent<SpriteRenderer>().sprite = classic_btn_released;
+		//classic_btn.GetComponent<SpriteRenderer>().sprite = classic_btn_released;
 		
 		Debug.Log("LOAD CLASSIC MODE");
 		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
-		GameManager.Instance.selectPlayers();
+		MenuManager.selectNumber();
 	}
 	
 	void TrainingPressed (object sender, EventArgs e)
@@ -69,11 +72,11 @@ public class SelectMode : MonoBehaviour {
 	
 	void TrainingReleased (object sender, EventArgs e)
 	{
-		training_btn.GetComponent<SpriteRenderer>().sprite = training_btn_released;
+		//training_btn.GetComponent<SpriteRenderer>().sprite = training_btn_released;
 		
 		Debug.Log("LOAD TRAINNG MODE");
 		GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
-		GameManager.Instance.selectPlayers();
+		MenuManager.selectNumber();
 	}
 	
 	void ScorePressed (object sender, EventArgs e)
@@ -83,10 +86,16 @@ public class SelectMode : MonoBehaviour {
 	
 	void ScoreReleased (object sender, EventArgs e)
 	{
-		score_btn.GetComponent<SpriteRenderer>().sprite = score_btn_released;
+		//score_btn.GetComponent<SpriteRenderer>().sprite = score_btn_released;
 		
 		Debug.Log("LOAD BEST SCORE");
 	}
 
+	void Back (object sender, EventArgs e)
+	{
+		MenuManager.startHome();
+		
+		Debug.Log("BACK TO HOME");
+	}
 	
 }

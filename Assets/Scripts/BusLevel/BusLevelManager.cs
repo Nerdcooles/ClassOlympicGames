@@ -16,7 +16,7 @@ public class BusLevelManager : LevelManager {
 
 	void Start() {
 		level = GameManager.eLevels.Bus;
-		_start(level);
+		PrepareLevel(level);
 		Debug.Log("BUS LEVEL");
 	}
 

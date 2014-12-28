@@ -8,23 +8,32 @@ public class BucketLevelManager : LevelManager {
 		
 	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
 	
-	public float seconds = 30;
+	public int seconds = 30;
 	private bool finished;
 	
-	void Start() {
+	void Awake() {
 		level = GameManager.eLevels.Bucket;
-		_start(level);
-		levelUI.show(LevelUI.ePanel.Scoreboard);
+		PrepareLevel(level);
 		Debug.Log("BUCKET LEVEL");
 		finished = false;
 		for(int i=0; i<num_players; i++) {
 			points.Add((GameManager.ePlayers)i, 0); 
 		}
-		StartCoroutine(Countdown(seconds));
 	}
 
-	IEnumerator Countdown(float waitTime) {
-		yield return new WaitForSeconds(waitTime);
+	void Start() {
+		levelUI.show(LevelUI.ePanel.Scoreboard);
+		levelUI.show(LevelUI.ePanel.Timer);
+		levelUI.timer(seconds);
+		StartCoroutine(LevelTimer(seconds));
+	}
+
+	IEnumerator LevelTimer(int waitTime) {
+		yield return new WaitForSeconds(4f);
+		for(int i=waitTime; i>=0; i--){
+			levelUI.timer(i);
+			yield return new WaitForSeconds(1f);
+		}
 		var player = from pair in points
 			orderby pair.Value descending
 				select pair;

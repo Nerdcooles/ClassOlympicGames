@@ -13,7 +13,7 @@ public class ArcheryLevelManager : LevelManager {
 	
 	void Start() {
 		level = GameManager.eLevels.Archery;
-		_start(level);
+		PrepareLevel(level);
 		levelUI.show(LevelUI.ePanel.Scoreboard);
 		Debug.Log("ARCHERY LEVEL");
 		finished = false;
