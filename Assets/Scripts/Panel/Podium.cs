@@ -4,12 +4,19 @@ using System.Collections;
 public class Podium : MonoBehaviour {
 
 	private LevelManager lvm;
-	
+	private SpriteRenderer first, second, third;
+
 	private bool canSkip = false;
 	private int secToSkip = 2;
 	
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		first = GameObject.Find("first").GetComponent<SpriteRenderer>();
+		second = GameObject.Find("second").GetComponent<SpriteRenderer>();
+		third = GameObject.Find("third").GetComponent<SpriteRenderer>();
+		first.sprite = null;
+		second.sprite = null;
+		third.sprite = null;
 	}
 	
 	void Start() {
@@ -23,11 +30,11 @@ public class Podium : MonoBehaviour {
 
 	public void Show() {
 		foreach (GameManager.ePlayers player in lvm.getFirstPlace())
-			Debug.Log ("first p" + player.ToString ());
+			first.sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
 		foreach (GameManager.ePlayers player in lvm.getSecondPlace())
-			Debug.Log ("second p" + player.ToString ());
+			second.sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
 		foreach (GameManager.ePlayers player in lvm.getThirdPlace())
-			Debug.Log ("third p" + player.ToString ());
+			third.sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
 		gameObject.SetActive (true);
 		InvokeRepeating ("WaitToSkip", 0.1f, 1);
 	}
