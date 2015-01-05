@@ -29,11 +29,9 @@ public class SelectNumber : MonoBehaviour {
 	
 	void Awake() {
 		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.CLASSIC) {
-			Debug.Log("p1 disabled");
 			isClassic = false;
 			p1_btn.GetComponent<SpriteRenderer>().sprite = p1_btn_disabled;
 		}else{
-			Debug.Log("p1 enabled");
 			isClassic = true;
 			p1_btn.GetComponent<SpriteRenderer>().sprite = p1_btn_released;
 		}

@@ -4,7 +4,7 @@ using System.Linq;
 
 public static class MenuManager {
 
-	public static void gameOver(GameManager.eLevels level) {
+	public static void levelOver(GameManager.eLevels level) {
 		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.CLASSIC) {
 			switch(level) {
 			case GameManager.eLevels.Bucket: 	Application.LoadLevel("Bus"); break;

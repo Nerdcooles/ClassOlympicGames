@@ -4,9 +4,13 @@ using System.Collections;
 using TouchScript.Gestures;
 
 public class Button : MonoBehaviour {
+	
+	public delegate void Gesture();
+	public event Gesture OnPressed;
+	public event Gesture OnReleased;
 
 	public GameManager.ePlayers player;
-	
+	public KeyCode key;
 	private GameManager.eColors color;
 
 	private Sprite s_pressed;
@@ -25,7 +29,6 @@ public class Button : MonoBehaviour {
 			s_pressed = Resources.Load <Sprite> ("Sprites/Buttons/" + color.ToString() + "_" + player.ToString() + "_pressed");
 			gameObject.GetComponent<SpriteRenderer>().sprite = s_released;
 		}catch{
-			Debug.LogError(player.ToString() + " no color");
 			gameObject.SetActive(false);
 		}
 	}
@@ -33,6 +36,16 @@ public class Button : MonoBehaviour {
 	void Start() {
 		AdaptPosition();
 	}
+
+	void Update() {
+		if(Input.GetKeyDown(key))
+			if(OnPressed != null)
+				OnPressed ();
+		
+		if(Input.GetKeyUp(key))
+			if(OnReleased != null)
+				OnReleased ();
+		}
 
 	private void OnEnable()
 	{
@@ -50,10 +63,14 @@ public class Button : MonoBehaviour {
 
 	private void Pressed(object sender, EventArgs e) {
 		gameObject.GetComponent<SpriteRenderer>().sprite = s_pressed;
+		if(OnPressed != null)
+			OnPressed ();
 	}
 	
 	private void Released(object sender, EventArgs e) {
-		gameObject.GetComponent<SpriteRenderer>().sprite = s_released;		
+		gameObject.GetComponent<SpriteRenderer>().sprite = s_released;	
+		if(OnReleased != null)
+			OnReleased ();	
 	}
 
 	private void AdaptPosition() {

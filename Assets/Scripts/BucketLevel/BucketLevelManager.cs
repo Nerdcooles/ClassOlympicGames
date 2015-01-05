@@ -1,61 +1,97 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class BucketLevelManager : LevelManager {
+public class BucketLevelManager : MonoBehaviour {
 		
-	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
-	
-	public int seconds = 30;
-	private bool finished;
-	
+	int[] points;
+
+	public int seconds = 10;
+	private int num_players;
+	private LevelManager lvm;
+
 	void Awake() {
-		level = GameManager.eLevels.Bucket;
-		PrepareLevel(level);
-		Debug.Log("BUCKET LEVEL");
-		finished = false;
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		num_players = GameManager.Instance.getNumPlayer ();
+
+		//init points
+		points = new int[num_players];
 		for(int i=0; i<num_players; i++) {
-			points.Add((GameManager.ePlayers)i, 0); 
+			points[i] = 0; 
 		}
 	}
 
-	void Start() {
-		levelUI.show(LevelUI.ePanel.Scoreboard);
-		levelUI.show(LevelUI.ePanel.Timer);
-		levelUI.timer(seconds);
-		StartCoroutine(LevelTimer(seconds));
-	}
-
-	IEnumerator LevelTimer(int waitTime) {
-		yield return new WaitForSeconds(4f);
-		for(int i=waitTime; i>=0; i--){
-			levelUI.timer(i);
-			yield return new WaitForSeconds(1f);
-		}
-		var player = from pair in points
-			orderby pair.Value descending
-				select pair;
-		int player_pos = 0;
-		foreach (KeyValuePair<GameManager.ePlayers, int> pair in player)
-		{
-			if(player_pos < 3){
-				GameManager.Instance.addMedal(pair.Key, (GameManager.eMedals)player_pos);
-				levelUI.medal(pair.Key, (GameManager.eMedals)player_pos);
-			}else {
-				break;
-			}
-			player_pos++;
-		}
-		finished = true;
-		StartCoroutine(GameOver());
+	void OnEnable()
+	{
+		lvm.OnStart += StartTimer;
 	}
 	
-	public void score(GameManager.ePlayers player) {
-		if(!finished){
-			points[player]++;
-			levelUI.score(player, points[player].ToString());
+	
+	void OnDisable()
+	{
+		lvm.OnStart -= StartTimer;
+	}
+
+	void StartTimer() {
+		InvokeRepeating ("Timer", 0.1f, 1);
+
+	}
+
+	void Timer() {
+		seconds--;
+		if(seconds < 0){
+			Finished ();
+			CancelInvoke("Timer");
 		}
 	}
+
+	void Finished() {
+		List<GameManager.ePlayers> firstPlace = new List<GameManager.ePlayers> ();
+		int max = points.Max ();
+		if (max != -1) {
+						Debug.Log ("first " + max);
+						for (int i=0; i<points.Length; i++)
+								if (points [i] == max) {
+										Debug.Log ("P0" + (i + 1));
+										firstPlace.Add ((GameManager.ePlayers)i);
+										points [i] = -1;
+								}
+				}
+		lvm.setFirstPlace (firstPlace);
+
+		List<GameManager.ePlayers> secondPlace = new List<GameManager.ePlayers> ();
+		max = points.Max ();
+		if (max != -1) {
+						Debug.Log ("second " + max);
+						for (int i=0; i<points.Length; i++)
+								if (points [i] == max) {
+										Debug.Log ("P0" + (i + 1));
+										secondPlace.Add ((GameManager.ePlayers)i);
+										points [i] = -1;
+								}
+				}
+		lvm.setSecondPlace (secondPlace);
+
+		List<GameManager.ePlayers> thirdPlace = new List<GameManager.ePlayers> ();
+		max = points.Max ();
+		if (max != -1) {
+						Debug.Log ("third " + max);
+						for (int i=0; i<points.Length; i++)
+								if (points [i] == max) {
+										Debug.Log ("P0" + (i + 1));
+										thirdPlace.Add ((GameManager.ePlayers)i);
+										points [i] = -1;
+								}
+				}
+		lvm.setThirdPlace (thirdPlace);
+
+		lvm.FinishGame();
+	}
+
+	public void Score(GameManager.ePlayers player) {
+		points[player.GetHashCode()]++;
+		Debug.Log (player.ToString () + " " + points [player.GetHashCode ()]);
+	}
+
 }

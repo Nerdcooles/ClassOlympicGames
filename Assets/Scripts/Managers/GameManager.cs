@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public int getNumPlayer() {
-		return players.Count;
+		return players.Count ();
 	}
 
 	public void addMedal(ePlayers player, eMedals medal) {
@@ -74,5 +74,9 @@ public class GameManager : Singleton<GameManager> {
 		case eColors.green: return Color.green; break;
 		default: return Color.blue;
 		}
+	}
+
+	public void LevelOver(eLevels level) {
+		MenuManager.levelOver (level);
 	}
 }

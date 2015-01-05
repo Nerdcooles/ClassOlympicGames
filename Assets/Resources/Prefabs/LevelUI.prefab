@@ -401,6 +401,8 @@ GameObject:
   - 224: {fileID: 22400048}
   - 222: {fileID: 22200048}
   - 114: {fileID: 11400048}
+  - 61: {fileID: 6142496}
+  - 114: {fileID: 11442496}
   m_Layer: 5
   m_Name: Panel_Scores
   m_TagString: Untagged
@@ -947,6 +949,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 22400070}
   m_RootOrder: 4
+--- !u!61 &6142496
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100048}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 779.241882, y: 482.639801}
+  m_Center: {x: -1.13197052, y: 1.13211715}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2334,6 +2347,28 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
+--- !u!114 &11442496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1235405773, guid: 20c2a163775f09b4cafa29b19d0c9204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  advancedProps: 0
+  combineTouches: 0
+  combineTouchesInterval: .300000012
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
 --- !u!114 &11453442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2770,7 +2805,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 31, y: 149}
+  m_AnchoredPosition: {x: 229, y: 149}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400004

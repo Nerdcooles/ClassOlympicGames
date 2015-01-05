@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
+  key: 97
 --- !u!114 &11474650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 3
+  key: 108
 --- !u!114 &11474656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
+  key: 102
 --- !u!114 &11474662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -451,6 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 2
+  key: 106
 --- !u!114 &11474668
 MonoBehaviour:
   m_ObjectHideFlags: 1

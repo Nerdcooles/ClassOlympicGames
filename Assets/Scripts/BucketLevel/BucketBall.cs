@@ -4,13 +4,20 @@ using System.Collections;
 public class BucketBall : MonoBehaviour {
 
 	private GameManager.ePlayers player;
-	private BucketLevelManager levelManager;
-	private bool inTrash;
-	
+	private LevelManager lvm;
+	private BucketLevelManager blvm;
+
 	void Start () {
-		inTrash = false;
-		levelManager = GameObject.Find("LevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
+		blvm = GameObject.Find("BucketLevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
+		lvm.OnFinish += DestroyMe;
 	}
+
+
+	private void DestroyMe() {
+		lvm.OnFinish -= DestroyMe;
+		Destroy (gameObject);
+		}
 
 	public void setPlayer(GameManager.ePlayers player) {
 		this.player = player;
@@ -21,14 +28,12 @@ public class BucketBall : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.name == "trash" && !inTrash) {
-			inTrash = true;
-			levelManager.score(this.player);
-			GetComponent<Animator>().enabled = false;
-			transform.localScale = new Vector3(1f, 1f, 1f);		
+		if(other.name == "trash") {
+			DestroyMe();	
+			blvm.Score(player);
 		}
 		if(other.name == "bound") {
-			Destroy(gameObject);
+			DestroyMe();
 		}
 	}
 }
