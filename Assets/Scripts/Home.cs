@@ -18,6 +18,18 @@ public class Home : MonoBehaviour {
 		start_btn.GetComponent<SpriteRenderer>().sprite = start_btn_released;
 		credits_btn.GetComponent<SpriteRenderer>().sprite = credits_btn_released;
 	}
+
+	
+	
+	void Update() {
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return))
+						startPressed (null, null);
+		
+		
+		if (Input.GetKeyUp (KeyCode.Space) || Input.GetKeyUp (KeyCode.Return))
+			startReleased (null, null);
+	}
+
 	
 	private void OnEnable()
 	{
