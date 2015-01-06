@@ -21,8 +21,16 @@ public class Button : MonoBehaviour {
 	private const float BTN_CENTER = 0f;
 	private const float BTN_DOBLE = 2.5f;
 	private const float BTN_TRIPLE = 4.5f;
-	
+
+	private LevelManager lvm;
+	private bool enabled;
+
 	void Awake() {
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		enabled = false;
+	}
+
+	void Start() {
 		try {
 			color = GameManager.Instance.getColor(player);
 			s_released = Resources.Load <Sprite> ("Sprites/Buttons/" + color.ToString() + "_" + player.ToString());
@@ -31,18 +39,15 @@ public class Button : MonoBehaviour {
 		}catch{
 			gameObject.SetActive(false);
 		}
-	}
-
-	void Start() {
 		AdaptPosition();
 	}
 
 	void Update() {
-		if(Input.GetKeyDown(key))
+		if(Input.GetKeyDown(key) && enabled)
 			if(OnPressed != null)
 				OnPressed ();
 		
-		if(Input.GetKeyUp(key))
+		if(Input.GetKeyUp(key) && enabled)
 			if(OnReleased != null)
 				OnReleased ();
 		}
@@ -51,26 +56,40 @@ public class Button : MonoBehaviour {
 	{
 		gameObject.GetComponent<PressGesture>().Pressed += Pressed;
 		gameObject.GetComponent<ReleaseGesture>().Released += Released;
+		lvm.OnStart += EnableButton;
+		lvm.OnFinish += DisableButton;
 	}
 	
 	private void OnDisable()
 	{
-		try{
 			gameObject.GetComponent<PressGesture>().Pressed -= Pressed;
-			gameObject.GetComponent<ReleaseGesture>().Released -= Released;		
-		}catch{}
+			gameObject.GetComponent<ReleaseGesture>().Released -= Released;	
+		lvm.OnStart -= EnableButton;
+		lvm.OnFinish -= DisableButton;
+	}
+
+	void EnableButton() {
+		enabled = true;
+	}
+	
+	void DisableButton() {
+		enabled = false;
 	}
 
 	private void Pressed(object sender, EventArgs e) {
-		gameObject.GetComponent<SpriteRenderer>().sprite = s_pressed;
-		if(OnPressed != null)
-			OnPressed ();
+		if (enabled) {
+						gameObject.GetComponent<SpriteRenderer> ().sprite = s_pressed;
+						if (OnPressed != null)
+								OnPressed ();
+				}
 	}
 	
 	private void Released(object sender, EventArgs e) {
-		gameObject.GetComponent<SpriteRenderer>().sprite = s_released;	
-		if(OnReleased != null)
-			OnReleased ();	
+		if (enabled) {
+						gameObject.GetComponent<SpriteRenderer> ().sprite = s_released;	
+						if (OnReleased != null)
+								OnReleased ();	
+				}
 	}
 
 	private void AdaptPosition() {

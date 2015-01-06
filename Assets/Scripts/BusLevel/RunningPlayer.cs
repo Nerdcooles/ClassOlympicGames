@@ -7,51 +7,50 @@ public class RunningPlayer : MonoBehaviour {
 
 	public float deltaX = 1;
 	public GameManager.ePlayers player;
-
+	private GameManager.eColors color;
 	public GameObject button;
-	private BusLevelManager levelManager;
+	private LevelManager levelManager;
 	private Animator animator;
 	private bool finished;
 	private int last;
+	private RuntimeAnimatorController animCtrl;
+
 
 	void Awake() {
-		levelManager = GameObject.Find("LevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 	}
 
 	void Start () {
-		animator = GetComponent<Animator>();
-		finished = false;
+		try {
+			color = GameManager.Instance.getColor(player);
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
+			animator = GetComponent<Animator>();			
+			animator.runtimeAnimatorController = animCtrl;
+		}catch{
+			gameObject.SetActive(false);
+		}
 		last = GameManager.Instance.getNumPlayer();
 	}
 
 	private void OnEnable()
 	{
-		button.GetComponent<PressGesture>().Pressed += move;
+		button.GetComponent<Button>().OnPressed += move;
 	}
 	
 	private void OnDisable()
 	{
-		try{
-			button.GetComponent<PressGesture>().Pressed -= move;
-		}catch{}
+		button.GetComponent<Button>().OnPressed -= move;
 	}
 
-	private void move(object sender, EventArgs e) {
+	private void move() {
 		Debug.Log(player.ToString() + " tap");
-//		if(levelManager.isStarted() && !finished) {
-			StopAllCoroutines();
+
 			Vector3 pos = transform.position;
 			pos.x += deltaX;
 			transform.position = pos;
-			animator.SetBool("isMoving", true);
-			StartCoroutine(animation());
-//		}
+
 	}
 
-	private IEnumerator animation() {
-		yield return new WaitForSeconds(0.5f);
-		animator.SetBool("isMoving",false);
-	}
 
 //	private void OnTriggerEnter2D(Collider2D other) {
 //		int pos = levelManager.Finish(this.player)+1;

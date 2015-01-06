@@ -1,24 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BusLevelManager : LevelManager {
+public class BusLevelManager : MonoBehaviour {
 		
+	public GameObject firsLine;
+
 	private int player_pos;
 	private float start_time;
 	private float finish_time;
-
+	private int num_players;
+	private LevelManager lvm;
+	
 	void Awake() {
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		num_players = GameManager.Instance.getNumPlayer ();
+		firsLine.SetActive (false);
 		player_pos = 0;
 		start_time = 0;
 		finish_time = 0;
 	}
 
-	void Start() {
-//		level = GameManager.eLevels.Bus;
-//		PrepareLevel(level);
-		Debug.Log("BUS LEVEL");
+	void OnEnable()
+	{
+		lvm.OnStart += ActiveFirstLine;
+	}
+	
+	
+	void OnDisable()
+	{
+		lvm.OnStart -= ActiveFirstLine;
 	}
 
+	void ActiveFirstLine() {
+		firsLine.SetActive (true);
+	}
 	public int Finish(GameManager.ePlayers player) {
 //		finish_time = Time.time - start_time;
 //		//levelUI.score(player, finish_time.ToString("0.00") + " sec");

@@ -26,7 +26,6 @@ public class Instructions : MonoBehaviour {
 
 	public void Show(){
 		gameObject.SetActive (true);
-		Debug.Log ("instruction show");
 		InvokeRepeating ("WaitToSkip", 0.1f, 1);
 	}
 
@@ -42,7 +41,6 @@ public class Instructions : MonoBehaviour {
 	private void WaitToSkip() {
 		secToSkip--;
 		if (secToSkip < 0) {
-			Debug.Log ("instruction can skip");
 			canSkip=true;
 			CancelInvoke("WaitToSkip");
 
