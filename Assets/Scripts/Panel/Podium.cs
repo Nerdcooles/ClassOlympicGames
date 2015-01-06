@@ -4,19 +4,14 @@ using System.Collections;
 public class Podium : MonoBehaviour {
 
 	private LevelManager lvm;
-	private SpriteRenderer first, second, third;
 
 	private bool canSkip = false;
 	private int secToSkip = 2;
+	private GameObject podiumPrefab;
 	
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-		first = GameObject.Find("first").GetComponent<SpriteRenderer>();
-		second = GameObject.Find("second").GetComponent<SpriteRenderer>();
-		third = GameObject.Find("third").GetComponent<SpriteRenderer>();
-		first.sprite = null;
-		second.sprite = null;
-		third.sprite = null;
+		podiumPrefab = Resources.Load<GameObject> ("Prefabs/Podium");
 	}
 	
 	void Start() {
@@ -29,12 +24,27 @@ public class Podium : MonoBehaviour {
 	}
 
 	public void Show() {
-		foreach (GameManager.ePlayers player in lvm.getFirstPlace())
-			first.sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
-		foreach (GameManager.ePlayers player in lvm.getSecondPlace())
-			second.sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
-		foreach (GameManager.ePlayers player in lvm.getThirdPlace())
-			third.sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
+		int i = 0;
+		foreach (GameManager.ePlayers player in lvm.getFirstPlace()) {
+			GameObject pl = Instantiate(podiumPrefab, transform.position + new Vector3(0.3f + i*0.5f,0.8f,0), transform.rotation) as GameObject;
+			pl.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
+			i++;
+		}
+
+		i = 1;
+		foreach (GameManager.ePlayers player in lvm.getSecondPlace()) {
+			GameObject pl = Instantiate(podiumPrefab, transform.position + new Vector3(1 + i*0.5f,0.5f,0), transform.rotation) as GameObject;
+			pl.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
+			i++;
+		}
+
+		i = -1;
+		foreach (GameManager.ePlayers player in lvm.getThirdPlace()) {
+			GameObject pl = Instantiate(podiumPrefab, transform.position + new Vector3(i*0.5f,0.2f,0), transform.rotation) as GameObject;
+			pl.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
+			i--;
+		}
+
 		gameObject.SetActive (true);
 		InvokeRepeating ("WaitToSkip", 0.1f, 1);
 	}
