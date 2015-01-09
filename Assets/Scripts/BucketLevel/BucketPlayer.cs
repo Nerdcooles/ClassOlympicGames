@@ -21,6 +21,7 @@ public class BucketPlayer : MonoBehaviour {
 	private RuntimeAnimatorController animCtrl;
 
 	void Awake() {
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		try {
 			color = GameManager.Instance.getColor(player);
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
@@ -32,7 +33,6 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	void Start () {
-		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		can_shoot = false;
 		switch(player) {
 		case GameManager.ePlayers.p01:  
@@ -45,7 +45,8 @@ public class BucketPlayer : MonoBehaviour {
 	private void OnEnable()
 	{
 		shoot_btn.GetComponent<Button>().OnPressed += startPower;
-		shoot_btn.GetComponent<Button>().OnReleased += shoot;	
+		shoot_btn.GetComponent<Button>().OnReleased += shoot;
+		levelManager.OnFinish += endHitted;
 	}
 	
 	private void OnDisable()
@@ -53,6 +54,7 @@ public class BucketPlayer : MonoBehaviour {
 		try{
 			shoot_btn.GetComponent<Button>().OnPressed -= startPower;
 			shoot_btn.GetComponent<Button>().OnReleased -= shoot;
+			levelManager.OnFinish -= endHitted;
 		}
 		catch
 		{
@@ -64,7 +66,7 @@ public class BucketPlayer : MonoBehaviour {
 			can_shoot=true;
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
-			animator.SetBool("isShooting", true);
+			animator.SetBool("isShooting", false);
 		}else{
 			can_shoot=false;
 		}
@@ -92,6 +94,8 @@ public class BucketPlayer : MonoBehaviour {
 
 	public void endHitted() {
 		animator.SetBool("isHitted",false);
+		animator.SetBool("isLoading", false);
+		animator.SetBool("isShooting", false);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

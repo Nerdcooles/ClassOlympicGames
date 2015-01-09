@@ -2,20 +2,22 @@
 using System.Collections;
 
 public class Podium : MonoBehaviour {
+	public GameObject[] pod;
+	public GameObject bg;
 
 	private LevelManager lvm;
+	private RuntimeAnimatorController animCtrl;
 
 	private bool canSkip = false;
 	private int secToSkip = 2;
-	private GameObject podiumPrefab;
-	
+
 	void Awake() {
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-		podiumPrefab = Resources.Load<GameObject> ("Prefabs/Podium");
+		lvm = transform.parent.gameObject.GetComponent<LevelManager>() as LevelManager;
 	}
 	
 	void Start() {
 		gameObject.SetActive (false);
+		bg.SetActive (false);
 	}
 	
 	void Update() {
@@ -24,28 +26,22 @@ public class Podium : MonoBehaviour {
 	}
 
 	public void Show() {
-		int i = 0;
-		foreach (GameManager.ePlayers player in lvm.getFirstPlace()) {
-			GameObject pl = Instantiate(podiumPrefab, transform.position + new Vector3(0.3f + i*0.5f,0.8f,0), transform.rotation) as GameObject;
-			pl.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
-			i++;
+		Debug.Log ("SHOW");
+		bg.SetActive (true);
+		int num_players = GameManager.Instance.getNumPlayer ();
+		for (int i=0; i<num_players; i++) {
+			if(i==num_players-1 && i!=0) {
+				//LOSER
+				animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (lvm.getPodium(i)) + "_podium_loser");
+			}else{
+				//WINNER
+				animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (lvm.getPodium(i)) + "_podium_winner");
+			}
+			pod[i].GetComponent<Animator>().runtimeAnimatorController = animCtrl;
+			pod[i].SetActive(true);		
 		}
-
-		i = 1;
-		foreach (GameManager.ePlayers player in lvm.getSecondPlace()) {
-			GameObject pl = Instantiate(podiumPrefab, transform.position + new Vector3(1 + i*0.5f,0.5f,0), transform.rotation) as GameObject;
-			pl.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
-			i++;
-		}
-
-		i = -1;
-		foreach (GameManager.ePlayers player in lvm.getThirdPlace()) {
-			GameObject pl = Instantiate(podiumPrefab, transform.position + new Vector3(i*0.5f,0.2f,0), transform.rotation) as GameObject;
-			pl.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Podium/" + GameManager.Instance.getColor(player));
-			i--;
-		}
-
 		gameObject.SetActive (true);
+
 		InvokeRepeating ("WaitToSkip", 0.1f, 1);
 	}
 	

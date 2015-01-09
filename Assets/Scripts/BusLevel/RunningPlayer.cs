@@ -5,11 +5,11 @@ using TouchScript.Gestures;
 
 public class RunningPlayer : MonoBehaviour {
 
-	public float deltaX = 1;
+	public float deltaX = 0.5f;
 	public GameManager.ePlayers player;
 	private GameManager.eColors color;
 	public GameObject button;
-	private LevelManager levelManager;
+	private BusLevelManager gameMgr;
 	private Animator animator;
 	private bool finished;
 	private int last;
@@ -17,7 +17,7 @@ public class RunningPlayer : MonoBehaviour {
 
 
 	void Awake() {
-		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
+		gameMgr = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
 	}
 
 	void Start () {
@@ -29,7 +29,7 @@ public class RunningPlayer : MonoBehaviour {
 		}catch{
 			gameObject.SetActive(false);
 		}
-		last = GameManager.Instance.getNumPlayer();
+		finished = false;
 	}
 
 	private void OnEnable()
@@ -39,23 +39,27 @@ public class RunningPlayer : MonoBehaviour {
 	
 	private void OnDisable()
 	{
+		try{
 		button.GetComponent<Button>().OnPressed -= move;
+		}catch{
+		}
 	}
 
 	private void move() {
-		Debug.Log(player.ToString() + " tap");
-
-			Vector3 pos = transform.position;
-			pos.x += deltaX;
-			transform.position = pos;
-
+		if (!finished) {
+						Vector3 pos = transform.position;
+						pos.x += deltaX;
+						transform.position = pos;
+				}
 	}
-
-
-//	private void OnTriggerEnter2D(Collider2D other) {
-//		int pos = levelManager.Finish(this.player)+1;
-//		if(pos!=last || last==1) animator.SetBool("isWinner", true);
-//		else animator.SetBool("isLoser", true);
-//		finished = true;
-//	}
+	
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag == "Target") {
+			finished = true;
+			gameMgr.Finish(player);
+		}
+		if (other.name == "FirstLine") {
+			other.transform.position = transform.position + new Vector3(1f,0,0);
+		}
+	}
 }

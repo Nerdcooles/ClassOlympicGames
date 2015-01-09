@@ -6,6 +6,9 @@ using System.Linq;
 
 public class LevelManager : MonoBehaviour {
 	public GameManager.eLevels level;
+	public GameObject panel_instructions;
+	public GameObject panel_podium;
+	public GameObject panel_finish;
 
 	public enum eState {Instructions, Countdown, Run, Pause, Finish}
 	private eState state;
@@ -15,12 +18,12 @@ public class LevelManager : MonoBehaviour {
 	private Podium podium;
 
 	public delegate void StateChange();
+	public event StateChange OnCountdown;
 	public event StateChange OnStart;
 	public event StateChange OnFinish;
 
-	private List<GameManager.ePlayers> firstPlace;
-	private List<GameManager.ePlayers> secondPlace;
-	private List<GameManager.ePlayers> thirdPlace;
+	private GameManager.ePlayers[] positions;
+	private int num_players;
 
 	void Awake() {
 		if (GameManager.Instance.getNumPlayer() == 0) {
@@ -30,16 +33,21 @@ public class LevelManager : MonoBehaviour {
 				}
 
 		//INSTRUCTIONS
-		instructions = GetComponentInChildren<Instructions> ();
+		instructions = panel_instructions.GetComponent<Instructions>();
 
 		//COUNTDOWN
 		countdown = GetComponentInChildren<Countdown>();
 
+		//FINISH
+		panel_finish.SetActive (false);
 		//PODIUM
-		podium = GetComponentInChildren<Podium> ();
+		podium = panel_podium.GetComponent<Podium> ();
 	}
 
 	void Start() {
+		num_players = GameManager.Instance.getNumPlayer ();
+		positions = new GameManager.ePlayers[num_players];
+
 		instructions.Show();
 		state = eState.Instructions;
 		Debug.Log ("INSTRUCTIONS");
@@ -49,6 +57,8 @@ public class LevelManager : MonoBehaviour {
 		instructions.Hide();
 		state = eState.Countdown;
 		Debug.Log ("COUNTDOWN");
+		if(OnCountdown != null)
+			OnCountdown();
 		countdown.StartCountdown ();
 	}
 
@@ -62,8 +72,15 @@ public class LevelManager : MonoBehaviour {
 	public void FinishGame() {
 		state = eState.Finish;
 		Debug.Log ("FINISH");
+		panel_finish.SetActive (true);
 		if(OnFinish != null)
 			OnFinish();
+		StartCoroutine ("WaitForPodium");
+	}
+
+	IEnumerator WaitForPodium() {
+		yield return new WaitForSeconds(2f);
+		panel_finish.SetActive (false);
 		podium.Show ();
 	}
 
@@ -75,27 +92,12 @@ public class LevelManager : MonoBehaviour {
 		return level;
 	}
 
-	public void setFirstPlace(List<GameManager.ePlayers> players) {
-		this.firstPlace = players;
-	}
-	
-	public void setSecondPlace(List<GameManager.ePlayers> players) {
-		this.secondPlace = players;
-	}
-	
-	public void setThirdPlace(List<GameManager.ePlayers> players) {
-		this.thirdPlace = players;
-	}
-	public List<GameManager.ePlayers> getFirstPlace() {
-		return firstPlace;
-	}
-	
-	public List<GameManager.ePlayers> getSecondPlace() {
-		return secondPlace;
+	public void setPodium(GameManager.ePlayers player, int position) {
+		positions [position] = player;
+		Debug.Log ("Set podium " + position + " " + positions [position].ToString());
 	}
 
-	public List<GameManager.ePlayers> getThirdPlace() {
-		return thirdPlace;
+	public GameManager.ePlayers getPodium(int position) {
+		return positions[position];
 	}
-
 }
