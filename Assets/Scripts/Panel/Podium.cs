@@ -26,7 +26,6 @@ public class Podium : MonoBehaviour {
 	}
 
 	public void Show() {
-		Debug.Log ("SHOW");
 		bg.SetActive (true);
 		int num_players = GameManager.Instance.getNumPlayer ();
 		for (int i=0; i<num_players; i++) {

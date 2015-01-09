@@ -73,7 +73,6 @@ public class BucketLevelManager : MonoBehaviour {
 	public void Score(GameManager.ePlayers player) {
 		points[player.GetHashCode()]++;
 		times[player.GetHashCode()] = Time.time;
-		Debug.Log (player.ToString () + " " + points [player.GetHashCode ()] + " " + times [player.GetHashCode ()]);
 	}
 
 }

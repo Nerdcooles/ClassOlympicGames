@@ -94,7 +94,6 @@ public class LevelManager : MonoBehaviour {
 
 	public void setPodium(GameManager.ePlayers player, int position) {
 		positions [position] = player;
-		Debug.Log ("Set podium " + position + " " + positions [position].ToString());
 	}
 
 	public GameManager.ePlayers getPodium(int position) {

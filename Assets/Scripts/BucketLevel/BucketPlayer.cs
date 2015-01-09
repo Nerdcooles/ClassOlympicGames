@@ -96,6 +96,12 @@ public class BucketPlayer : MonoBehaviour {
 		animator.SetBool("isHitted",false);
 		animator.SetBool("isLoading", false);
 		animator.SetBool("isShooting", false);
+		//IF NOT LAST PLAYER
+		if(levelManager.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_winner");
+		else
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_loser");
+		animator.runtimeAnimatorController = animCtrl;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
