@@ -23,6 +23,11 @@ public class GameManager : Singleton<GameManager> {
 		return players.Count ();
 	}
 
+	public List<ePlayers> getPlayers() {
+		List<ePlayers> ps = new List<ePlayers>(players.Keys);
+		return ps;
+	}
+
 	public void addMedal(ePlayers player, eMedals medal) {
 		if (players.ContainsKey(player))
 			players[player].addMedal(medal);

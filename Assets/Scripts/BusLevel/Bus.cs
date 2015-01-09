@@ -15,6 +15,7 @@ public class Bus : MonoBehaviour {
 	{
 		lvm.OnCountdown += InitBus;
 		lvm.OnStart += MoveBus;
+		lvm.OnFinish += RemoveCollider;
 	}
 	
 	
@@ -22,6 +23,8 @@ public class Bus : MonoBehaviour {
 	{
 		lvm.OnCountdown -= InitBus;
 		lvm.OnStart -= MoveBus;
+		lvm.OnFinish -= RemoveCollider;
+
 	}
 	
 	void InitBus() {
@@ -30,6 +33,10 @@ public class Bus : MonoBehaviour {
 
 	void MoveBus() {
 		rigidbody2D.AddForce(Vector3.right * speed);
+	}
+
+	void RemoveCollider() {
+		GetComponent<BoxCollider2D> ().enabled = false;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {

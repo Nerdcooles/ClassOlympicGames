@@ -39,7 +39,6 @@ public class BucketLevelManager : MonoBehaviour {
 
 	void StartTimer() {
 		InvokeRepeating ("Timer", 0.1f, 1);
-
 	}
 
 	void Timer() {

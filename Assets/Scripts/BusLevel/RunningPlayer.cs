@@ -56,7 +56,7 @@ public class RunningPlayer : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Target") {
 			finished = true;
-			gameMgr.Finish(player);
+			gameMgr.Score(player);
 		}
 		if (other.name == "FirstLine") {
 			other.transform.position = transform.position + new Vector3(1f,0,0);
