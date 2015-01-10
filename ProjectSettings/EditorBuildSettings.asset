@@ -14,12 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectLevel.unity
   - enabled: 1
+    path: Assets/Scenes/SelectPlayer.unity
+  - enabled: 1
     path: Assets/Scenes/Bus.unity
   - enabled: 1
     path: Assets/Scenes/Bucket.unity
-  - enabled: 0
-    path: Assets/Scenes/_arch.unity
   - enabled: 1
     path: Assets/Scenes/Archery.unity
-  - enabled: 1
-    path: Assets/Scenes/SelectPlayer.unity

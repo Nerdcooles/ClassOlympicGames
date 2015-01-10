@@ -31,9 +31,12 @@ public static class MenuManager {
 	public static void selectMode() {
 		Application.LoadLevel("SelectMode");
 	}
+
+	public static void selectLevel() {
+		Application.LoadLevel("SelectLevel");
+	}
 	
-	public static void selectPlayer(int num_players) {
-		GameManager.Instance.createPlayers(num_players);
+	public static void selectPlayer() {
 		Application.LoadLevel("SelectPlayer");
 	}
 

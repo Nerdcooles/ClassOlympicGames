@@ -15,25 +15,11 @@ public class SelectNumber : MonoBehaviour {
 		}
 	}
 
-	public void Start1p()
+	public void StartWithPlayers(int num_players)
 	{
-		MenuManager.selectPlayer(1);
-	}	
-
-	public void Start2p()
-	{
-		MenuManager.selectPlayer(2);
-	}	
-
-	public void Start3p()
-	{
-		MenuManager.selectPlayer(3);
-	}	
-
-	public void Start4p()
-	{
-		MenuManager.selectPlayer(4);
-	}		
+		GameManager.Instance.createPlayers(num_players);
+		MenuManager.selectPlayer();
+	}
 	
 	public void Back ()
 	{
