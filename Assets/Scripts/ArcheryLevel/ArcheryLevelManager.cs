@@ -3,50 +3,75 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ArcheryLevelManager : LevelManager {
+public class ArcheryLevelManager : MonoBehaviour {
 	
-	Dictionary<GameManager.ePlayers, int> points = new Dictionary<GameManager.ePlayers, int>();
+	int[] points;
+	float[] times;
 	
-	public float seconds = 30;
-	private bool finished;
-
-
-	void Start() {
-//		level = GameManager.eLevels.Archery;
-////		PrepareLevel(level);
-////		levelUI.show(LevelUI.ePanel.Scoreboard);
-//		Debug.Log("ARCHERY LEVEL");
-//		finished = false;
-//		for(int i=0; i<num_players; i++) {
-//			points.Add((GameManager.ePlayers)i, 0); 
-//		}
-//		StartCoroutine(Countdown(seconds));
+	public int seconds = 10;
+	private int num_players;
+	private LevelManager lvm;
+	
+	void Awake() {
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		num_players = GameManager.Instance.getNumPlayer ();
+		
+		//init points
+		points = new int[num_players];
+		times = new float[num_players];
+		
+		for(int i=0; i<num_players; i++) {
+			points[i] = 0; 
+			times[i] = 0; 
+		}
 	}
 	
-	IEnumerator Countdown(float waitTime) {
-		yield return new WaitForSeconds(waitTime);
-		var player = from pair in points
-			orderby pair.Value descending
-				select pair;
-		int player_pos = 0;
-		foreach (KeyValuePair<GameManager.ePlayers, int> pair in player)
-		{
-			if(player_pos < 3){
-				GameManager.Instance.addMedal(pair.Key, (GameManager.eMedals)player_pos);
-	//			levelUI.medal(pair.Key, (GameManager.eMedals)player_pos);
-			}else {
-				break;
+	void OnEnable()
+	{
+		lvm.OnStart += StartTimer;
+	}
+	
+	
+	void OnDisable()
+	{
+		lvm.OnStart -= StartTimer;
+	}
+	
+	void StartTimer() {
+		InvokeRepeating ("Timer", 0.1f, 1);
+	}
+	
+	void Timer() {
+		seconds--;
+		if(seconds < 0){
+			Finished ();
+			CancelInvoke("Timer");
+		}
+	}
+	
+	void Finished() {
+		for(int pos=0; pos<num_players; pos++) {
+			int max = points.Max ();
+			float min_time = Time.time;
+			GameManager.ePlayers winner = (GameManager.ePlayers)pos;
+			for (int i=0; i<points.Length; i++){
+				if (points [i] == max && times [i] < min_time) {
+					winner = (GameManager.ePlayers)i;
+					min_time = times[i];
+				}
 			}
-			player_pos++;
+			points[winner.GetHashCode()] = -1;
+			times[winner.GetHashCode()] = -1;
+			Debug.Log(winner.ToString() + " position " + pos);
+			lvm.setPodium(winner, pos);
 		}
-		finished = true;
-//		StartCoroutine(GameOver());
+		
+		lvm.FinishGame();
 	}
 	
-	public void score(GameManager.ePlayers player) {
-		if(!finished){
-			points[player]++;
-	//		levelUI.score(player, points[player].ToString());
-		}
+	public void Score(GameManager.ePlayers player) {
+		points[player.GetHashCode()]++;
+		times[player.GetHashCode()] = Time.time;
 	}
+
 }

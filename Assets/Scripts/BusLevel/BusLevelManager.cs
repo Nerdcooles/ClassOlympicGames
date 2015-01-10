@@ -11,7 +11,7 @@ public class BusLevelManager : MonoBehaviour {
 	private LevelManager lvm;
 	private List<GameManager.ePlayers> playersToFinish;
 
-	public const float WAIT_SECS = 15f;
+	public const float WAIT_SECS = 10f;
 	
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();

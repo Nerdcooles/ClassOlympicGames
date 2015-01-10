@@ -3,17 +3,21 @@ using System.Collections;
 
 public class ArcheryPencil : MonoBehaviour {
 
-	public Sprite p1_sprite, p2_sprite, p3_sprite, p4_sprite;
+	
 	private GameManager.ePlayers player;
-	private ArcheryLevelManager levelManager;
+	private LevelManager lvm;
+	private ArcheryLevelManager alvm;
+	
 	private bool shooted;
 	float speed = 4f;
 	float dir;
 	
 	void Start () {
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
+		alvm = GameObject.Find("ArcheryLevelManager").GetComponent<ArcheryLevelManager>() as ArcheryLevelManager;
+		lvm.OnFinish += DestroyMe;
 		dir = (Random.Range(0,2) - 0.5f) * speed;
 		shooted = false;
-		levelManager = GameObject.Find("LevelManager").GetComponent<ArcheryLevelManager>() as ArcheryLevelManager;
 	}
 	
 	void Update () {
@@ -24,31 +28,38 @@ public class ArcheryPencil : MonoBehaviour {
 				dir = dir * -1;
 			transform.Rotate (Vector3.forward * dir);
 		}
-		}
-
+	}
+	
+	
+	private void DestroyMe() {
+		lvm.OnFinish -= DestroyMe;
+		Destroy (gameObject);
+	}
+	
 	public void setPlayer(GameManager.ePlayers player) {
 		this.player = player;
-		switch(player) {
-		case GameManager.ePlayers.p01: gameObject.GetComponent<SpriteRenderer>().sprite = p1_sprite; break;
-		case GameManager.ePlayers.p02: gameObject.GetComponent<SpriteRenderer>().sprite = p2_sprite; break;
-		case GameManager.ePlayers.p03: gameObject.GetComponent<SpriteRenderer>().sprite = p3_sprite; break;
-		case GameManager.ePlayers.p04: gameObject.GetComponent<SpriteRenderer>().sprite = p4_sprite; break;		
+		gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/ArcheryLevel/pen/" + GameManager.Instance.getColor(player));
+	}
+	
+	public GameManager.ePlayers getPlayer() {
+		return player;
+	}
+	
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.name == "target") {
+			DestroyMe();	
+			alvm.Score(player);
+		}
+		if(other.name == "bound") {
+			DestroyMe();
+		}
+		if (other.tag == "Bullet") {
+			DestroyMe();
+			Destroy (other.gameObject);
 		}
 	}
 
 	public void shoot() {
 		shooted = true;
-	}
-
-	void OnTriggerEnter2D(Collider2D other) {
-		if(other.tag == "Bound") 
-			Destroy(gameObject);
-		else if(other.tag == "Bullet") {
-			Destroy(gameObject);
-			Destroy(other.gameObject);
-		} else if(other.tag == "Target") {
-			levelManager.score(this.player);
-			Destroy(gameObject);
-		}
 	}
 }

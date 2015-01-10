@@ -43,13 +43,21 @@ public class Button : MonoBehaviour {
 	}
 
 	void Update() {
-		if(Input.GetKeyDown(key) && enabled)
-			if(OnPressed != null)
-				OnPressed ();
-		
-		if(Input.GetKeyUp(key) && enabled)
-			if(OnReleased != null)
-				OnReleased ();
+		if (Input.GetKeyDown (key) && enabled) {
+						gameObject.GetComponent<SpriteRenderer> ().sprite = s_pressed;
+
+						if (OnPressed != null) {
+
+								OnPressed ();
+						}
+				}
+		if (Input.GetKeyUp (key) && enabled) {
+						gameObject.GetComponent<SpriteRenderer> ().sprite = s_released;	
+
+						if (OnReleased != null) {
+								OnReleased ();
+						}
+				}
 		}
 
 	private void OnEnable()

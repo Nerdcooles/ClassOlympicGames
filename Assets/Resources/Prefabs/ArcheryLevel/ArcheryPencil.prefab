@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
-  m_LocalPosition: {x: -5.05000019, y: -.230000004, z: 1}
-  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.33000004, y: 1.33000004, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,8 +55,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 1.99999976, y: .49999994}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: .385607094, y: .0888346657}
+  m_Center: {x: .0296490956, y: -.00527651561}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,10 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f482f18c927c54148bb30514c8c8a590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1_sprite: {fileID: 21300000, guid: 69f1dc12db82c45c6bb64949219cb46c, type: 3}
-  p2_sprite: {fileID: 21300000, guid: 999693964a812445a8865bda8add3d27, type: 3}
-  p3_sprite: {fileID: 21300000, guid: ba1b9c71927b44edb8515b4aab478022, type: 3}
-  p4_sprite: {fileID: 21300000, guid: e154b4605580b4c7cac6c6daa3fa5012, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +88,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 69f1dc12db82c45c6bb64949219cb46c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18b48f42f92064b3babe79aaf4d720fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -8,7 +8,7 @@ public static class MenuManager {
 		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.CLASSIC) {
 			switch(level) {
 			case GameManager.eLevels.Bucket: 	Application.LoadLevel("Bus"); break;
-			case GameManager.eLevels.Bus: 		Application.LoadLevel("Archery"); break;
+			case GameManager.eLevels.Bus: 		Application.LoadLevel("SelectMode"); break;
 			case GameManager.eLevels.Archery: 	Application.LoadLevel("SelectMode"); break;	
 			}
 		}else{

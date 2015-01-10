@@ -16,9 +16,17 @@ public class Camera2DFollow : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		lastTargetPosition = new Vector3(target.position.x, 0 ,target.position.z);
-		offsetZ = (transform.position - target.position).z;
-		transform.parent = null;
+		if (target != null) {
+			Debug.Log ("CameraFollow enabled");
+
+						lastTargetPosition = new Vector3 (target.position.x, 0, target.position.z);
+						offsetZ = (transform.position - target.position).z;
+						transform.parent = null;
+				} else {
+			Debug.Log ("CameraFollow disabled");
+
+			enabled = false;
+				}
 	}
 	
 	// Update is called once per frame
@@ -40,7 +48,7 @@ public class Camera2DFollow : MonoBehaviour {
 		Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, damping);
 		
 		transform.position = newPos;
-		
+
 		lastTargetPosition = new Vector3(target.position.x, 0 ,target.position.z);
 	}
 }

@@ -33,10 +33,10 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	void Start () {
-		can_shoot = false;
+		can_shoot = true;
 		switch(player) {
 		case GameManager.ePlayers.p01:  
-		case GameManager.ePlayers.p02:direction = (Quaternion.AngleAxis(60, transform.forward) * transform.right) * alpha; break;
+		case GameManager.ePlayers.p02:direction = (Quaternion.AngleAxis(65, transform.forward) * transform.right) * alpha; break;
 		case GameManager.ePlayers.p03:
 		case GameManager.ePlayers.p04:direction = (Quaternion.AngleAxis(60, transform.forward) * transform.right) * alpha; break;
 		}
@@ -46,7 +46,7 @@ public class BucketPlayer : MonoBehaviour {
 	{
 		shoot_btn.GetComponent<Button>().OnPressed += startPower;
 		shoot_btn.GetComponent<Button>().OnReleased += shoot;
-		levelManager.OnFinish += endHitted;
+		levelManager.OnFinish += endPlayer;
 	}
 	
 	private void OnDisable()
@@ -54,7 +54,7 @@ public class BucketPlayer : MonoBehaviour {
 		try{
 			shoot_btn.GetComponent<Button>().OnPressed -= startPower;
 			shoot_btn.GetComponent<Button>().OnReleased -= shoot;
-			levelManager.OnFinish -= endHitted;
+			levelManager.OnFinish -= endPlayer;
 		}
 		catch
 		{
@@ -62,18 +62,15 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	private void startPower() {
-		if(levelManager.getState() == LevelManager.eState.Run) {
-			can_shoot=true;
+		if(levelManager.getState() == LevelManager.eState.Run && can_shoot) {
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
-		}else{
-			can_shoot=false;
 		}
 	}
 
 	private void shoot() {
-		if(can_shoot) {
+		if(levelManager.getState() == LevelManager.eState.Run && can_shoot) {
 			force = (float)Math.Round((Time.time - press_time), 3);
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
@@ -93,6 +90,11 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	public void endHitted() {
+		animator.SetBool("isHitted",false);
+		can_shoot=true;
+	}
+
+	public void endPlayer() {
 		animator.SetBool("isHitted",false);
 		animator.SetBool("isLoading", false);
 		animator.SetBool("isShooting", false);

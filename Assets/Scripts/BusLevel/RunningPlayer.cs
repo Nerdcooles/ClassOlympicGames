@@ -59,7 +59,7 @@ public class RunningPlayer : MonoBehaviour {
 			gameMgr.Score(player);
 		}
 		if (other.name == "FirstLine") {
-			other.transform.position = transform.position + new Vector3(1f,0,0);
+			other.transform.position = other.transform.position + new Vector3(1f,0,0);
 		}
 	}
 }

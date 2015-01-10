@@ -32,7 +32,7 @@ public class BucketBall : MonoBehaviour {
 			DestroyMe();	
 			blvm.Score(player);
 		}
-		if(other.name == "bound") {
+		if(other.tag == "Bound") {
 			DestroyMe();
 		}
 	}

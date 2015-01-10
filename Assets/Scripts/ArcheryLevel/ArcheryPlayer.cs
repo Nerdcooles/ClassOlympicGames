@@ -35,24 +35,16 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	private void OnEnable()
 	{
-		// subscribe to gesture's Tapped event
-		shoot_btn.GetComponent<TapGesture>().Tapped += shoot;
-		
+		shoot_btn.GetComponent<Button>().OnPressed += shoot;
 	}
 	
 	private void OnDisable()
 	{
-		// don't forget to unsubscribe
-		try{
-			shoot_btn.GetComponent<TapGesture>().Tapped -= shoot;
-		}
-		catch
-		{
-		}
+		shoot_btn.GetComponent<Button>().OnPressed -= shoot;
 	}
 
 	
-	private void shoot(object sender, EventArgs e) {
+	private void shoot() {
 		if(!shooted && pencilInstance!=null) {
 			pencilInstance.GetComponent<ArcheryPencil>().shoot();
 			StartCoroutine(Reload());
