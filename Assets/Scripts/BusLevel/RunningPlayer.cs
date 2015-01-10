@@ -34,13 +34,13 @@ public class RunningPlayer : MonoBehaviour {
 
 	private void OnEnable()
 	{
-		button.GetComponent<Button>().OnPressed += move;
+		button.GetComponent<PlayerButton>().OnPressed += move;
 	}
 	
 	private void OnDisable()
 	{
 		try{
-		button.GetComponent<Button>().OnPressed -= move;
+			button.GetComponent<PlayerButton>().OnPressed -= move;
 		}catch{
 		}
 	}

@@ -109,11 +109,15 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: de82774f1a2ca4a53bebdcf22c08c067, type: 3}
       m_Size: 128
-  m_BuildTargetBatching: []
-  webPlayerTemplate: APPLICATION:Default
+  m_BuildTargetBatching:
+  - m_BuildTarget: iPhone
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
+  webPlayerTemplate: APPLICATION:No Context Menu
   m_TemplateCustomTags: {}
+  locationUsageDescription: 
   XboxTitleId: 
   XboxImageXexPath: 
   XboxSpaPath: 

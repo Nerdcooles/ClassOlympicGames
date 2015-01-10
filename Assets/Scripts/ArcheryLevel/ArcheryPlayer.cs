@@ -35,12 +35,12 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	private void OnEnable()
 	{
-		shoot_btn.GetComponent<Button>().OnPressed += shoot;
+		shoot_btn.GetComponent<PlayerButton>().OnPressed += shoot;
 	}
 	
 	private void OnDisable()
 	{
-		shoot_btn.GetComponent<Button>().OnPressed -= shoot;
+		shoot_btn.GetComponent<PlayerButton>().OnPressed -= shoot;
 	}
 
 	

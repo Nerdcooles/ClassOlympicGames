@@ -44,16 +44,16 @@ public class BucketPlayer : MonoBehaviour {
 	
 	private void OnEnable()
 	{
-		shoot_btn.GetComponent<Button>().OnPressed += startPower;
-		shoot_btn.GetComponent<Button>().OnReleased += shoot;
+		shoot_btn.GetComponent<PlayerButton>().OnPressed += startPower;
+		shoot_btn.GetComponent<PlayerButton>().OnReleased += shoot;
 		levelManager.OnFinish += endPlayer;
 	}
 	
 	private void OnDisable()
 	{
 		try{
-			shoot_btn.GetComponent<Button>().OnPressed -= startPower;
-			shoot_btn.GetComponent<Button>().OnReleased -= shoot;
+			shoot_btn.GetComponent<PlayerButton>().OnPressed -= startPower;
+			shoot_btn.GetComponent<PlayerButton>().OnReleased -= shoot;
 			levelManager.OnFinish -= endPlayer;
 		}
 		catch
