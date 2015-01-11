@@ -41,6 +41,7 @@ public class BusLevelManager : MonoBehaviour {
 	
 	public void Score(GameManager.ePlayers player) {
 		lvm.setPodium (player, player_pos);
+		GameManager.Instance.addMedal (player, (GameManager.eMedals)player_pos);
 		playersToFinish.Remove (player);
 
 		if (player_pos == 0) {

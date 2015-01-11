@@ -29,8 +29,10 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public void addMedal(ePlayers player, eMedals medal) {
-		if (players.ContainsKey(player))
-			players[player].addMedal(medal);
+		if (players.ContainsKey (player) && medal.GetHashCode() != 3) {
+						players [player].addMedal (medal);
+						Debug.Log (player + " " + medal.ToString ());
+				}
 	}
 
 	public int getMedal(ePlayers player, eMedals medal) {
