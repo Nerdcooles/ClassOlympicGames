@@ -9,7 +9,7 @@ public class SelectNumber : MonoBehaviour {
 	GameObject btn_1p;
 	
 	void Awake() {
-		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.TRAINING) {
+		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.CLASSIC) {
 			btn_1p = GameObject.Find ("btn_1p");
 			btn_1p.GetComponent<Button>().interactable = false;
 		}

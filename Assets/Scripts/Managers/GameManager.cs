@@ -63,7 +63,6 @@ public class GameManager : Singleton<GameManager> {
 	public void setColor(ePlayers player, eColors color) {
 		if (players.ContainsKey(player)){
 			players[player].setColor(color);
-			Debug.Log(player.ToString() + " " + color.ToString());
 		}
 	}
 

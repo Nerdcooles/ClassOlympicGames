@@ -21,6 +21,6 @@ public class SelectLevel : MonoBehaviour {
 	}
 
 	public void Back() {
-		MenuManager.selectPlayer ();
+		MenuManager.selectPlayer();
 	}
 }
