@@ -18,9 +18,7 @@ public class HudKeyboardAdapter : MonoBehaviour {
 	private KeyCode key_p3;
 	private KeyCode key_p4;
 
-	private Sprite[] pressed;
-	private Sprite[] released;
-	private Image[] img;
+	private BtnHandler[] btn;
 		
 	void Start() {
 		int num_players = GameManager.Instance.getNumPlayer ();
@@ -31,53 +29,47 @@ public class HudKeyboardAdapter : MonoBehaviour {
 		case 4: key_p1 = KEY_LEFT; key_p2 = KEY_MID_LEFT; key_p3 = KEY_MID_RIGHT; key_p4 = KEY_RIGHT; break;
 		}
 
-		pressed = new Sprite[num_players];
-		released = new Sprite[num_players];
-		img = new Image[num_players];
-
-		for (int i= 0; i<num_players; i++) {
-			pressed[i] = button[i].GetComponent<Button>().spriteState.pressedSprite;
-			img[i] = button[i].GetComponent<Image>();
-			released[i] = img[i].sprite;
+		btn = new BtnHandler[num_players];
+		for (int i=0; i<num_players; i++) {
+			btn[i] = button[i].GetComponent<BtnHandler>() as BtnHandler;
 		}
 	}
+
 	void Update()
 	{
-		var pointer = new PointerEventData(EventSystem.current);
-
 		if (key_p1 != null) {
 			if (Input.GetKeyDown (key_p1)){
-				img[0].sprite = pressed[0];
+				btn[0].Press(null,null);
 			}
 			if (Input.GetKeyUp (key_p1)) {
-				img[0].sprite = released[0];
+				btn[0].Release(null,null);
 			}
 		}
 		
 		if (key_p2 != null) {
 			if (Input.GetKeyDown (key_p2)){
-				img[1].sprite = pressed[1];
+				btn[1].Press(null,null);
 			}
 			if (Input.GetKeyUp (key_p2)) {
-				img[1].sprite = released[1];
+				btn[1].Release(null,null);
 			}
 		}
 		
 		if (key_p3 != null) {
 			if (Input.GetKeyDown (key_p3)){
-				img[2].sprite = pressed[2];
+				btn[2].Press(null,null);
 			}
 			if (Input.GetKeyUp (key_p3)) {
-				img[2].sprite = released[2];
+				btn[2].Release(null,null);
 			}
 		}
 		
 		if (key_p4 != null) {
 			if (Input.GetKeyDown (key_p4)){
-				img[3].sprite = pressed[3];
+				btn[3].Press(null,null);
 			}
 			if (Input.GetKeyUp (key_p4)) {
-				img[3].sprite = released[3];
+				btn[3].Release(null,null);
 			}
 		}
 	}

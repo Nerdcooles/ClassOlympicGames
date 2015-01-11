@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using TouchScript.Gestures;
 
-public class PlayerButton : MonoBehaviour {
+public class Pb : MonoBehaviour {
 	
 	public delegate void Gesture();
 	public event Gesture OnPressed;

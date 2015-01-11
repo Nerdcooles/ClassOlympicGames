@@ -17,14 +17,10 @@ public class Camera2DFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (target != null) {
-			Debug.Log ("CameraFollow enabled");
-
 						lastTargetPosition = new Vector3 (target.position.x, 0, target.position.z);
 						offsetZ = (transform.position - target.position).z;
 						transform.parent = null;
 				} else {
-			Debug.Log ("CameraFollow disabled");
-
 			enabled = false;
 				}
 	}

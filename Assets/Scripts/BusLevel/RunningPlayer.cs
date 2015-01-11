@@ -5,10 +5,10 @@ using TouchScript.Gestures;
 
 public class RunningPlayer : MonoBehaviour {
 
-	public float deltaX = 0.5f;
+	public float deltaX = 50f;
 	public GameManager.ePlayers player;
 	private GameManager.eColors color;
-	public GameObject button;
+	private GameObject button;
 	private BusLevelManager gameMgr;
 	private Animator animator;
 	private bool finished;
@@ -21,6 +21,7 @@ public class RunningPlayer : MonoBehaviour {
 	}
 
 	void Start () {
+		button = GameObject.Find ("UIManager").GetComponent<HudManager> ().getButton (player);
 		try {
 			color = GameManager.Instance.getColor(player);
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
@@ -30,17 +31,13 @@ public class RunningPlayer : MonoBehaviour {
 			gameObject.SetActive(false);
 		}
 		finished = false;
-	}
-
-	private void OnEnable()
-	{
-		button.GetComponent<PlayerButton>().OnPressed += move;
+		button.GetComponent<BtnHandler>().OnPressed += move;
 	}
 	
 	private void OnDisable()
 	{
 		try{
-			button.GetComponent<PlayerButton>().OnPressed -= move;
+			button.GetComponent<BtnHandler>().OnPressed -= move;
 		}catch{
 		}
 	}
@@ -59,7 +56,7 @@ public class RunningPlayer : MonoBehaviour {
 			gameMgr.Score(player);
 		}
 		if (other.name == "FirstLine") {
-			other.transform.position = other.transform.position + new Vector3(1f,0,0);
+			other.transform.position = other.transform.position + new Vector3(100f,0,0);
 		}
 	}
 }

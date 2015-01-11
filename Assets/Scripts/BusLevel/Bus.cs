@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Bus : MonoBehaviour {
 	private LevelManager lvm;
-	float init_speed = 30f;
-	float speed = 80f;
-	float turbo = 2f;
+	public float init_speed = 30f;
+	public float speed = 80f;
+	public float turbo = 2f;
 
 	void Awake () {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
