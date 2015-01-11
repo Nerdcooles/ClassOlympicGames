@@ -15,13 +15,13 @@ public class BusLevelManager : MonoBehaviour {
 	
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-		num_players = GameManager.Instance.getNumPlayer ();
 		player_pos = 0;
 		start_time = 0;
 		first_time = 0;
 	}
 
 	void Start() {
+		num_players = GameManager.Instance.getNumPlayer ();
 		playersToFinish = GameManager.Instance.getPlayers ();
 	}
 	void OnEnable()
@@ -40,15 +40,15 @@ public class BusLevelManager : MonoBehaviour {
 	}
 	
 	public void Score(GameManager.ePlayers player) {
-		Debug.Log ("Arrive " + player.ToString () + " POS " + player_pos);
 		lvm.setPodium (player, player_pos);
 		playersToFinish.Remove (player);
 
-		if (player_pos == 0)
-			StartCoroutine("WaitLastPlayer");
-		if (player_pos == num_players-1)
-			Finish ();
-
+		if (player_pos == 0) {
+						StartCoroutine ("WaitLastPlayer");
+				}
+		if (player_pos == num_players - 1) {
+						Finish ();
+				}
 		player_pos++;
 	}
 
@@ -56,13 +56,13 @@ public class BusLevelManager : MonoBehaviour {
 		yield return new WaitForSeconds(WAIT_SECS);
 		foreach (GameManager.ePlayers p in playersToFinish) {
 						lvm.setPodium (p, player_pos++);
-			Debug.Log ("Doesn't arrive " + p.ToString ());
-
 				}
+		if(lvm.getState()!=LevelManager.eState.Finish)
 		Finish ();
 	}
 
 	void Finish() {
+		CancelInvoke ("WatiLastPlayer");
 		lvm.FinishGame ();
 	}
 }

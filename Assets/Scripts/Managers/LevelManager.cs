@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,16 @@ using System.Linq;
 public class LevelManager : MonoBehaviour {
 	public GameManager.eLevels level;
 	public GameObject panel_instructions;
+	public GameObject panel_countdown;
 	public GameObject panel_podium;
 	public GameObject panel_finish;
 
 	public enum eState {Instructions, Countdown, Run, Pause, Finish}
 	private eState state;
 
-	private Instructions instructions;
+	private Image instructions;
 	private Countdown countdown;
+	private Image finish;
 	private Podium podium;
 
 	public delegate void StateChange();
@@ -33,13 +36,14 @@ public class LevelManager : MonoBehaviour {
 				}
 
 		//INSTRUCTIONS
-		instructions = panel_instructions.GetComponent<Instructions>();
+		instructions = panel_instructions.GetComponent<Image>();
 
 		//COUNTDOWN
-		countdown = GetComponentInChildren<Countdown>();
+		countdown = panel_countdown.GetComponent<Countdown>();
 
 		//FINISH
-		panel_finish.SetActive (false);
+		finish = panel_finish.GetComponent<Image>();
+
 		//PODIUM
 		podium = panel_podium.GetComponent<Podium> ();
 	}
@@ -48,13 +52,20 @@ public class LevelManager : MonoBehaviour {
 		num_players = GameManager.Instance.getNumPlayer ();
 		positions = new GameManager.ePlayers[num_players];
 
-		instructions.Show();
+		instructions.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + level.ToString());
+		instructions.enabled = true;
 		state = eState.Instructions;
 		Debug.Log ("INSTRUCTIONS");
 	}
+
+	void Update() {
+		if (state == eState.Instructions)
+				if (Input.anyKeyDown)
+						ShowCountdown ();
+	}
 	
 	public void ShowCountdown() {
-		instructions.Hide();
+		instructions.enabled = false;
 		state = eState.Countdown;
 		Debug.Log ("COUNTDOWN");
 		if(OnCountdown != null)
@@ -72,7 +83,7 @@ public class LevelManager : MonoBehaviour {
 	public void FinishGame() {
 		state = eState.Finish;
 		Debug.Log ("FINISH");
-		panel_finish.SetActive (true);
+		finish.enabled = true;
 		if(OnFinish != null)
 			OnFinish();
 		StartCoroutine ("WaitForPodium");
@@ -80,7 +91,7 @@ public class LevelManager : MonoBehaviour {
 
 	IEnumerator WaitForPodium() {
 		yield return new WaitForSeconds(2f);
-		panel_finish.SetActive (false);
+		finish.enabled = false;
 		podium.Show ();
 	}
 

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Podium : MonoBehaviour {
 	public GameObject[] pod;
-	public GameObject bg;
 
 	private LevelManager lvm;
 	private RuntimeAnimatorController animCtrl;
@@ -12,21 +12,22 @@ public class Podium : MonoBehaviour {
 	private int secToSkip = 2;
 
 	void Awake() {
-		lvm = transform.parent.gameObject.GetComponent<LevelManager>() as LevelManager;
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 	}
 	
 	void Start() {
 		gameObject.SetActive (false);
-		bg.SetActive (false);
+		GetComponent<Image> ().enabled = true;
 	}
 	
 	void Update() {
-		if((Input.touchCount > 0 || Input.anyKey) && canSkip)
-			GameManager.Instance.LevelOver(lvm.getLevel());
+		if(lvm.getState() == LevelManager.eState.Finish)
+			if((Input.touchCount > 0 || Input.anyKey) && canSkip)
+				GameManager.Instance.LevelOver(lvm.getLevel());
 	}
 
 	public void Show() {
-		bg.SetActive (true);
+		gameObject.SetActive (true);
 		int num_players = GameManager.Instance.getNumPlayer ();
 		for (int i=0; i<num_players; i++) {
 			if(i==num_players-1 && i!=0) {

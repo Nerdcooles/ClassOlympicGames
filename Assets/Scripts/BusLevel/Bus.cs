@@ -41,7 +41,8 @@ public class Bus : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == "Player")
-			rigidbody2D.AddForce(Vector3.right * speed * turbo);
+			if(lvm.getState()==LevelManager.eState.Run)
+				rigidbody2D.AddForce(Vector3.right * speed * turbo);
 		if (other.gameObject.tag == "Target") {
 			transform.position = transform.position + new Vector3(1f, 0, 0);
 			collider2D.isTrigger = false;
