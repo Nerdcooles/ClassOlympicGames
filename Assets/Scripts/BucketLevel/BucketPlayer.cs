@@ -46,7 +46,7 @@ public class BucketPlayer : MonoBehaviour {
 		}
 		button.GetComponent<BtnHandler>().OnPressed += startPower;
 		button.GetComponent<BtnHandler>().OnReleased += shoot;
-		lvm.OnFinish += endPlayer;
+		//lvm.OnFinish += endPlayer;
 	}
 	
 	private void OnDisable()
@@ -54,7 +54,7 @@ public class BucketPlayer : MonoBehaviour {
 		try{
 			button.GetComponent<BtnHandler>().OnPressed -= startPower;
 			button.GetComponent<BtnHandler>().OnReleased -= shoot;
-			lvm.OnFinish -= endPlayer;
+			//lvm.OnFinish -= endPlayer;
 		}catch{
 		}
 	}
@@ -92,17 +92,17 @@ public class BucketPlayer : MonoBehaviour {
 		can_shoot=true;
 	}
 
-	public void endPlayer() {
-		animator.SetBool("isHitted",false);
-		animator.SetBool("isLoading", false);
-		animator.SetBool("isShooting", false);
-		//IF NOT LAST PLAYER
-		if(lvm.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_winner");
-		else
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_loser");
-		animator.runtimeAnimatorController = animCtrl;
-	}
+//	public void endPlayer() {
+//		animator.SetBool("isHitted",false);
+//		animator.SetBool("isLoading", false);
+//		animator.SetBool("isShooting", false);
+//		//IF NOT LAST PLAYER
+//		if(lvm.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
+//			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_winner");
+//		else
+//			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_loser");
+//		animator.runtimeAnimatorController = animCtrl;
+//	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == "Bullet" && other.gameObject.GetComponent<BucketBall>().getPlayer() != player) {

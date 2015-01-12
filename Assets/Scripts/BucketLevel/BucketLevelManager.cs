@@ -15,7 +15,7 @@ public class BucketLevelManager : MonoBehaviour {
 
 	private Text[] scoreP;
 
-	void Awake() {
+	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
 	
@@ -31,37 +31,30 @@ public class BucketLevelManager : MonoBehaviour {
 		scoreP = new Text[4];
 		for(int i=0; i<4; i++) {
 			scoreP[i] = GameObject.Find("ScoreP"+(i+1)).GetComponent<Text>();
-			scoreP[i].text = "";
-			scoreP[i].color = GameManager.Instance.getSysColor((GameManager.ePlayers)i);
+			if(i<num_players) {
+				scoreP[i].text = "0";
+				scoreP[i].color = GameManager.Instance.getSysColor((GameManager.ePlayers)i);
+			}else
+				scoreP[i].gameObject.SetActive(false);
+
 		}
 
 		switch (num_players) {
 		case 1: scoreP[0].GetComponent<RectTransform>().position = new Vector3(-164, 251, 0);
-				scoreP[1].gameObject.SetActive(false);
-				scoreP[2].gameObject.SetActive(false);
-			scoreP[3].gameObject.SetActive(false);
+
 			break;
 		case 2: scoreP[0].GetComponent<RectTransform>().position = scoreP[1].GetComponent<RectTransform>().position;
 			scoreP[1].GetComponent<RectTransform>().position = scoreP[2].GetComponent<RectTransform>().position;
-			scoreP[2].gameObject.SetActive(false);
-			scoreP[3].gameObject.SetActive(false);
+
 			break;
 		case 3: //scoreP0 nothing
 			scoreP[1].GetComponent<RectTransform>().position = new Vector3(-164, 251, 0);
 			scoreP[2].GetComponent<RectTransform>().position = scoreP[3].GetComponent<RectTransform>().position;
-			scoreP[3].gameObject.SetActive(false);
 			break;
 				}
-	}
 
-	void Start() {
-		for (int i=0; i<num_players; i++)
-						scoreP [i].text = "0";
-	}
-
-	void OnEnable()
-	{
 		lvm.OnStart += StartTimer;
+
 	}
 	
 	
@@ -103,7 +96,6 @@ public class BucketLevelManager : MonoBehaviour {
 	}
 
 	public void Score(GameManager.ePlayers player) {
-		Debug.Log (player.ToString ());
 		int pts = 		++points[player.GetHashCode()];
 		scoreP [player.GetHashCode ()].text = pts.ToString();
 		times[player.GetHashCode()] = Time.time;
