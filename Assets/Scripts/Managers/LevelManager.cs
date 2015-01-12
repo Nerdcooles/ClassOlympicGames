@@ -11,9 +11,12 @@ public class LevelManager : MonoBehaviour {
 	public GameObject panel_countdown;
 	public GameObject panel_podium;
 	public GameObject panel_finish;
+	public GameObject panel_pause;
+	public GameObject btn_pause;
 
 	public enum eState {Instructions, Countdown, Run, Pause, Finish}
 	private eState state;
+	private eState old_state;
 
 	private Image instructions;
 	private Countdown countdown;
@@ -58,6 +61,7 @@ public class LevelManager : MonoBehaviour {
 		Debug.Log ("INSTRUCTIONS");
 	}
 
+
 	void Update() {
 		if (state == eState.Instructions)
 				if (Input.anyKeyDown)
@@ -65,7 +69,8 @@ public class LevelManager : MonoBehaviour {
 	}
 	
 	public void ShowCountdown() {
-		instructions.enabled = false;
+		panel_instructions.SetActive (false);
+		btn_pause.SetActive (true);
 		state = eState.Countdown;
 		Debug.Log ("COUNTDOWN");
 		if(OnCountdown != null)
@@ -74,6 +79,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		panel_countdown.SetActive (false);
 		state = eState.Run;
 		Debug.Log ("RUN");
 		if(OnStart != null)
@@ -83,7 +89,7 @@ public class LevelManager : MonoBehaviour {
 	public void FinishGame() {
 		state = eState.Finish;
 		Debug.Log ("FINISH");
-		finish.enabled = true;
+		panel_finish.SetActive (true);
 		if(OnFinish != null)
 			OnFinish();
 		StartCoroutine ("WaitForPodium");
@@ -94,6 +100,33 @@ public class LevelManager : MonoBehaviour {
 		finish.enabled = false;
 		podium.Show ();
 	}
+
+	public void PauseGame() {
+		Debug.Log ("Pause");
+		old_state = state;
+		state = eState.Pause;
+		btn_pause.SetActive (false);
+		panel_pause.SetActive (true);
+		Time.timeScale=0;
+	}
+
+	public void ResumeGame() {
+		Debug.Log ("Resume");
+		state = old_state;
+		panel_pause.SetActive (false);
+		btn_pause.SetActive (true);
+		Time.timeScale=1;
+
+	}
+
+	public void RestartGame() {
+		Application.LoadLevel (Application.loadedLevel);
+	}
+
+	public void MainMenu() {
+		MenuManager.newGame ();
+
+		}
 
 	public eState getState() {
 		return state;
