@@ -225,7 +225,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 174047307}
-  - 60: {fileID: 174047308}
+  - 61: {fileID: 174047309}
+  - 61: {fileID: 174047308}
   m_Layer: 0
   m_Name: container
   m_TagString: Untagged
@@ -245,8 +246,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1850744910}
   m_RootOrder: 0
---- !u!60 &174047308
-PolygonCollider2D:
+--- !u!61 &174047308
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -254,14 +255,19 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Poly:
-    m_Paths:
-    - - {x: -14.6790867, y: -43.0372009}
-      - {x: 35.036602, y: -41.203949}
-      - {x: 48.4832726, y: 35.259182}
-      - {x: 38.33395, y: -42.7491989}
-      - {x: -20.1598682, y: -45.5452309}
-      - {x: -39.3962326, y: 35.9582062}
+  m_Size: {x: 8.9777832, y: 17.4906769}
+  m_Center: {x: 43.6885681, y: 29.4676132}
+--- !u!61 &174047309
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 174047306}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 8.9777832, y: 17.4906769}
+  m_Center: {x: -35.6885681, y: 29.4676132}
 --- !u!1 &310402375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,8 +1763,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 1605d0c8f16344428b43cbf64ac9051f, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1938,8 +1944,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 1605d0c8f16344428b43cbf64ac9051f, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2860,8 +2866,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 1605d0c8f16344428b43cbf64ac9051f, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -4480,8 +4486,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 1605d0c8f16344428b43cbf64ac9051f, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

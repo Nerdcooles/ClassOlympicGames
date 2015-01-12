@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 58: {fileID: 5800002}
   - 95: {fileID: 9500000}
-  - 58: {fileID: 5843842}
+  - 60: {fileID: 6015870}
   m_Layer: 0
   m_Name: Bucket_ball
   m_TagString: Bullet
@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0450000018, y: 1.35500002, z: 0}
-  m_LocalScale: {x: 1.33000004, y: 1.33000004, z: 1}
+  m_LocalPosition: {x: 0, y: 64.0999985, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,19 +57,26 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .10849461
+  m_Radius: 10.8494596
   m_Center: {x: 0, y: 0}
---- !u!58 &5843842
-CircleCollider2D:
+--- !u!60 &6015870
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8be6341e1ce3f4cec9902bc34f72d20a, type: 2}
   m_IsTrigger: 0
-  m_Radius: .10849461
-  m_Center: {x: 0, y: 0}
+  m_Poly:
+    m_Paths:
+    - - {x: -1.88878989, y: 10}
+      - {x: -9.73011875, y: 3.98406219}
+      - {x: -11.1269703, y: 1.73030853}
+      - {x: -6.46024323, y: -7.7301178}
+      - {x: 10.0793247, y: -8.42854309}
+      - {x: 11.3015718, y: .587211609}
+      - {x: 6.12697077, y: 6.85708618}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -116,7 +123,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 5c627a24920e44fef9beafa3d982afae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09926d877bca2448f9795297979efdbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
