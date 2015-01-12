@@ -11,7 +11,7 @@ public class RunningPlayer : MonoBehaviour {
 	public GameManager.ePlayers player;
 	private GameManager.eColors color;
 	private GameObject button;
-	private BusLevelManager gameMgr;
+	private BusLevelManager sceneManager;
 	private Animator animator;
 	private bool finished;
 	private int last;
@@ -19,7 +19,7 @@ public class RunningPlayer : MonoBehaviour {
 
 
 	void Awake() {
-		gameMgr = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
+		sceneManager = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
 	}
 
 	void Start () {
@@ -67,7 +67,7 @@ public class RunningPlayer : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Target") {
 			finished = true;
-			int pos = gameMgr.Score(player);
+			int pos = sceneManager.Score(player);
 			if(pos != GameManager.Instance.getNumPlayer() - 1)
 				animator.SetBool("isWinner", true);
 			else

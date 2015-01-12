@@ -7,12 +7,14 @@ public class BucketPlayer : MonoBehaviour {
 
 	public GameManager.ePlayers player;
 	private GameManager.eColors color;
-	
-	public GameObject shoot_btn;
+
+	private const int GRAVITY = 100;
+	private GameObject button;
 	public GameObject ballPrefab;
 	public int alpha = 500;
 	
-	private LevelManager levelManager;
+	private BucketLevelManager sceneMgr;
+	private LevelManager lvm;
 	private float force;
 	private float press_time;
 	private Vector3 direction;
@@ -21,15 +23,8 @@ public class BucketPlayer : MonoBehaviour {
 	private RuntimeAnimatorController animCtrl;
 
 	void Awake() {
-		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
-		try {
-			color = GameManager.Instance.getColor(player);
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
-			animator = GetComponent<Animator>();			
-			animator.runtimeAnimatorController = animCtrl;
-		}catch{
-			gameObject.SetActive(false);
-		}
+		sceneMgr = GameObject.Find("BucketLevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 	}
 
 	void Start () {
@@ -40,29 +35,32 @@ public class BucketPlayer : MonoBehaviour {
 		case GameManager.ePlayers.p03:
 		case GameManager.ePlayers.p04:direction = (Quaternion.AngleAxis(60, transform.forward) * transform.right) * alpha; break;
 		}
-	}
-	
-	private void OnEnable()
-	{
-		shoot_btn.GetComponent<BtnHandler>().OnPressed += startPower;
-		shoot_btn.GetComponent<BtnHandler>().OnReleased += shoot;
-		levelManager.OnFinish += endPlayer;
+		button = GameObject.Find ("UIManager").GetComponent<HudManager> ().getButton (player);
+		try {
+			color = GameManager.Instance.getColor(player);
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
+			animator = GetComponent<Animator>();			
+			animator.runtimeAnimatorController = animCtrl;
+		}catch{
+			gameObject.SetActive(false);
+		}
+		button.GetComponent<BtnHandler>().OnPressed += startPower;
+		button.GetComponent<BtnHandler>().OnReleased += shoot;
+		lvm.OnFinish += endPlayer;
 	}
 	
 	private void OnDisable()
 	{
 		try{
-			shoot_btn.GetComponent<BtnHandler>().OnPressed -= startPower;
-			shoot_btn.GetComponent<BtnHandler>().OnReleased -= shoot;
-			levelManager.OnFinish -= endPlayer;
-		}
-		catch
-		{
+			button.GetComponent<BtnHandler>().OnPressed -= startPower;
+			button.GetComponent<BtnHandler>().OnReleased -= shoot;
+			lvm.OnFinish -= endPlayer;
+		}catch{
 		}
 	}
 
 	private void startPower() {
-		if(levelManager.getState() == LevelManager.eState.Run && can_shoot) {
+		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
@@ -70,8 +68,8 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	private void shoot() {
-		if(levelManager.getState() == LevelManager.eState.Run && can_shoot) {
-			force = (float)Math.Round((Time.time - press_time), 3);
+		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
+			force = (float)Math.Round((Time.time - press_time), 1) * GRAVITY;
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
 			StartCoroutine(waitAnimation());
@@ -99,7 +97,7 @@ public class BucketPlayer : MonoBehaviour {
 		animator.SetBool("isLoading", false);
 		animator.SetBool("isShooting", false);
 		//IF NOT LAST PLAYER
-		if(levelManager.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
+		if(lvm.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_winner");
 		else
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_loser");

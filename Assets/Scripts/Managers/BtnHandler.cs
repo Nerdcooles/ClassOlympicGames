@@ -57,11 +57,11 @@ public class BtnHandler : MonoBehaviour {
 	
 	void DisableButton() {
 		enabled = false;
+		s_renderer.sprite = s_released;
 	}
 
 	public void Press(object sender, EventArgs e) {
 		if (enabled) {
-
 						s_renderer.sprite = s_pressed;
 						if (OnPressed != null)
 								OnPressed ();

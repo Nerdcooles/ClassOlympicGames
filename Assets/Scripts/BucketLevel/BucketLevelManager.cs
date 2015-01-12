@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ public class BucketLevelManager : MonoBehaviour {
 	private int num_players;
 	private LevelManager lvm;
 
+	private Text[] scoreP;
+
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
-
+	
 		//init points
 		points = new int[num_players];
 		times = new float[num_players];
@@ -23,7 +26,18 @@ public class BucketLevelManager : MonoBehaviour {
 		for(int i=0; i<num_players; i++) {
 			points[i] = 0; 
 			times[i] = 0; 
+		}		
+
+		scoreP = new Text[4];
+		for(int i=0; i<4; i++) {
+			scoreP[i] = GameObject.Find("ScoreP"+(i+1)).GetComponent<Text>();
+			scoreP[i].text = "";
 		}
+	}
+
+	void Start() {
+		for (int i=0; i<num_players; i++)
+						scoreP [i].text = "0";
 	}
 
 	void OnEnable()
@@ -70,7 +84,9 @@ public class BucketLevelManager : MonoBehaviour {
 	}
 
 	public void Score(GameManager.ePlayers player) {
-		points[player.GetHashCode()]++;
+		Debug.Log (player.ToString ());
+		int pts = 		++points[player.GetHashCode()];
+		scoreP [player.GetHashCode ()].text = pts.ToString();
 		times[player.GetHashCode()] = Time.time;
 	}
 
