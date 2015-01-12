@@ -39,7 +39,7 @@ public class BusLevelManager : MonoBehaviour {
 		start_time = Time.time;
 	}
 	
-	public void Score(GameManager.ePlayers player) {
+	public int Score(GameManager.ePlayers player) {
 		lvm.setPodium (player, player_pos);
 		GameManager.Instance.addMedal (player, (GameManager.eMedals)player_pos);
 		playersToFinish.Remove (player);
@@ -50,7 +50,7 @@ public class BusLevelManager : MonoBehaviour {
 		if (player_pos == num_players - 1) {
 						Finish ();
 				}
-		player_pos++;
+		return player_pos++;
 	}
 
 	IEnumerator WaitLastPlayer() {

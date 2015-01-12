@@ -345,7 +345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b07d04f50c3440b9cec60d191ba8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deltaX: 50
   player: 2
 --- !u!212 &87522346
 SpriteRenderer:
@@ -392,7 +391,7 @@ Animator:
   m_GameObject: {fileID: 87522342}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 990bbc4b2f4844b5ab927ab1f3fe684e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d18a87bf52144e1a81849dfb553a2eb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -526,7 +525,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_Name
@@ -593,6 +592,10 @@ Prefab:
       propertyPath: m_Size.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8d18a87bf52144e1a81849dfb553a2eb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
   m_RootGameObject: {fileID: 87522342}
@@ -770,7 +773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b07d04f50c3440b9cec60d191ba8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deltaX: 50
   player: 0
 --- !u!212 &192432598
 SpriteRenderer:
@@ -817,7 +819,7 @@ Animator:
   m_GameObject: {fileID: 192432594}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 990bbc4b2f4844b5ab927ab1f3fe684e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9ed981ede82c84282ac22e966cd300c6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1267,7 +1269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b07d04f50c3440b9cec60d191ba8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deltaX: 50
   player: 1
 --- !u!212 &648374098
 SpriteRenderer:
@@ -1314,7 +1315,7 @@ Animator:
   m_GameObject: {fileID: 648374094}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 990bbc4b2f4844b5ab927ab1f3fe684e, type: 2}
+  m_Controller: {fileID: 9100000, guid: cc70f9c80b5e24187bf1c4c61e2ee4cd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1637,7 +1638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b07d04f50c3440b9cec60d191ba8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deltaX: 50
   player: 3
 --- !u!212 &805625084
 SpriteRenderer:
@@ -1684,7 +1684,7 @@ Animator:
   m_GameObject: {fileID: 805625080}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0fba2ed8f5880474a88c9baaad4a74e1, type: 2}
+  m_Controller: {fileID: 9100000, guid: b6fa8c9beb6ce43f9b3401a768a51029, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1861,7 +1861,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_Name
@@ -1887,7 +1887,7 @@ Prefab:
     - target: {fileID: 9500000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 0fba2ed8f5880474a88c9baaad4a74e1, type: 2}
+      objectReference: {fileID: 9100000, guid: b6fa8c9beb6ce43f9b3401a768a51029, type: 2}
     - target: {fileID: 11400000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: button
       value: 
@@ -2991,7 +2991,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_Name
@@ -3062,6 +3062,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cc70f9c80b5e24187bf1c4c61e2ee4cd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
   m_RootGameObject: {fileID: 648374094}
@@ -3505,7 +3509,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_Name
@@ -3567,6 +3571,18 @@ Prefab:
     - target: {fileID: 6100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
       propertyPath: m_Size.y
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9ed981ede82c84282ac22e966cd300c6, type: 2}
+    - target: {fileID: 9500000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 019cea0f0a9794bedb64cf9aed9d762d, type: 2}
