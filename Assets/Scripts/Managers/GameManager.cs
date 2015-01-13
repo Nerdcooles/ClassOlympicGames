@@ -74,11 +74,11 @@ public class GameManager : Singleton<GameManager> {
 	
 	public Color getSysColor(ePlayers player) {
 		switch(players[player].getColor()){
-		case eColors.blue: return Color.blue; break;
-		case eColors.red: return Color.red; break;
-		case eColors.yellow: return Color.yellow; break;
-		case eColors.green: return Color.green; break;
-		default: return Color.blue;
+		case eColors.blue: return new Color(93/255f,93/255f,244/255f,255/255f); break;
+		case eColors.red: return new Color(255/255f,68/255f,68/255f,255/255f); break;
+		case eColors.yellow: return new Color(246/255f, 229/255f, 38/255f,255/255f); break;
+		case eColors.green: return new Color(111/255f,255/255f,11/255f,255/255f); break;
+		default: throw new System.Exception("Player get color error");
 		}
 	}
 
