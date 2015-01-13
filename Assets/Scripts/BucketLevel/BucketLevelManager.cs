@@ -14,12 +14,12 @@ public class BucketLevelManager : MonoBehaviour {
 	private int seconds;
 	private int num_players;
 	private LevelManager lvm;
+	private UIManager uim;
 	private Timebar timebar;
-
-	private Text[] scoreP;
 
 	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		uim = GameObject.Find("UIManager").GetComponent<UIManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
 		timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
 		seconds = START_SEC;
@@ -32,30 +32,7 @@ public class BucketLevelManager : MonoBehaviour {
 			times[i] = 0; 
 		}		
 
-		scoreP = new Text[4];
-		for(int i=0; i<4; i++) {
-			scoreP[i] = GameObject.Find("ScoreP"+(i+1)).GetComponent<Text>();
-			if(i<num_players) {
-				scoreP[i].text = "0";
-				scoreP[i].color = GameManager.Instance.getSysColor((GameManager.ePlayers)i);
-			}else
-				scoreP[i].gameObject.SetActive(false);
 
-		}
-
-		switch (num_players) {
-		case 1: scoreP[0].GetComponent<RectTransform>().position = new Vector3(-164, 251, 0);
-
-			break;
-		case 2: scoreP[0].GetComponent<RectTransform>().position = scoreP[1].GetComponent<RectTransform>().position;
-			scoreP[1].GetComponent<RectTransform>().position = scoreP[2].GetComponent<RectTransform>().position;
-
-			break;
-		case 3: //scoreP0 nothing
-			scoreP[1].GetComponent<RectTransform>().position = new Vector3(-164, 251, 0);
-			scoreP[2].GetComponent<RectTransform>().position = scoreP[3].GetComponent<RectTransform>().position;
-			break;
-				}
 
 		lvm.OnStart += StartTimer;
 
@@ -74,7 +51,6 @@ public class BucketLevelManager : MonoBehaviour {
 	void Timer() {
 		float perc = (START_SEC - seconds) / (float)START_SEC;
 		timebar.setPercentage (perc);
-		Debug.Log (seconds);
 		seconds--;
 		if(seconds < 0){
 			Finished ();
@@ -103,8 +79,8 @@ public class BucketLevelManager : MonoBehaviour {
 	}
 
 	public void Score(GameManager.ePlayers player) {
-		int pts = 		++points[player.GetHashCode()];
-		scoreP [player.GetHashCode ()].text = pts.ToString();
+		int pts = ++points[player.GetHashCode()];
+		uim.score (player, pts);
 		times[player.GetHashCode()] = Time.time;
 	}
 

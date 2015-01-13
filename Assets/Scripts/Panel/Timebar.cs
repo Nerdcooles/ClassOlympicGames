@@ -21,7 +21,6 @@ public class Timebar : MonoBehaviour {
 	}
 
 	public void setPercentage(float percentage) {
-		Debug.Log ("Timebar " + percentage);
 		if(percentage < 0 || percentage > 1)
 			throw new System.ArgumentException("percentage must be between 0 and 1", "percentage");
 		pos.position = new Vector3 (MIN + (percentage * size), y, z);

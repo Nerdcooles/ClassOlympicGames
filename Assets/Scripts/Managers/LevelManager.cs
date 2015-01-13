@@ -119,6 +119,7 @@ public class LevelManager : MonoBehaviour {
 
 	}
 
+
 	public void RestartGame() {
 		Time.timeScale=1;
 		Application.LoadLevel (Application.loadedLevel);

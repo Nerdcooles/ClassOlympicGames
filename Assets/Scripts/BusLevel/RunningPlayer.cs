@@ -23,7 +23,7 @@ public class RunningPlayer : MonoBehaviour {
 	}
 
 	void Start () {
-		button = GameObject.Find ("UIManager").GetComponent<HudManager> ().getButton (player);
+		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
 		try {
 			color = GameManager.Instance.getColor(player);
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_runner");
