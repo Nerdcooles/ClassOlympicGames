@@ -29,7 +29,7 @@ public class ArcheryTeacher : MonoBehaviour {
 	
 	void Move() {
 		animator.SetBool ("isMoving", true);
-		rigidbody2D.AddForce(Vector3.right * speed);
+		rigidbody2D.AddForce(new Vector3(Random.Range(-1,2), 0f, 0f) * speed);
 	}
 
 	void Finish() {

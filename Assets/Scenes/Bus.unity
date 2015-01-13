@@ -718,6 +718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud_tablet: {fileID: 1879668156}
   hud_phone_4p: {fileID: 167072232}
+  player: []
 --- !u!1001 &123111335
 Prefab:
   m_ObjectHideFlags: 0
@@ -1204,7 +1205,7 @@ GameObject:
   - 114: {fileID: 416907762}
   - 114: {fileID: 416907768}
   m_Layer: 0
-  m_Name: Camera_follow
+  m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1458,6 +1459,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181d5011d44da4348b14179803f39a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+  - {fileID: 192432594}
+  - {fileID: 648374094}
+  - {fileID: 87522342}
+  - {fileID: 805625080}
 --- !u!4 &567124540
 Transform:
   m_ObjectHideFlags: 0

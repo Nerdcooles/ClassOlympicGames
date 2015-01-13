@@ -6,7 +6,7 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
 	public GameObject hud_tablet, hud_phone_4p;
-
+	public GameObject[] player;
 	private const int X_2P = 250;
 	bool isPhone4p = false;
 	private int num_players;
@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour {
 
 	void Start() {
 		num_players = GameManager.Instance.getNumPlayer ();
-		initButtons ();
+		initPositions();
 		try {
 		initScoring();
 		}catch(System.NullReferenceException e) {
@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
-	private void initButtons() {
+	private void initPositions() {
 		GameObject[] button  = hud_tablet.GetComponent<HudKeyboardAdapter>().button;
 		float y = button[0].GetComponent<RectTransform>().position.y;
 		float width = (float)Screen.width/2f;
