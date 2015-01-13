@@ -10,9 +10,9 @@ public class BucketPlayer : MonoBehaviour {
 
 	private const int GRAVITY = 100;
 	private GameObject button;
-	public GameObject ballPrefab;
-	public int alpha = 500;
-	
+	private GameObject ballPrefab;
+	public int alpha = 500; //TODO remove alpha
+
 	private BucketLevelManager sceneMgr;
 	private LevelManager lvm;
 	private float force;
@@ -41,6 +41,7 @@ public class BucketPlayer : MonoBehaviour {
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
 			animator = GetComponent<Animator>();			
 			animator.runtimeAnimatorController = animCtrl;
+			ballPrefab = Resources.Load <GameObject> ("Prefabs/BucketBall");
 		}catch{
 			gameObject.SetActive(false);
 		}
@@ -64,6 +65,7 @@ public class BucketPlayer : MonoBehaviour {
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
+			InvokeRepeating ("Timer", 0.1f, 1);
 		}
 	}
 

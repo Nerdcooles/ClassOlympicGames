@@ -9,25 +9,13 @@ public class ArcheryPencil : MonoBehaviour {
 	private ArcheryLevelManager alvm;
 	
 	private bool shooted;
-	float speed = 4f;
 	float dir;
 	
 	void Start () {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		alvm = GameObject.Find("ArcheryLevelManager").GetComponent<ArcheryLevelManager>() as ArcheryLevelManager;
 		lvm.OnFinish += DestroyMe;
-		dir = (Random.Range(0,2) - 0.5f) * speed;
 		shooted = false;
-	}
-	
-	void Update () {
-		if(shooted)
-			transform.position = transform.position + transform.up * speed * Time.deltaTime;
-		else{
-			if(transform.rotation.z > 0.5f)
-				dir = dir * -1;
-			transform.Rotate (Vector3.forward * dir);
-		}
 	}
 	
 	
@@ -50,7 +38,7 @@ public class ArcheryPencil : MonoBehaviour {
 			DestroyMe();	
 			alvm.Score(player);
 		}
-		if(other.name == "bound") {
+		if(other.tag == "Bound") {
 			DestroyMe();
 		}
 		if (other.tag == "Bullet") {
