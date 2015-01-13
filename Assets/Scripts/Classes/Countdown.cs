@@ -9,7 +9,7 @@ public class Countdown : MonoBehaviour {
 	private Image s_renderer;
 	private Sprite[] sprite;
 
-	void Awake() {
+	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		s_renderer = gameObject.GetComponent<Image> ();
 		sprite = new Sprite[4];

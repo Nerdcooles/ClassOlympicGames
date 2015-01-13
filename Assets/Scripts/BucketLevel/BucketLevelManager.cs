@@ -9,16 +9,20 @@ public class BucketLevelManager : MonoBehaviour {
 	int[] points;
 	float[] times;
 
-	public int seconds = 10;
+	private const int START_SEC = 30;
+
+	private int seconds;
 	private int num_players;
 	private LevelManager lvm;
+	private Timebar timebar;
 
 	private Text[] scoreP;
 
 	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
-	
+		timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
+		seconds = START_SEC;
 		//init points
 		points = new int[num_players];
 		times = new float[num_players];
@@ -68,6 +72,9 @@ public class BucketLevelManager : MonoBehaviour {
 	}
 
 	void Timer() {
+		float perc = (START_SEC - seconds) / (float)START_SEC;
+		timebar.setPercentage (perc);
+		Debug.Log (seconds);
 		seconds--;
 		if(seconds < 0){
 			Finished ();

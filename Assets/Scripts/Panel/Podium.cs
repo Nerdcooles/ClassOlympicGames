@@ -11,11 +11,9 @@ public class Podium : MonoBehaviour {
 	private bool canSkip = false;
 	private int secToSkip = 2;
 
-	void Awake() {
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
-	}
 	
 	void Start() {
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		gameObject.SetActive (false);
 		GetComponent<Image> ().enabled = true;
 	}
