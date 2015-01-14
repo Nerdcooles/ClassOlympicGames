@@ -123,14 +123,20 @@ public class ArcheryPlayer : MonoBehaviour {
 //	IEnumerator Reload() {
 //		yield return new WaitForSeconds(1f);
 //		can_reload = true;
-//	}
-
+	//	}
+	
 	public void endPlayer() {
 		//IF NOT LAST PLAYER
-		if(lvm.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_winner");
-		else
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_loser");
+		int num_players = GameManager.Instance.getNumPlayer ();
+		if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
+			//IF SINGLE PLAYER OR NOT LAST PLAYER
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
+			Debug.Log("WIN " + "Sprites/Podium/" + color.ToString () + "_podium_winner");
+		} else {
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
+			Debug.Log("LOSE " + "Sprites/Podium/" + color.ToString () + "_podium_loser");
+		}
+		animator = GetComponent<Animator>();			
 		animator.runtimeAnimatorController = animCtrl;
 	}
 }

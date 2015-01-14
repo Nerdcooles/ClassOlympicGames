@@ -9,9 +9,9 @@ public class BucketLevelManager : MonoBehaviour {
 	int[] points;
 	float[] times;
 
-	private const int START_SEC = 30;
+	private const float START_SEC = 30;
 
-	private int seconds;
+	private float seconds;
 	private int num_players;
 	private LevelManager lvm;
 	private UIManager uim;
@@ -45,16 +45,17 @@ public class BucketLevelManager : MonoBehaviour {
 	}
 
 	void StartTimer() {
-		InvokeRepeating ("Timer", 0.1f, 1);
+		InvokeRepeating ("Timer", 0.1f, 0.1f);
 	}
 
 	void Timer() {
-		float perc = (START_SEC - seconds) / (float)START_SEC;
+		float perc = (START_SEC - seconds) / START_SEC;
 		timebar.setPercentage (perc);
-		seconds--;
-		if(seconds < 0){
+		seconds-=0.1f;
+		if(seconds <= 0){
 			Finished ();
 			CancelInvoke("Timer");
+			return;
 		}
 	}
 

@@ -4,46 +4,65 @@ using System.Linq;
 
 public static class MenuManager {
 
-	public static void levelOver(GameManager.eLevels level) {
+	public static void LevelOver() {
+		Debug.Log ("Finished level " + GameManager.Instance.Level.ToString ());
+		GameManager.Instance.Level = ((GameManager.eLevels)(GameManager.Instance.Level.GetHashCode () + 1));
+		Debug.Log ("Next level " + GameManager.Instance.Level.ToString ());
+
 		if (GameManager.Instance.getGameMode () == GameManager.eGameMode.CLASSIC)
-						Application.LoadLevel (((GameManager.eLevels)(level.GetHashCode () + 1)).ToString ());
-				else
-						newGame ();
+						Summary ();
+		else
+						NewGame ();
 	}
 
-	public static void newGame() {
-		Application.LoadLevel("SelectMode");
+	public static void NewGame() {
+		Application.LoadLevel("Home");
 	}
 
-	public static void startHome() {
+	public static void StartHome() {
 		Application.LoadLevel("Home");
 	}
 	
-	public static void selectNumber() {
+	public static void SelectNumber() {
 		Application.LoadLevel("SelectNumber");
 	}
 
-	public static void selectMode() {
+	public static void SelectMode() {
 		Application.LoadLevel("SelectMode");
 	}
 
-	public static void selectLevel() {
+	public static void SelectLevel() {
 		Application.LoadLevel("SelectLevel");
 	}
 	
-	public static void selectPlayer() {
+	public static void SelectPlayer() {
 		Application.LoadLevel("SelectPlayer");
 	}
 
-	public static void credits() {
+	public static void Credits() {
 		Debug.Log("credits");
 	}
 	
-	public static void startGame() {
-		Application.LoadLevel(((GameManager.eLevels)0).ToString());
+	public static void Summary() {
+		Application.LoadLevel("Summary");
 	}
 	
-	public static void startLevel(GameManager.eLevels level) {
+	public static void Award() {
+		Application.LoadLevel("Award");
+	}
+	
+	public static void StartGame() {
+		GameManager.Instance.Level = (GameManager.eLevels)1;
+		Application.LoadLevel(GameManager.Instance.Level.ToString());
+	}
+
+	public static void NextLevel() {
+		Debug.Log ("next " + GameManager.Instance.Level.ToString ());
+		Application.LoadLevel (GameManager.Instance.Level.ToString ());
+	}
+	
+	public static void StartLevel(GameManager.eLevels level) {
+		GameManager.Instance.Level = level;
 		Application.LoadLevel (((GameManager.eLevels)level.GetHashCode ()).ToString ());
 	}
 }

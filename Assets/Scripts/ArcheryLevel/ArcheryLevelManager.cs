@@ -7,15 +7,19 @@ public class ArcheryLevelManager : MonoBehaviour {
 	
 	int[] points;
 	float[] times;
-	
-	public int seconds = 10;
+	private const float START_SEC = 30;
+
+	private float seconds;
 	private int num_players;
 	private LevelManager lvm;
-	
+	private Timebar timebar;
+
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
-		
+		timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
+		seconds = START_SEC;
+
 		//init points
 		points = new int[num_players];
 		times = new float[num_players];
@@ -25,7 +29,6 @@ public class ArcheryLevelManager : MonoBehaviour {
 			times[i] = 0; 
 		}
 	}
-	
 	void OnEnable()
 	{
 		lvm.OnStart += StartTimer;
@@ -38,14 +41,17 @@ public class ArcheryLevelManager : MonoBehaviour {
 	}
 	
 	void StartTimer() {
-		InvokeRepeating ("Timer", 0.1f, 1);
+		InvokeRepeating ("Timer", 0.1f, 0.1f);
 	}
 	
 	void Timer() {
-		seconds--;
-		if(seconds < 0){
+		float perc = (START_SEC - seconds) / (float)START_SEC;
+		timebar.setPercentage (perc);
+		seconds -= 0.1f;
+		if(seconds <= 0){
 			Finished ();
 			CancelInvoke("Timer");
+			return;
 		}
 	}
 	

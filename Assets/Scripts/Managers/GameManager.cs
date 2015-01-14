@@ -7,11 +7,12 @@ public class GameManager : Singleton<GameManager> {
 	public enum ePlayers {p01, p02, p03, p04};
 	public enum eMedals {Gold, Silver, Bronze};
 	public enum eGameMode {CLASSIC, TRAINING};
-	public enum eLevels {Bus, Bucket, Archery};
+	public enum eLevels {Home, Bus, Bucket, Archery, Award};
 	public enum eColors {blue, green, red, yellow};
 	
 	Dictionary<ePlayers, Player> players = new Dictionary<ePlayers, Player>();
 	private eGameMode gameMode;
+	private eLevels level = eLevels.Home;
 		
 	protected GameManager () {} // guarantee this will be always a singleton only - can't use the constructor!
 
@@ -41,13 +42,16 @@ public class GameManager : Singleton<GameManager> {
 		return 0;
 	}
 
-	public string getName(ePlayers player) {
-		if (players.ContainsKey(player))
-			return players[player].getName();
-		return "";
-	}
+	public bool IsPlaying(ePlayers player) {
+		if (players.ContainsKey (player)) {
+						return true;
+				} else {
+						return false;
+				}
+		}
 
 	public void startMode(eGameMode mode) {
+		level = eLevels.Home;
 		this.gameMode = mode;
 	}
 
@@ -55,10 +59,8 @@ public class GameManager : Singleton<GameManager> {
 		players = new Dictionary<ePlayers, Player>();
 		
 		for(int i=0; i<num_players; i++){
-			Player _player = new Player();
-			_player.setName("Player " + (i+1));
-			_player.setColor((eColors)i);
-			players.Add((ePlayers)i, _player);
+			Player p = new Player();
+			players.Add((ePlayers)i, p);
 		}
 	}
 
@@ -82,7 +84,17 @@ public class GameManager : Singleton<GameManager> {
 		}
 	}
 
-	public void LevelOver(eLevels level) {
-		MenuManager.levelOver (level);
+	public void LevelOver() {
+		MenuManager.LevelOver ();
 	}
+
+	public eLevels Level {
+		get {
+			return level;
+		}
+		set {
+			level = value;
+		}
+	}
+
 }

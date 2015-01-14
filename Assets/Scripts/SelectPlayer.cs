@@ -32,14 +32,14 @@ public class SelectPlayer : MonoBehaviour {
 	private void CheckNumber() {
 		if (pos == GameManager.Instance.getNumPlayer ()) {
 			switch(GameManager.Instance.getGameMode()){
-				case GameManager.eGameMode.CLASSIC: MenuManager.startGame (); break;
-				case GameManager.eGameMode.TRAINING: MenuManager.selectLevel (); break;
+				case GameManager.eGameMode.CLASSIC: MenuManager.StartGame (); break;
+				case GameManager.eGameMode.TRAINING: MenuManager.SelectLevel (); break;
 			}
 		}
 	}
 	
 	public void Back ()
 	{
-		MenuManager.selectNumber();		
+		MenuManager.SelectNumber();		
 	}
 }

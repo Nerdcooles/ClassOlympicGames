@@ -410,6 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud_tablet: {fileID: 1736318558}
   hud_phone_4p: {fileID: 2010366526}
+  player: []
 --- !u!4 &58495815
 Transform:
   m_ObjectHideFlags: 0
@@ -2248,7 +2249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22bdf88c02eb4d53b4b7479452a675a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 30
 --- !u!4 &783572173
 Transform:
   m_ObjectHideFlags: 0

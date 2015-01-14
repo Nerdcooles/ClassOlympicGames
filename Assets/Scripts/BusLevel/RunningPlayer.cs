@@ -72,7 +72,6 @@ public class RunningPlayer : MonoBehaviour {
 				animator.SetBool("isWinner", true);
 			else
 				animator.SetBool("isLoser", true);
-			Debug.Log(pos);
 		}
 		if (other.name == "FirstLine") {
 			other.transform.position = other.transform.position + new Vector3(100f,0,0);

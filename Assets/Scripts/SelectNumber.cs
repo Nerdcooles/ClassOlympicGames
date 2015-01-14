@@ -18,11 +18,11 @@ public class SelectNumber : MonoBehaviour {
 	public void StartWithPlayers(int num_players)
 	{
 		GameManager.Instance.createPlayers(num_players);
-		MenuManager.selectPlayer();
+		MenuManager.SelectPlayer();
 	}
 	
 	public void Back ()
 	{
-		MenuManager.selectMode();
+		MenuManager.SelectMode();
 	}
 }

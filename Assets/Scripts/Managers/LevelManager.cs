@@ -36,6 +36,8 @@ public class LevelManager : MonoBehaviour {
 						Debug.Log("Debug mode");
 						GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
 						GameManager.Instance.createPlayers (4);
+						for(int i=0; i<4; i++)
+							GameManager.Instance.setColor((GameManager.ePlayers)i, (GameManager.eColors)i);
 				}
 
 		//INSTRUCTIONS
@@ -90,6 +92,8 @@ public class LevelManager : MonoBehaviour {
 		state = eState.Finish;
 		Debug.Log ("FINISH");
 		panel_finish.SetActive (true);
+		for(int i=0; i<positions.Length; i++)
+			GameManager.Instance.addMedal (positions[i], (GameManager.eMedals)i);
 		if(OnFinish != null)
 			OnFinish();
 		StartCoroutine ("WaitForPodium");
@@ -127,7 +131,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void MainMenu() {
 		Time.timeScale=1;
-		MenuManager.newGame ();
+		MenuManager.NewGame ();
 		}
 
 	public eState getState() {

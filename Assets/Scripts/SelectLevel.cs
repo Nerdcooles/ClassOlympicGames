@@ -7,20 +7,20 @@ public class SelectLevel : MonoBehaviour {
 
 	public void startBus()
 	{
-		MenuManager.startLevel(GameManager.eLevels.Bus);
+		MenuManager.StartLevel(GameManager.eLevels.Bus);
 	}
 	
 	public void startBucket()
 	{
-		MenuManager.startLevel(GameManager.eLevels.Bucket);
+		MenuManager.StartLevel(GameManager.eLevels.Bucket);
 	}
 	
 	public void startArchery()
 	{
-		MenuManager.startLevel(GameManager.eLevels.Archery);
+		MenuManager.StartLevel(GameManager.eLevels.Archery);
 	}
 
 	public void Back() {
-		MenuManager.selectPlayer();
+		MenuManager.SelectPlayer();
 	}
 }

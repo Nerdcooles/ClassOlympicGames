@@ -28,26 +28,30 @@ public class BucketPlayer : MonoBehaviour {
 	}
 
 	void Start () {
-		can_shoot = true;
-		switch(player) {
-		case GameManager.ePlayers.p01:  
-		case GameManager.ePlayers.p02:direction = (Quaternion.AngleAxis(65, transform.forward) * transform.right) * alpha; break;
-		case GameManager.ePlayers.p03:
-		case GameManager.ePlayers.p04:direction = (Quaternion.AngleAxis(60, transform.forward) * transform.right) * alpha; break;
-		}
-		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
-		try {
-			color = GameManager.Instance.getColor(player);
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
-			animator = GetComponent<Animator>();			
-			animator.runtimeAnimatorController = animCtrl;
-			ballPrefab = Resources.Load <GameObject> ("Prefabs/BucketBall");
-		}catch{
-			gameObject.SetActive(false);
-		}
-		button.GetComponent<BtnHandler>().OnPressed += startPower;
-		button.GetComponent<BtnHandler>().OnReleased += shoot;
-		lvm.OnFinish += endPlayer;
+		if (GameManager.Instance.IsPlaying (player)) {
+						can_shoot = true;
+						switch (player) {
+						case GameManager.ePlayers.p01:  
+						case GameManager.ePlayers.p02:
+								direction = (Quaternion.AngleAxis (65, transform.forward) * transform.right) * alpha;
+								break;
+						case GameManager.ePlayers.p03:
+						case GameManager.ePlayers.p04:
+								direction = (Quaternion.AngleAxis (60, transform.forward) * transform.right) * alpha;
+								break;
+						}
+						button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
+						color = GameManager.Instance.getColor (player);
+						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString () + "/animation/" + color.ToString () + "_bucket");
+						animator = GetComponent<Animator> ();			
+						animator.runtimeAnimatorController = animCtrl;
+						ballPrefab = Resources.Load <GameObject> ("Prefabs/BucketBall");
+						button.GetComponent<BtnHandler> ().OnPressed += startPower;
+						button.GetComponent<BtnHandler> ().OnReleased += shoot;
+						lvm.OnFinish += endPlayer;
+				} else {
+						gameObject.SetActive (false);
+				}
 	}
 	
 	private void OnDisable()
@@ -65,7 +69,6 @@ public class BucketPlayer : MonoBehaviour {
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
-			InvokeRepeating ("Timer", 0.1f, 1);
 		}
 	}
 
@@ -96,10 +99,16 @@ public class BucketPlayer : MonoBehaviour {
 
 	public void endPlayer() {
 		//IF NOT LAST PLAYER
-		if(lvm.getPodium(GameManager.Instance.getNumPlayer()-1)!=this.player)
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_winner");
-		else
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString() + "_podium_loser");
+		int num_players = GameManager.Instance.getNumPlayer ();
+		if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
+						//IF SINGLE PLAYER OR NOT LAST PLAYER
+						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
+						Debug.Log("WIN " + "Sprites/Podium/" + color.ToString () + "_podium_winner");
+				} else {
+						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
+						Debug.Log("LOSE " + "Sprites/Podium/" + color.ToString () + "_podium_loser");
+				}
+		animator = GetComponent<Animator>();			
 		animator.runtimeAnimatorController = animCtrl;
 	}
 

@@ -9,13 +9,13 @@ public class SelectMode : MonoBehaviour {
 	public void StartClassic ()
 	{
 		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
-		MenuManager.selectNumber();
+		MenuManager.SelectNumber();
 	}
 	
 	public void StartTraining ()
 	{
 		GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
-		MenuManager.selectNumber();
+		MenuManager.SelectNumber();
 	}
 
 	public void StartScores ()
@@ -25,7 +25,7 @@ public class SelectMode : MonoBehaviour {
 
 	public void Back ()
 	{
-		MenuManager.startHome();
+		MenuManager.StartHome();
 	}
 	
 }
