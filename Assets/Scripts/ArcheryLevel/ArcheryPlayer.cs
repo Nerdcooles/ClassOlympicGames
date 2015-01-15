@@ -95,6 +95,7 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	public void endHitted() {
 		animator.SetBool("isHitted",false);
+		animator.SetBool("isLoading",false);
 		press_time = Time.time;	
 		can_shoot=true;
 	}
@@ -116,7 +117,9 @@ public class ArcheryPlayer : MonoBehaviour {
 		if(other.gameObject.tag == "Bullet" && other.gameObject.GetComponent<ArcheryPencil>().getPlayer() != player) {
 			can_shoot=false;
 			Destroy(other.gameObject);
+			Destroy(pencilInstance);
 			animator.SetBool("isHitted",true);
+
 		}
 	}
 }

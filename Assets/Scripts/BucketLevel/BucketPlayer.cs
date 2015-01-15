@@ -91,6 +91,7 @@ public class BucketPlayer : MonoBehaviour {
 
 	public void endHitted() {
 		animator.SetBool("isHitted",false);
+		animator.SetBool("isLoading",false);
 		press_time = Time.time;	
 		can_shoot=true;
 	}
