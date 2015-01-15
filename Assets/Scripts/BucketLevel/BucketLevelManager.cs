@@ -72,7 +72,6 @@ public class BucketLevelManager : MonoBehaviour {
 			}
 			points[winner.GetHashCode()] = -1;
 			times[winner.GetHashCode()] = -1;
-			Debug.Log(winner.ToString() + " position " + pos);
 			lvm.setPodium(winner, pos);
 		}
 

@@ -91,6 +91,7 @@ public class BucketPlayer : MonoBehaviour {
 
 	public void endHitted() {
 		animator.SetBool("isHitted",false);
+		press_time = Time.time;	
 		can_shoot=true;
 	}
 
@@ -100,10 +101,8 @@ public class BucketPlayer : MonoBehaviour {
 		if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
 						//IF SINGLE PLAYER OR NOT LAST PLAYER
 						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
-						Debug.Log("WIN " + "Sprites/Podium/" + color.ToString () + "_podium_winner");
 				} else {
 						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
-						Debug.Log("LOSE " + "Sprites/Podium/" + color.ToString () + "_podium_loser");
 				}
 		animator = GetComponent<Animator>();			
 		animator.runtimeAnimatorController = animCtrl;
@@ -114,7 +113,6 @@ public class BucketPlayer : MonoBehaviour {
 			can_shoot=false;
 			Destroy(other.gameObject);
 			animator.SetBool("isHitted",true);
-			
 		}
 	}
 }

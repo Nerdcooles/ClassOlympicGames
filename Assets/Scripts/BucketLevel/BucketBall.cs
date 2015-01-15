@@ -16,7 +16,10 @@ public class BucketBall : MonoBehaviour {
 
 	private void DestroyMe() {
 		lvm.OnFinish -= DestroyMe;
-		Destroy (gameObject);
+		try{
+			Destroy (gameObject);
+		}catch{
+				}
 		}
 
 	public void setPlayer(GameManager.ePlayers player) {
