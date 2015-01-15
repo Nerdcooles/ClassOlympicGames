@@ -56,7 +56,8 @@ public class LevelManager : MonoBehaviour {
 	void Start() {
 		num_players = GameManager.Instance.getNumPlayer ();
 		positions = new GameManager.ePlayers[num_players];
-
+		for (int i=0; i<num_players; i++)
+						positions [i] = GameManager.ePlayers.none;
 		instructions.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + level.ToString());
 		instructions.enabled = true;
 		state = eState.Instructions;
@@ -88,8 +89,9 @@ public class LevelManager : MonoBehaviour {
 	public void FinishGame() {
 		state = eState.Finish;
 		panel_finish.SetActive (true);
-		for(int i=0; i<positions.Length; i++)
-			GameManager.Instance.addMedal (positions[i], (GameManager.eMedals)i);
+		for (int i=0; i<positions.Length; i++) {
+						GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
+				}
 		if(OnFinish != null)
 			OnFinish();
 		StartCoroutine ("WaitForPodium");
@@ -143,6 +145,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public GameManager.ePlayers getPodium(int position) {
-		return positions[position];
-	}
+				return positions [position];
+		}
 }

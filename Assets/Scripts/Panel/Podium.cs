@@ -28,19 +28,22 @@ public class Podium : MonoBehaviour {
 		gameObject.SetActive (true);
 		int num_players = GameManager.Instance.getNumPlayer ();
 		for (int i=0; i<num_players; i++) {
-			if(i==num_players-1 && i!=0) {
-				//LOSER
-				animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (lvm.getPodium(i)) + "_podium_loser");
-			}else{
-				//WINNER
-				animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (lvm.getPodium(i)) + "_podium_winner");
+			GameManager.ePlayers player = lvm.getPodium(i);
+			if(player != GameManager.ePlayers.none) {
+				if(i==num_players-1 && i!=0) {
+					//LOSER
+					animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_loser");
+				}else{
+					//WINNER
+					animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_winner");
+				}
+				pod[i].GetComponent<Animator>().runtimeAnimatorController = animCtrl;
+				pod[i].SetActive(true);
 			}
-			pod[i].GetComponent<Animator>().runtimeAnimatorController = animCtrl;
-			pod[i].SetActive(true);		
 		}
 		gameObject.SetActive (true);
 
-		InvokeRepeating ("WaitToSkip", 0.1f, 1);
+		InvokeRepeating ("WaitToSkip", 0.1f, 0.5f);
 	}
 	
 	private void WaitToSkip() {

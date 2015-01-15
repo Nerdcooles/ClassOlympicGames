@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using TouchScript.Gestures;
 
-public class SkipperPlayer : MonoBehaviour {
+public class SkatePlayer : MonoBehaviour {
 
-	private const int MAX = 500;
+	public float red_line = -150f;
 	public Vector2 jump;
 	public float normal_vel;
 	public float slow_vel;
@@ -14,7 +14,7 @@ public class SkipperPlayer : MonoBehaviour {
 	public GameManager.ePlayers player;
 	private GameManager.eColors color;
 	private GameObject button;
-	private SkipLevelManager sceneManager;
+	private LongLevelManager sceneManager;
 	private LevelManager lvm;
 	private Animator animator;
 	private bool finished;
@@ -22,14 +22,14 @@ public class SkipperPlayer : MonoBehaviour {
 	private RuntimeAnimatorController animCtrl;
 	private float press_time;
 
-	private bool can_jump, pressed;
+	private bool jumping, can_move, pressed;
 	private float offsetX;
 
 	void Awake() {
 	}
 
 	void Start () {
-		sceneManager = GameObject.Find("SkipLevelManager").GetComponent<SkipLevelManager>() as SkipLevelManager;
+		sceneManager = GameObject.Find("LongLevelManager").GetComponent<LongLevelManager>() as LongLevelManager;
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		offsetX = Camera.main.transform.position.x - transform.position.x;
 		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
@@ -41,34 +41,35 @@ public class SkipperPlayer : MonoBehaviour {
 			finished = false;
 			button.GetComponent<BtnHandler>().OnPressed += Move;
 			button.GetComponent<BtnHandler>().OnReleased += Jump;
-			can_jump = true;
+			jumping = false;
+			can_move = true;
 		}else{
 			gameObject.SetActive(false);
 		}
 	}
 
 	void Update() {
-		if (Camera.main.transform.position.x - transform.position.x > offsetX) {
-			Vector3 newPos = new Vector3 (Camera.main.transform.position.x - offsetX, transform.position.y, transform.position.z);
-			transform.position = Vector3.Lerp (transform.position, newPos, 10 * Time.deltaTime);
-			animator.SetBool("isMoving", true);
+		if (transform.position.x >= red_line && !jumping && !finished) {
+			can_move = false;
+			rigidbody2D.velocity = Vector2.zero;
+			animator.SetBool("isLoser", true);
+			sceneManager.Score(player, 0f);
+			finished = true;	
 		}
-
 	}
 
 	private void Move() {
-		if (!finished && can_jump) {
-			pressed = true;
+		pressed = true;
+		if (!finished && can_move) {
 			rigidbody2D.gravityScale = 0;
-			rigidbody2D.velocity = (Vector2.right * normal_vel);
-			animator.SetBool("isMoving", true);
+			rigidbody2D.velocity = (Vector2.right * fast_vel);
 		}
 	}
 	
 	private void Jump() {
-		if (!finished && can_jump && pressed) {
-			pressed = false;
-						can_jump = false;
+		pressed = false;
+		if (!finished && can_move) {
+						jumping = true;
 						rigidbody2D.gravityScale = 40;
 						rigidbody2D.velocity = Vector2.zero;
 						rigidbody2D.AddForce (jump, ForceMode2D.Impulse);
@@ -79,31 +80,24 @@ public class SkipperPlayer : MonoBehaviour {
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Target") {
-			finished = true;			
-			int pos = sceneManager.Score(player);
-			if(pos != GameManager.Instance.getNumPlayer() - 1)
-				animator.SetBool("isWinner", true);
-			else
-				animator.SetBool("isLoser", true);
-		}
-		if (other.gameObject.tag == "Respawn") {
-			pressed = false;
-			Destroy(other);	
-			rigidbody2D.gravityScale = 40;
-			rigidbody2D.velocity = (Vector2.right * slow_vel);
-			animator.SetBool("isMoving", false);
-			animator.SetBool("isJumping", false);
-		}
 		if (other.gameObject.tag == "Bonus") {
 			Destroy(other);	
 			rigidbody2D.velocity = (Vector2.right * fast_vel);
 		}
 		if (other.gameObject.tag == "Floor") {
-			can_jump = true;
 			animator.SetBool("isJumping", false);
 			animator.SetBool("isMoving", false);
 
+		}
+			if (other.name == "cement") {
+			finished = true;	
+			sceneManager.Score(player, transform.position.x - red_line);
+			can_move = false;
+			rigidbody2D.velocity = Vector2.zero;
+
+			animator.SetBool("isJumping", false);
+			animator.SetBool("isMoving", false);
+			
 		}
 	}
 }

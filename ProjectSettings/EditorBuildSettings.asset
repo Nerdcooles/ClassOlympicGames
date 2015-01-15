@@ -29,3 +29,5 @@ EditorBuildSettings:
     path: Assets/Scenes/SkipTheTest.unity
   - enabled: 1
     path: Assets/Scenes/Nerdthrow.unity
+  - enabled: 1
+    path: Assets/Scenes/LongboardJump.unity
