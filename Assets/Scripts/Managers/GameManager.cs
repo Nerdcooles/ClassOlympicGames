@@ -29,42 +29,49 @@ public class GameManager : Singleton<GameManager> {
 		return ps;
 	}
 
-//	public Players getFirst() {
-//		//find max golds value
-//		int max_golds = 0;
-//		foreach (Player p in players) {
-//						int golds = p.getMedals (eMedals.Gold);
-//						if (golds > max_golds) {
-//								max_golds = golds;
-//						}
-//				}
-//		//store players with max golds value
-//		List<Players> first = new List<Players>();
-//		foreach (Player p in players) {
-//			if (p.getMedals (eMedals.Gold) > max_golds) {
-//				first.Add(p);
-//			}
-//		}
-//
-//		//if more than one
-//		if(first.Count > 1) {
-//			return first[0];
-//			}else{
-//				return first[0];
-//			}
-//	}
-//
-//		int max = points.Max ();
-//		float min_time = Time.time;
-//		GameManager.ePlayers winner = (GameManager.ePlayers)pos;
-//		for (int i=0; i<points.Length; i++){
-//			if (points [i] == max && times [i] < min_time) {
-//				winner = (GameManager.ePlayers)i;
-//				min_time = times[i];
-//			}
-//		}
-//		points[winner.GetHashCode()] = -1;
-//		}
+	public List<ePlayers> getWinners() {
+		List<Player> playersToCtrl = new List<Player>();
+		List<ePlayers> winners = new List<ePlayers> ();
+
+		//populate list to control
+		for (int i=0; i<players.Count; i++)
+			playersToCtrl.Add (players [(ePlayers)i]);
+
+
+		while (playersToCtrl.Count > 0) {
+			ePlayers winner = WhoHasMoreMedals(playersToCtrl, eMedals.Gold).Number;
+			winners.Add(winner);
+			playersToCtrl.Remove(players[winner]);
+		}
+
+		return winners;
+	}
+
+	Player WhoHasMoreMedals(List<Player> playersToCtrl, eMedals medal) {
+		//find max golds value
+		int max_medals = 0;
+		foreach (Player p in playersToCtrl) {
+			int medals = p.getMedals (medal);
+			if (medals > max_medals) {
+				max_medals = medals;
+			}
+		}
+
+		//store players with max golds value
+		List<Player> results = new List<Player>();
+		foreach (Player p in playersToCtrl) {
+			if (p.getMedals (medal) == max_medals) {
+				results.Add(p);
+			}
+		}
+
+		if(results.Count > 1) {
+			//if more then one, repeat
+			return WhoHasMoreMedals(results, (eMedals)(medal.GetHashCode()+1));
+		}else{
+			return results[0];
+		}
+	}
 
 	public void addMedal(ePlayers player, eMedals medal) {
 		if (players.ContainsKey (player) && medal.GetHashCode() != 3) {

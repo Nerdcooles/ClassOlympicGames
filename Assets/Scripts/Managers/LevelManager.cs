@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
 						GameManager.Instance.createPlayers (4);
 						for(int i=0; i<4; i++)
 							GameManager.Instance.setColor((GameManager.ePlayers)i, (GameManager.eColors)i);
-				}
+		}
 
 		//INSTRUCTIONS
 		instructions = panel_instructions.GetComponent<Image>();

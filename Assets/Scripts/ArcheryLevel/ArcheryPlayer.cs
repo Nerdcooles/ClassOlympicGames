@@ -15,7 +15,7 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	private float force;
 	private float press_time;
-	private Vector3 direction;
+	private int direction;
 	private GameObject pencilInstance;
 	private bool can_shoot;
 
@@ -54,6 +54,7 @@ public class ArcheryPlayer : MonoBehaviour {
 		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
 			pencilInstance = Instantiate(pencilPrefab, transform.position + new Vector3(pencilPosX, pencilPosY, 0f) , Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
 			pencilInstance.GetComponent<ArcheryPencil>().setPlayer(player);
+			direction = (UnityEngine.Random.Range(0,2) * 2 - 1);
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
@@ -63,7 +64,7 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	void SpinPencil() {
 		try{
-		pencilInstance.transform.Rotate (Vector3.forward, Time.deltaTime * 180, Space.Self);
+			pencilInstance.transform.Rotate (direction*Vector3.forward, Time.deltaTime * 180, Space.Self);
 		}catch{
 				}
 	}
