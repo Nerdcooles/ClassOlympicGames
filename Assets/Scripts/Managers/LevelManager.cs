@@ -88,6 +88,8 @@ public class LevelManager : MonoBehaviour {
 
 	public void FinishGame() {
 		state = eState.Finish;
+		if(OnFinish != null)
+			OnFinish();
 		StartCoroutine ("WaitForFinish");
 	}
 	
@@ -97,8 +99,6 @@ public class LevelManager : MonoBehaviour {
 		for (int i=0; i<positions.Length; i++) {
 			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
 		}
-		if(OnFinish != null)
-			OnFinish();
 		StartCoroutine ("WaitForPodium");
 	}
 

@@ -102,9 +102,12 @@ public class UIManager : MonoBehaviour {
 				scoreP[i].gameObject.SetActive(false);
 			
 		}
-		
+
+		float mid = (scoreP [1].GetComponent<RectTransform> ().position.x + scoreP [2].GetComponent<RectTransform> ().position.x) / 2f;
+		float y = scoreP [1].GetComponent<RectTransform> ().position.y;
+		float z = scoreP [1].GetComponent<RectTransform> ().position.z;
 		switch (num_players) {
-		case 1: scoreP[0].GetComponent<RectTransform>().position = new Vector3(-164, 251, 0);
+		case 1: scoreP[0].GetComponent<RectTransform>().position = new Vector3(mid, y, z);
 			
 			break;
 		case 2: scoreP[0].GetComponent<RectTransform>().position = scoreP[1].GetComponent<RectTransform>().position;
@@ -112,7 +115,7 @@ public class UIManager : MonoBehaviour {
 			
 			break;
 		case 3: //scoreP0 nothing
-			scoreP[1].GetComponent<RectTransform>().position = new Vector3(-164, 251, 0);
+			scoreP[1].GetComponent<RectTransform>().position = new Vector3(mid, y, z);
 			scoreP[2].GetComponent<RectTransform>().position = scoreP[3].GetComponent<RectTransform>().position;
 			break;
 		}
