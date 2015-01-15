@@ -21,8 +21,10 @@ public class ArcheryPencil : MonoBehaviour {
 	
 	private void DestroyMe() {
 		lvm.OnFinish -= DestroyMe;
-		Destroy (gameObject);
-	}
+		try{
+			Destroy (gameObject);
+		}catch{
+		}	}
 	
 	public void setPlayer(GameManager.ePlayers player) {
 		this.player = player;
@@ -34,7 +36,7 @@ public class ArcheryPencil : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.name == "target") {
+		if(other.tag == "Target") {
 			DestroyMe();	
 			alvm.Score(player);
 		}

@@ -32,9 +32,18 @@ public class ArcheryTeacher : MonoBehaviour {
 		rigidbody2D.AddForce(new Vector3(Random.Range(0,2) * 2 - 1, 0f, 0f) * speed);
 	}
 
+	void Hitted() {
+		animator.SetBool ("isHitted", true);
+		rigidbody2D.velocity = Vector2.zero;
+	}
+
+	public void EndHitted() {
+		animator.SetBool ("isHitted", false);
+		Move ();
+	}
+
 	void Finish() {
 		rigidbody2D.velocity = Vector2.zero;
-
 		animator.SetBool ("isMoving", false);
 		}
 	
@@ -43,12 +52,12 @@ public class ArcheryTeacher : MonoBehaviour {
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player")
-						Debug.Log ("hit");
-		if (other.gameObject.tag == "Bound") {
+		if (other.gameObject.tag == "Bullet")
+						Hitted ();
+		if (other.gameObject.tag == "EnemyBound") {
 			Vector2 vel = rigidbody2D.velocity;
 			vel.x *= -1;
 			rigidbody2D.velocity = vel;
-				}
+		}
 	}
 }

@@ -32,10 +32,7 @@ public class BucketLevelManager : MonoBehaviour {
 			times[i] = 0; 
 		}		
 
-
-
 		lvm.OnStart += StartTimer;
-
 	}
 	
 	

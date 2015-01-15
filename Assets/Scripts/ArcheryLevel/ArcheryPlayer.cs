@@ -58,18 +58,18 @@ public class ArcheryPlayer : MonoBehaviour {
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
 			InvokeRepeating ("SpinPencil", 0.1f, 0.01f);
-			Debug.Log("Invoked");
 		}
 	}
 	
 	void SpinPencil() {
+		try{
 		pencilInstance.transform.Rotate (Vector3.forward, Time.deltaTime * 180, Space.Self);
+		}catch{
+				}
 	}
 	
 	private void shoot() {
 		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
-			//TODO set spin
-			Debug.Log("Shoot");
 			CancelInvoke("SpinPencil");
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
@@ -81,8 +81,11 @@ public class ArcheryPlayer : MonoBehaviour {
 
 	private IEnumerator waitAnimation() {
 		yield return new WaitForSeconds(0.1f);
+		try{
 		pencilInstance.GetComponent<ArcheryPencil>().setPlayer(player);
-		pencilInstance.rigidbody2D.AddForce(pencilInstance.transform.right * 500, ForceMode2D.Impulse);
+			pencilInstance.rigidbody2D.AddForce(pencilInstance.transform.right * 500, ForceMode2D.Impulse);
+		}catch{
+		}
 		yield return new WaitForSeconds(1f);
 	}
 	
@@ -92,41 +95,9 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	public void endHitted() {
 		animator.SetBool("isHitted",false);
+		press_time = Time.time;	
 		can_shoot=true;
 	}
-	
-//	void OnTriggerEnter2D(Collider2D other) {
-//		if(other.gameObject.tag == "Bullet" && other.gameObject.GetComponent<BucketBall>().getPlayer() != player) {
-//			can_shoot=false;
-//			Destroy(other.gameObject);
-//			animator.SetBool("isHitted",true);
-//			
-//		}
-//	}
-	
-//	private void OnEnable()
-//	{
-//		shoot_btn.GetComponent<BtnHandler>().OnPressed += shoot;
-//	}
-//	
-//	private void OnDisable()
-//	{
-//		shoot_btn.GetComponent<BtnHandler>().OnPressed -= shoot;
-//	}
-//
-//	
-//	private void shoot() {
-//		if(!shooted && pencilInstance!=null) {
-//			pencilInstance.GetComponent<ArcheryPencil>().shoot();
-//			StartCoroutine(Reload());
-//			shooted = true;
-//		}
-//	}
-//
-//	IEnumerator Reload() {
-//		yield return new WaitForSeconds(1f);
-//		can_reload = true;
-	//	}
 	
 	public void endPlayer() {
 		//IF NOT LAST PLAYER
@@ -134,45 +105,18 @@ public class ArcheryPlayer : MonoBehaviour {
 		if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
 			//IF SINGLE PLAYER OR NOT LAST PLAYER
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
-			Debug.Log("WIN " + "Sprites/Podium/" + color.ToString () + "_podium_winner");
 		} else {
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
-			Debug.Log("LOSE " + "Sprites/Podium/" + color.ToString () + "_podium_loser");
 		}
 		animator = GetComponent<Animator>();			
 		animator.runtimeAnimatorController = animCtrl;
 	}
+	
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.gameObject.tag == "Bullet" && other.gameObject.GetComponent<ArcheryPencil>().getPlayer() != player) {
+			can_shoot=false;
+			Destroy(other.gameObject);
+			animator.SetBool("isHitted",true);
+		}
+	}
 }
-
-//	public GameManager.ePlayers player;
-//	public GameObject pencilPrefab;
-//	public float force = 300f;
-//	private GameObject pencil;
-//	private bool canShoot = false;
-//
-//	void Start() {
-//		newPencil();
-//	}	
-//
-//	public void setDirection(float dir) {
-//		if(canShoot)
-//		{		
-//			if(player == GameManager.ePlayers.p01 || player == GameManager.ePlayers.p04)
-//				pencil.GetComponent<ArcheryPencil>().setDirection(dir*60);
-//			  else 
-//			   pencil.GetComponent<ArcheryPencil>().setDirection(180-dir*60);
-//		}
-//	}
-//
-//	public void shoot() {
-//		if(canShoot) {
-//			pencil.rigidbody2D.AddForce(pencil.transform.right * force);
-//			canShoot = false;
-//		}
-//	}
-//
-//	public void newPencil() {
-//		pencil = Instantiate(pencilPrefab, transform.position, transform.rotation) as GameObject;
-//		pencil.GetComponent<ArcheryPencil>().setPlayer(player);
-//		canShoot = true;
-//	}

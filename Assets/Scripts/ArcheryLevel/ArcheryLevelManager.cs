@@ -12,14 +12,15 @@ public class ArcheryLevelManager : MonoBehaviour {
 	private float seconds;
 	private int num_players;
 	private LevelManager lvm;
+	private UIManager uim;
 	private Timebar timebar;
 
-	void Awake() {
+	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		uim = GameObject.Find("UIManager").GetComponent<UIManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
 		timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
 		seconds = START_SEC;
-
 		//init points
 		points = new int[num_players];
 		times = new float[num_players];
@@ -28,9 +29,7 @@ public class ArcheryLevelManager : MonoBehaviour {
 			points[i] = 0; 
 			times[i] = 0; 
 		}
-	}
-	void OnEnable()
-	{
+
 		lvm.OnStart += StartTimer;
 	}
 	
@@ -45,9 +44,9 @@ public class ArcheryLevelManager : MonoBehaviour {
 	}
 	
 	void Timer() {
-		float perc = (START_SEC - seconds) / (float)START_SEC;
+		float perc = (START_SEC - seconds) / START_SEC;
 		timebar.setPercentage (perc);
-		seconds -= 0.1f;
+		seconds-=0.1f;
 		if(seconds <= 0){
 			Finished ();
 			CancelInvoke("Timer");
@@ -68,7 +67,6 @@ public class ArcheryLevelManager : MonoBehaviour {
 			}
 			points[winner.GetHashCode()] = -1;
 			times[winner.GetHashCode()] = -1;
-			Debug.Log(winner.ToString() + " position " + pos);
 			lvm.setPodium(winner, pos);
 		}
 		
@@ -76,7 +74,8 @@ public class ArcheryLevelManager : MonoBehaviour {
 	}
 	
 	public void Score(GameManager.ePlayers player) {
-		points[player.GetHashCode()]++;
+		int pts = ++points[player.GetHashCode()];
+		uim.score (player, pts);
 		times[player.GetHashCode()] = Time.time;
 	}
 
