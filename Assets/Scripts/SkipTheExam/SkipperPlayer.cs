@@ -23,13 +23,15 @@ public class SkipperPlayer : MonoBehaviour {
 	private float press_time;
 
 	private bool can_jump, pressed;
+	private float offsetX;
 
 	void Awake() {
-		sceneManager = GameObject.Find("SkipLevelManager").GetComponent<SkipLevelManager>() as SkipLevelManager;
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 	}
 
 	void Start () {
+		sceneManager = GameObject.Find("SkipLevelManager").GetComponent<SkipLevelManager>() as SkipLevelManager;
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
+		offsetX = Camera.main.transform.position.x - transform.position.x;
 		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
 		if (GameManager.Instance.IsPlaying (player)) {
 			color = GameManager.Instance.getColor(player);
@@ -42,6 +44,13 @@ public class SkipperPlayer : MonoBehaviour {
 			can_jump = true;
 		}else{
 			gameObject.SetActive(false);
+		}
+	}
+
+	void Update() {
+		if (Camera.main.transform.position.x - transform.position.x > offsetX) {
+			Vector3 newPos = new Vector3 (Camera.main.transform.position.x - offsetX, transform.position.y, transform.position.z);
+			transform.position = Vector3.Lerp (transform.position, newPos, 10 * Time.deltaTime);
 		}
 	}
 
@@ -65,6 +74,7 @@ public class SkipperPlayer : MonoBehaviour {
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
+
 		if (other.gameObject.tag == "Target") {
 			finished = true;			
 			int pos = sceneManager.Score(player);
@@ -75,18 +85,16 @@ public class SkipperPlayer : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Respawn") {
 			pressed = false;
-
 			Destroy(other);	
 			rigidbody2D.gravityScale = 40;
 			rigidbody2D.velocity = (Vector2.right * slow_vel);
 		}
-		if (other.gameObject.tag == "Floor") {
+		if (other.gameObject.tag == "Bonus") {
+			Destroy(other);	
+			rigidbody2D.velocity = (Vector2.right * fast_vel);
+		}
+		if (other.name == "floor"+(player.GetHashCode()+1)) {
 			can_jump = true;
 		}
-
-		if (other.gameObject.tag == "RearWall") {
-			rigidbody2D.gravityScale = 0;
-			rigidbody2D.velocity = (Vector2.right * normal_vel);
-		}	
 	}
 }

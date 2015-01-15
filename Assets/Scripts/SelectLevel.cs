@@ -7,17 +7,17 @@ public class SelectLevel : MonoBehaviour {
 
 	public void startBus()
 	{
-		MenuManager.StartLevel(GameManager.eLevels.Bus);
+		MenuManager.StartLevel(GameManager.eLevels.Delaybus);
 	}
 	
 	public void startBucket()
 	{
-		MenuManager.StartLevel(GameManager.eLevels.Bucket);
+		MenuManager.StartLevel(GameManager.eLevels.Bucketball);
 	}
 	
 	public void startArchery()
 	{
-		MenuManager.StartLevel(GameManager.eLevels.Archery);
+		MenuManager.StartLevel(GameManager.eLevels.Arteachery);
 	}
 
 	public void Back() {

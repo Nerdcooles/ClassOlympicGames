@@ -16,14 +16,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectPlayer.unity
   - enabled: 1
-    path: Assets/Scenes/Bus.unity
+    path: Assets/Scenes/Delaybus.unity
   - enabled: 1
-    path: Assets/Scenes/Bucket.unity
+    path: Assets/Scenes/Bucketball.unity
   - enabled: 1
-    path: Assets/Scenes/Archery.unity
+    path: Assets/Scenes/Arteachery.unity
   - enabled: 1
     path: Assets/Scenes/Summary.unity
   - enabled: 1
     path: Assets/Scenes/Award.unity
   - enabled: 1
-    path: Assets/Scenes/SkipTheExam.unity
+    path: Assets/Scenes/SkipTheTest.unity
