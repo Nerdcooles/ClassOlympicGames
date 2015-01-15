@@ -18,6 +18,7 @@ public class NerdPlayer : MonoBehaviour {
 	
 	private Animator animator;
 	private RuntimeAnimatorController animCtrl;
+	bool shooted = false;
 	
 	void Awake() {
 		sceneMgr = GameObject.Find("NerdLevelManager").GetComponent<NerdLevelManager>() as NerdLevelManager;
@@ -32,17 +33,17 @@ public class NerdPlayer : MonoBehaviour {
 			animator = GetComponent<Animator>();			
 			animator.runtimeAnimatorController = animCtrl;
 			nerdPrefab = Resources.Load <GameObject> ("Prefabs/Nerd");
-
+			button.GetComponent<BtnHandler>().OnPressed += shoot;
+			lvm.OnFinish += endPlayer;
+			lvm.OnStart += StartPlayer;
 		}catch{
 			gameObject.SetActive(false);
 		}
-		button.GetComponent<BtnHandler>().OnPressed += shoot;
-		lvm.OnFinish += endPlayer;
-		lvm.OnStart += StartPlayer;
 	}
 
 	void StartPlayer() {
-		nerdInstance = Instantiate(nerdPrefab, transform.position - new Vector3(20f, 20f, 0), Quaternion.Euler(new Vector3(0, 0, -45f))) as GameObject;
+		nerdInstance = Instantiate(nerdPrefab, transform.position - new Vector3(20f, 20f, 0), Quaternion.Euler(new Vector3(0, 0, -25f))) as GameObject;
+		nerdInstance.GetComponent<Nerd> ().Player = player;
 		animator.SetBool("isLoading", true);
 
 		}
@@ -51,7 +52,7 @@ public class NerdPlayer : MonoBehaviour {
 
 	
 	private void shoot() {
-		if(lvm.getState() == LevelManager.eState.Run) {
+		if(lvm.getState() == LevelManager.eState.Run && !shooted) {
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
 			StartCoroutine(waitAnimation());
@@ -61,7 +62,9 @@ public class NerdPlayer : MonoBehaviour {
 	private IEnumerator waitAnimation() {
 		yield return new WaitForSeconds(0.1f);
 		try{
+			shooted = true;
 			nerdInstance.GetComponent<Nerd>().Shooted = true;
+			nerdInstance.GetComponent<Nerd>().StartPt = transform.position.x;
 		}catch{
 		}
 		yield return new WaitForSeconds(1f);

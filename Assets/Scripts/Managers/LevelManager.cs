@@ -88,17 +88,22 @@ public class LevelManager : MonoBehaviour {
 
 	public void FinishGame() {
 		state = eState.Finish;
+		StartCoroutine ("WaitForFinish");
+	}
+	
+	IEnumerator WaitForFinish() {
+		yield return new WaitForSeconds(2f);
 		panel_finish.SetActive (true);
 		for (int i=0; i<positions.Length; i++) {
-						GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
-				}
+			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
+		}
 		if(OnFinish != null)
 			OnFinish();
 		StartCoroutine ("WaitForPodium");
 	}
 
 	IEnumerator WaitForPodium() {
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(1f);
 		finish.enabled = false;
 		podium.Show ();
 	}
