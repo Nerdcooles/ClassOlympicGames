@@ -4,24 +4,17 @@ using System.Collections.Generic;
 
 public class BusLevelManager : MonoBehaviour {
 		
-	public GameObject[] player;
-
 	private int player_pos;
 	private float start_time;
 	private float first_time;
 	private int num_players;
 	private LevelManager lvm;
 	private List<GameManager.ePlayers> playersToFinish;
-
-	private Vector3[] init_pos;
-
+	
 	public const float WAIT_SECS = 10f;
 	
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-		init_pos = new Vector3[4];
-		for (int i=0; i<4; i++)
-						init_pos[i] = player [i].transform.position;
 	}
 
 	void Start() {
@@ -31,22 +24,6 @@ public class BusLevelManager : MonoBehaviour {
 		num_players = GameManager.Instance.getNumPlayer ();
 		playersToFinish = GameManager.Instance.getPlayers ();
 
-		switch (num_players) {
-				case 1:
-			player [0].transform.position = init_pos [2];
-			
-						break;
-				case 2:
-			player [0].transform.position = init_pos [1];
-			player [1].transform.position = init_pos [2];
-
-						break;
-				case 3:
-			player [0].transform.position = init_pos [1];
-			player [1].transform.position = init_pos [2];
-			player [2].transform.position = init_pos [3];
-						break;
-				}
 	}
 	void OnEnable()
 	{

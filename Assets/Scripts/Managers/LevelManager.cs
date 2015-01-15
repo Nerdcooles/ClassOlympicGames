@@ -60,7 +60,6 @@ public class LevelManager : MonoBehaviour {
 		instructions.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + level.ToString());
 		instructions.enabled = true;
 		state = eState.Instructions;
-		Debug.Log ("INSTRUCTIONS");
 	}
 
 
@@ -74,7 +73,6 @@ public class LevelManager : MonoBehaviour {
 		panel_instructions.SetActive (false);
 		btn_pause.SetActive (true);
 		state = eState.Countdown;
-		Debug.Log ("COUNTDOWN");
 		if(OnCountdown != null)
 			OnCountdown();
 		countdown.StartCountdown ();
@@ -83,14 +81,12 @@ public class LevelManager : MonoBehaviour {
 	public void StartGame() {
 		panel_countdown.SetActive (false);
 		state = eState.Run;
-		Debug.Log ("RUN");
 		if(OnStart != null)
 			OnStart();
 	}
 
 	public void FinishGame() {
 		state = eState.Finish;
-		Debug.Log ("FINISH");
 		panel_finish.SetActive (true);
 		for(int i=0; i<positions.Length; i++)
 			GameManager.Instance.addMedal (positions[i], (GameManager.eMedals)i);

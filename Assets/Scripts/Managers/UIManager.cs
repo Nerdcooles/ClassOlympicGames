@@ -6,7 +6,7 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
 	public GameObject hud_tablet, hud_phone_4p;
-	public GameObject[] player;
+	private GameObject[] player;
 	private const int X_2P = 250;
 	bool isPhone4p = false;
 	private int num_players;
@@ -40,21 +40,44 @@ public class UIManager : MonoBehaviour {
 				hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = true;
 		#endif
 
-
-
-	} 
-
-	void Start() {
-		num_players = GameManager.Instance.getNumPlayer ();
-		initPositions();
+		initPlayers ();
+		initButtons();
 		try {
-		initScoring();
+			initScoring();
 		}catch(System.NullReferenceException e) {
 			Debug.Log("No scoring on screen");
 		}
-	}
+	} 
 
-	private void initPositions() {
+	private void initPlayers() {
+		player = new GameObject[4];
+		for (int i=0; i<4; i++)
+			player [i] = GameObject.Find ("Player" + (i + 1));
+		num_players = GameManager.Instance.getNumPlayer ();
+		switch (num_players) {
+		case 1:
+			player [0].transform.position = player[2].transform.position;
+			player [0].transform.rotation = player[2].transform.rotation;
+			
+			break;
+		case 2:
+			player [0].transform.position = player [1].transform.position;
+			player [0].transform.rotation = player [1].transform.rotation;
+			player [1].transform.position = player [2].transform.position;
+			player [1].transform.rotation = player [2].transform.rotation;
+			
+			break;
+		case 3:
+			player [0].transform.position = player [1].transform.position;
+			player [0].transform.rotation = player [1].transform.rotation;
+			player [1].transform.position = player [2].transform.position;
+			player [1].transform.rotation = player [2].transform.rotation;
+			player [2].transform.position = player [3].transform.position;
+			player [2].transform.rotation = player [3].transform.rotation;
+			break;
+		}
+		}
+	private void initButtons() {
 		GameObject[] button  = hud_tablet.GetComponent<HudKeyboardAdapter>().button;
 		float y = button[0].GetComponent<RectTransform>().position.y;
 		float width = (float)Screen.width/2f;

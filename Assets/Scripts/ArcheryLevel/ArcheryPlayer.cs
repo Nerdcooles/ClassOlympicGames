@@ -8,7 +8,8 @@ public class ArcheryPlayer : MonoBehaviour {
 	public GameManager.ePlayers player;
 	private GameManager.eColors color;
 
-	private Vector3 pencilPos = new Vector3 (-32.6f, -9f, 0f);
+	private float pencilPosX = -32.6f;
+	private float pencilPosY = -9f;
 	private GameObject button;
 	private GameObject pencilPrefab;
 	
@@ -31,6 +32,8 @@ public class ArcheryPlayer : MonoBehaviour {
 	
 	void Start () {
 		can_shoot = true;
+		if(transform.rotation.y != 0)
+			pencilPosX = -pencilPosX;
 
 		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
 		try {
@@ -49,7 +52,7 @@ public class ArcheryPlayer : MonoBehaviour {
 
 	private void startPower() {
 		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
-			pencilInstance = Instantiate(pencilPrefab, transform.position + pencilPos, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
+			pencilInstance = Instantiate(pencilPrefab, transform.position + new Vector3(pencilPosX, pencilPosY, 0f) , Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
 			pencilInstance.GetComponent<ArcheryPencil>().setPlayer(player);
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);

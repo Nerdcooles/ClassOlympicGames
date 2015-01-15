@@ -410,7 +410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud_tablet: {fileID: 1736318558}
   hud_phone_4p: {fileID: 2010366526}
-  player: []
 --- !u!4 &58495815
 Transform:
   m_ObjectHideFlags: 0
@@ -2799,7 +2798,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 22bf61b2a79c2401a8f5e571f9edb966, type: 2}
   m_PrefabInternal: {fileID: 1298787699}
   m_GameObject: {fileID: 873339184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
   m_LocalPosition: {x: 317, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3182,7 +3181,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 22bf61b2a79c2401a8f5e571f9edb966, type: 2}
   m_PrefabInternal: {fileID: 813335439}
   m_GameObject: {fileID: 1146880573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
   m_LocalPosition: {x: 126, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

@@ -8,12 +8,6 @@ AnimatorController:
   m_Name: yellow_runner
   serializedVersion: 2
   m_AnimatorParameters:
-  - m_Name: speed
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: isWinner
     m_Type: 4
     m_DefaultFloat: 0
@@ -21,6 +15,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: isLoser
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: isMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -50,8 +50,8 @@ Transition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: speed
+  - m_ConditionMode: 2
+    m_ConditionEvent: isMoving
     m_EventTreshold: 1
     m_ExitTime: 1
   m_Atomic: 1
@@ -70,8 +70,8 @@ Transition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: speed
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMoving
     m_EventTreshold: 1
     m_ExitTime: 1
   m_Atomic: 1
@@ -124,7 +124,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: yellow_run
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: ec717ecb3e4dc41bb8a6466e4ace6d21, type: 2}
@@ -195,11 +195,10 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110241024}
-      second: []
-    data:
-      first: {fileID: 110229408}
-      second: []
+      first: {fileID: 0}
+      second:
+      - {fileID: 110173318}
+      - {fileID: 110140300}
     data:
       first: {fileID: 110287820}
       second:
@@ -209,10 +208,11 @@ StateMachine:
       second:
       - {fileID: 110132516}
     data:
-      first: {fileID: 0}
-      second:
-      - {fileID: 110173318}
-      - {fileID: 110140300}
+      first: {fileID: 110229408}
+      second: []
+    data:
+      first: {fileID: 110241024}
+      second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

@@ -8,12 +8,6 @@ AnimatorController:
   m_Name: green_runner
   serializedVersion: 2
   m_AnimatorParameters:
-  - m_Name: speed
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: isWinner
     m_Type: 4
     m_DefaultFloat: 0
@@ -21,6 +15,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: isLoser
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: isMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -50,8 +50,8 @@ Transition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: speed
+  - m_ConditionMode: 2
+    m_ConditionEvent: isMoving
     m_EventTreshold: 1
     m_ExitTime: 1
   m_Atomic: 1
@@ -110,8 +110,8 @@ Transition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: speed
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMoving
     m_EventTreshold: 1
     m_ExitTime: 1
   m_Atomic: 1
@@ -129,7 +129,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: d29a41bbd0ab34552b147db059ddfd22, type: 2}
   m_ParentStateMachine: {fileID: 110730734}
-  m_Position: {x: 156, y: 72, z: 0}
+  m_Position: {x: 168, y: 96, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -195,6 +195,11 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
+      first: {fileID: 0}
+      second:
+      - {fileID: 110151748}
+      - {fileID: 110113500}
+    data:
       first: {fileID: 110233050}
       second:
       - {fileID: 110193660}
@@ -203,10 +208,11 @@ StateMachine:
       second:
       - {fileID: 110104064}
     data:
-      first: {fileID: 0}
-      second:
-      - {fileID: 110151748}
-      - {fileID: 110113500}
+      first: {fileID: 110261336}
+      second: []
+    data:
+      first: {fileID: 110265574}
+      second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

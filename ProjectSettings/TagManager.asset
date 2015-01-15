@@ -7,6 +7,8 @@ TagManager:
   - Bound
   - Target
   - FirstLine
+  - Floor
+  - RearWall
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

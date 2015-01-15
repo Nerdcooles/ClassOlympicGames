@@ -1461,7 +1461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
-  ballPrefab: {fileID: 100000, guid: d9fd65ca435094e1497c24dfe075278a, type: 2}
   alpha: 500
 --- !u!212 &532821057
 SpriteRenderer:
@@ -1492,8 +1491,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 22bf61b2a79c2401a8f5e571f9edb966, type: 2}
   m_PrefabInternal: {fileID: 2062124428}
   m_GameObject: {fileID: 532821055}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 343, y: -35, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -350, y: -34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2450,7 +2449,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 2
-  ballPrefab: {fileID: 100000, guid: d9fd65ca435094e1497c24dfe075278a, type: 2}
   alpha: 500
 --- !u!212 &810330816
 SpriteRenderer:
@@ -2481,8 +2479,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 22bf61b2a79c2401a8f5e571f9edb966, type: 2}
   m_PrefabInternal: {fileID: 1981619702}
   m_GameObject: {fileID: 810330814}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -353, y: 127, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
+  m_LocalPosition: {x: 350, y: -34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2922,7 +2920,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
-  ballPrefab: {fileID: 100000, guid: d9fd65ca435094e1497c24dfe075278a, type: 2}
   alpha: 500
 --- !u!212 &860022998
 SpriteRenderer:
@@ -2954,7 +2951,7 @@ Transform:
   m_PrefabInternal: {fileID: 1269146821}
   m_GameObject: {fileID: 860022996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -348, y: -34, z: 0}
+  m_LocalPosition: {x: -350, y: 127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3958,7 +3955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 3
-  ballPrefab: {fileID: 100000, guid: d9fd65ca435094e1497c24dfe075278a, type: 2}
   alpha: 500
 --- !u!212 &1543739430
 SpriteRenderer:
@@ -3990,7 +3986,7 @@ Transform:
   m_PrefabInternal: {fileID: 348445383}
   m_GameObject: {fileID: 1543739428}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 336, y: 127, z: 0}
+  m_LocalPosition: {x: 350, y: 127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

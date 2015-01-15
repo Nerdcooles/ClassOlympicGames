@@ -718,7 +718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud_tablet: {fileID: 1879668156}
   hud_phone_4p: {fileID: 167072232}
-  player: []
 --- !u!1001 &123111335
 Prefab:
   m_ObjectHideFlags: 0
@@ -1223,11 +1222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019ab8a06dff344dca8d575b236ba661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 648955824}
-  damping: 1
-  lookAheadFactor: 0
-  lookAheadReturnSpeed: 0
-  lookAheadMoveThreshold: 0
 --- !u!81 &416907763
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1459,11 +1453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181d5011d44da4348b14179803f39a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-  - {fileID: 192432594}
-  - {fileID: 648374094}
-  - {fileID: 87522342}
-  - {fileID: 805625080}
 --- !u!4 &567124540
 Transform:
   m_ObjectHideFlags: 0
@@ -1738,45 +1727,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!1 &648955822
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 648955824}
-  - 61: {fileID: 648955823}
-  m_Layer: 0
-  m_Name: FirstLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &648955823
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 648955822}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Size: {x: 50, y: 430}
-  m_Center: {x: .893144608, y: 115.573242}
---- !u!4 &648955824
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 648955822}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
 --- !u!1 &655285638
 GameObject:
   m_ObjectHideFlags: 0
@@ -3596,7 +3546,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
 --- !u!212 &1482925230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3825,7 +3775,7 @@ Prefab:
     - target: {fileID: 11433430, guid: d76e3053a3c564d6d982d869ce2accc9, type: 2}
       propertyPath: target
       value: 
-      objectReference: {fileID: 648955824}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d76e3053a3c564d6d982d869ce2accc9, type: 2}
   m_RootGameObject: {fileID: 416907761}

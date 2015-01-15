@@ -3,6 +3,7 @@
 public class Player{
 
 	GameManager.eColors color;
+	GameManager.ePlayers number;
 
 	Dictionary<GameManager.eMedals, int> medals = new Dictionary<GameManager.eMedals, int>();
 
@@ -32,4 +33,12 @@ public class Player{
 		return num;
 	}
 
+	public GameManager.ePlayers Number {
+		get {
+			return number;
+		}
+		set {
+			number = value;
+		}
+	}
 }

@@ -16,6 +16,7 @@ public class BucketPlayer : MonoBehaviour {
 	private BucketLevelManager sceneMgr;
 	private LevelManager lvm;
 	private float force;
+	private float angle;
 	private float press_time;
 	private Vector3 direction;
 	private Animator animator;
@@ -30,16 +31,12 @@ public class BucketPlayer : MonoBehaviour {
 	void Start () {
 		if (GameManager.Instance.IsPlaying (player)) {
 						can_shoot = true;
-						switch (player) {
-						case GameManager.ePlayers.p01:  
-						case GameManager.ePlayers.p02:
-								direction = (Quaternion.AngleAxis (65, transform.forward) * transform.right) * alpha;
-								break;
-						case GameManager.ePlayers.p03:
-						case GameManager.ePlayers.p04:
-								direction = (Quaternion.AngleAxis (60, transform.forward) * transform.right) * alpha;
-								break;
-						}
+						if(transform.position.y < 0)
+							angle = 65f;
+						else 
+							angle = 60f;
+						direction = (Quaternion.AngleAxis (angle, transform.forward) * transform.right) * alpha;
+
 						button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
 						color = GameManager.Instance.getColor (player);
 						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString () + "/animation/" + color.ToString () + "_bucket");

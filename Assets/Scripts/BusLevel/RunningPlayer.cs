@@ -17,64 +17,56 @@ public class RunningPlayer : MonoBehaviour {
 	private int last;
 	private RuntimeAnimatorController animCtrl;
 
+	bool stop = true;
+	float x, old_pos;
 
-	void Awake() {
-		sceneManager = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
-	}
 
 	void Start () {
-		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
-		try {
+		sceneManager = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
+		if (GameManager.Instance.IsPlaying (player)) {
+			button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
+			button.GetComponent<BtnHandler>().OnPressed += move;
+			finished = false;
+			x = transform.position.x;
+			old_pos = x;
 			color = GameManager.Instance.getColor(player);
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_runner");
 			animator = GetComponent<Animator>();			
 			animator.runtimeAnimatorController = animCtrl;
-		}catch{
+		}else{
 			gameObject.SetActive(false);
 		}
-		finished = false;
-		button.GetComponent<BtnHandler>().OnPressed += move;
 	}
-	
-	private void OnDisable()
-	{
-		try{
-			button.GetComponent<BtnHandler>().OnPressed -= move;
-		}catch{
+
+	void Update() {
+		if (!stop) {
+			transform.position = Vector3.Lerp (transform.position, new Vector3 (x + 50f, transform.position.y, transform.position.z), 7 * Time.deltaTime);
+
+			if(transform.position.x-old_pos>0.5f)
+				animator.SetBool("isMoving", true);
+			else
+				animator.SetBool("isMoving", false);
+
+			old_pos = transform.position.x;
 		}
 	}
 
 	private void move() {
 		if (!finished) {
-			Vector3 pos = transform.position;
-			pos.x += 40f;
-			rigidbody2D.MovePosition(pos);
-			speed = 20;
-			CancelInvoke("DecrementSpeed");
-			InvokeRepeating ("DecrementSpeed", 0.1f, 0.2f);
+			x = transform.position.x;
+			stop = false;
 		}
-	}
-	
-	private void DecrementSpeed() {
-		speed -= 10;
-		if (speed <= 0) {
-			speed = 0;
-			CancelInvoke ("DecrementSpeed");
-	    }
-		animator.SetInteger("speed", speed);
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Target") {
 			finished = true;
+			stop = true;
 			int pos = sceneManager.Score(player);
 			if(pos != GameManager.Instance.getNumPlayer() - 1)
 				animator.SetBool("isWinner", true);
 			else
 				animator.SetBool("isLoser", true);
-		}
-		if (other.name == "FirstLine") {
-			other.transform.position = other.transform.position + new Vector3(100f,0,0);
 		}
 	}
 }

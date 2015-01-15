@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager> {
 	public enum ePlayers {p01, p02, p03, p04};
 	public enum eMedals {Gold, Silver, Bronze};
 	public enum eGameMode {CLASSIC, TRAINING};
-	public enum eLevels {Home, Bus, Bucket, Archery, Award};
+	public enum eLevels {Home, Bus, Bucket, Archery, SkipTheExam, Award};
 	public enum eColors {blue, green, red, yellow};
 	
 	Dictionary<ePlayers, Player> players = new Dictionary<ePlayers, Player>();
@@ -29,10 +29,46 @@ public class GameManager : Singleton<GameManager> {
 		return ps;
 	}
 
+//	public Players getFirst() {
+//		//find max golds value
+//		int max_golds = 0;
+//		foreach (Player p in players) {
+//						int golds = p.getMedals (eMedals.Gold);
+//						if (golds > max_golds) {
+//								max_golds = golds;
+//						}
+//				}
+//		//store players with max golds value
+//		List<Players> first = new List<Players>();
+//		foreach (Player p in players) {
+//			if (p.getMedals (eMedals.Gold) > max_golds) {
+//				first.Add(p);
+//			}
+//		}
+//
+//		//if more than one
+//		if(first.Count > 1) {
+//			return first[0];
+//			}else{
+//				return first[0];
+//			}
+//	}
+//
+//		int max = points.Max ();
+//		float min_time = Time.time;
+//		GameManager.ePlayers winner = (GameManager.ePlayers)pos;
+//		for (int i=0; i<points.Length; i++){
+//			if (points [i] == max && times [i] < min_time) {
+//				winner = (GameManager.ePlayers)i;
+//				min_time = times[i];
+//			}
+//		}
+//		points[winner.GetHashCode()] = -1;
+//		}
+
 	public void addMedal(ePlayers player, eMedals medal) {
 		if (players.ContainsKey (player) && medal.GetHashCode() != 3) {
 						players [player].addMedal (medal);
-						Debug.Log (player + " " + medal.ToString ());
 				}
 	}
 
@@ -60,6 +96,7 @@ public class GameManager : Singleton<GameManager> {
 		
 		for(int i=0; i<num_players; i++){
 			Player p = new Player();
+			p.Number = (ePlayers)i;
 			players.Add((ePlayers)i, p);
 		}
 	}

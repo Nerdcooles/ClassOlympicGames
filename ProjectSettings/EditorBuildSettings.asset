@@ -25,3 +25,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Summary.unity
   - enabled: 1
     path: Assets/Scenes/Award.unity
+  - enabled: 1
+    path: Assets/Scenes/SkipTheExam.unity
