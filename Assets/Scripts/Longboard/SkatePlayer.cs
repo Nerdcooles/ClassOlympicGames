@@ -21,7 +21,7 @@ public class SkatePlayer : MonoBehaviour {
 	private int last;
 	private RuntimeAnimatorController animCtrl;
 	private float press_time;
-
+	private GameObject footPrefab;
 	private bool jumping, can_move, pressed;
 	private float offsetX;
 
@@ -43,6 +43,7 @@ public class SkatePlayer : MonoBehaviour {
 			button.GetComponent<BtnHandler>().OnReleased += Jump;
 			jumping = false;
 			can_move = true;
+			footPrefab = Resources.Load <GameObject> ("Prefabs/CementFoot");
 		}else{
 			gameObject.SetActive(false);
 		}
@@ -91,6 +92,7 @@ public class SkatePlayer : MonoBehaviour {
 		}
 			if (other.name == "cement") {
 			finished = true;	
+			Instantiate(footPrefab, transform.position - new Vector3(0f,50f,-1f), transform.rotation);
 			sceneManager.Score(player, transform.position.x - red_line);
 			can_move = false;
 			rigidbody2D.velocity = Vector2.zero;

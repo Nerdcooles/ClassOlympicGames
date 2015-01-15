@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager> {
 	public enum ePlayers {p01, p02, p03, p04, none};
 	public enum eMedals {Gold, Silver, Bronze};
 	public enum eGameMode {CLASSIC, TRAINING};
-	public enum eLevels {Home, Delaybus, Bucketball, Arteachery, SkipTheTest, Nerdthrow, LongboardJump, Award};
+	public enum eLevels {Home, Delaybus, Bucketball, Arteachery, SkipTheTest, LongboardJump, Nerdthrow , Award};
 	public enum eColors {blue, green, red, yellow};
 	
 	Dictionary<ePlayers, Player> players = new Dictionary<ePlayers, Player>();
