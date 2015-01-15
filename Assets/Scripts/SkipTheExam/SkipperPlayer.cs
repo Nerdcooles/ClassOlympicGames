@@ -51,6 +51,7 @@ public class SkipperPlayer : MonoBehaviour {
 		if (Camera.main.transform.position.x - transform.position.x > offsetX) {
 			Vector3 newPos = new Vector3 (Camera.main.transform.position.x - offsetX, transform.position.y, transform.position.z);
 			transform.position = Vector3.Lerp (transform.position, newPos, 10 * Time.deltaTime);
+			animator.SetBool("isMoving", true);
 		}
 	}
 
@@ -59,6 +60,7 @@ public class SkipperPlayer : MonoBehaviour {
 			pressed = true;
 			rigidbody2D.gravityScale = 0;
 			rigidbody2D.velocity = (Vector2.right * normal_vel);
+			animator.SetBool("isMoving", true);
 		}
 	}
 	
@@ -69,12 +71,13 @@ public class SkipperPlayer : MonoBehaviour {
 						rigidbody2D.gravityScale = 40;
 						rigidbody2D.velocity = Vector2.zero;
 						rigidbody2D.AddForce (jump, ForceMode2D.Impulse);
-				}
+			animator.SetBool("isJumping", true);
+
+		}
 
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
-
 		if (other.gameObject.tag == "Target") {
 			finished = true;			
 			int pos = sceneManager.Score(player);
@@ -88,13 +91,18 @@ public class SkipperPlayer : MonoBehaviour {
 			Destroy(other);	
 			rigidbody2D.gravityScale = 40;
 			rigidbody2D.velocity = (Vector2.right * slow_vel);
+			animator.SetBool("isMoving", false);
+			animator.SetBool("isJumping", false);
 		}
 		if (other.gameObject.tag == "Bonus") {
 			Destroy(other);	
 			rigidbody2D.velocity = (Vector2.right * fast_vel);
 		}
-		if (other.name == "floor"+(player.GetHashCode()+1)) {
+		if (other.gameObject.tag == "Floor") {
 			can_jump = true;
+			animator.SetBool("isJumping", false);
+			animator.SetBool("isMoving", false);
+
 		}
 	}
 }

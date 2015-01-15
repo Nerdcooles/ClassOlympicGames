@@ -19,6 +19,11 @@ public class SelectLevel : MonoBehaviour {
 	{
 		MenuManager.StartLevel(GameManager.eLevels.Arteachery);
 	}
+	
+	public void startSkip()
+	{
+		MenuManager.StartLevel(GameManager.eLevels.SkipTheTest);
+	}
 
 	public void Back() {
 		MenuManager.SelectPlayer();

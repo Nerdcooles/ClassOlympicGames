@@ -10,7 +10,7 @@ public class SkipLevelManager : MonoBehaviour {
 	private int num_players;
 	private LevelManager lvm;
 	private List<GameManager.ePlayers> playersToFinish;
-	
+
 	public const float WAIT_SECS = 10f;
 	
 	void Awake() {

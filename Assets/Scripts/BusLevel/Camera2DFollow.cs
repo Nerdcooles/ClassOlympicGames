@@ -20,7 +20,7 @@ public class Camera2DFollow : MonoBehaviour {
 		float max_x = 0;
 		foreach (GameObject p in player) {
 			try{
-						if (p.transform.position.x > max_x) 
+				if (p.transform.position.x > max_x) 
 				max_x = p.transform.position.x;
 			}catch(System.NullReferenceException e){
 				//player disabled
