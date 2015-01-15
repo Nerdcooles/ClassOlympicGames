@@ -27,3 +27,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Award.unity
   - enabled: 1
     path: Assets/Scenes/SkipTheTest.unity
+  - enabled: 1
+    path: Assets/Scenes/Nerdthrow.unity

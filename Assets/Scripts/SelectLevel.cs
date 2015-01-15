@@ -24,6 +24,16 @@ public class SelectLevel : MonoBehaviour {
 	{
 		MenuManager.StartLevel(GameManager.eLevels.SkipTheTest);
 	}
+	
+	public void startNerd()
+	{
+		MenuManager.StartLevel(GameManager.eLevels.Nerdthrow);
+	}
+	
+	public void startLongboard()
+	{
+		MenuManager.StartLevel(GameManager.eLevels.LongboardJump);
+	}
 
 	public void Back() {
 		MenuManager.SelectPlayer();
