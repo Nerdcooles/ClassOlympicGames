@@ -12,7 +12,7 @@ public class Summary : MonoBehaviour {
 
 	void Start () {
 
-		//**************************************  TEST CASES  **************************************
+		/**************************************  TEST CASES  **************************************
 		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
 		GameManager.Instance.createPlayers (4);
 		for(int i=0; i<4; i++)
@@ -120,28 +120,17 @@ public class Summary : MonoBehaviour {
 
 	void setPositions() {
 		int num_players = GameManager.Instance.getNumPlayer ();
-		Debug.Log ("Number: " + num_players);
-		
+
 		switch (num_players) {
 		case 2: pod[0].transform.position = new Vector3(x,y[1],z);pod[1].transform.position = new Vector3(x,y[2],z); pod[2].SetActive(false);pod[3].SetActive(false);break;
 		case 3: pod[0].transform.position = new Vector3(x,(y[0]+y[1])/2f,z);pod[1].transform.position = new Vector3(x,(y[1]+y[2])/2f,z);pod[2].transform.position = new Vector3(x,(y[2]+y[3])/2f,z);pod[3].SetActive(false);break;
 		}
 
 		for (int i=0; i<num_players; i++) {
-			Debug.Log((GameManager.ePlayers)i);
-			if(i!=(num_players-1)) {
-				//PODIUM
-				Debug.Log("winner");
-				pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor ((GameManager.ePlayers)i) + "_podium_winner");
 
-			}else{
-				//OUT
-				Debug.Log("loser");
-				pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor ((GameManager.ePlayers)i) + "_podium_loser");
-			}
+			pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor ((GameManager.ePlayers)i) + "_podium_winner");
 
 			for(int medal = 0; medal<3; medal++) {
-				Debug.Log(((GameManager.eMedals)medal).ToString());
 				for(int tot = GameManager.Instance.getMedal((GameManager.ePlayers)i,(GameManager.eMedals)medal); tot > 0; tot--) {
 					Instantiate(medalPrefab[medal], pod[i].transform.position + new Vector3(((1+4f*medal) * 50f) + (tot * 30f),0f,0f), transform.rotation);
 				}
