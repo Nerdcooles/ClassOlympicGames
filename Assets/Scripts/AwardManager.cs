@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class AwardManager : MonoBehaviour {
 	
 	public GameObject[] pod;
+	public GameObject[] button;
+	private const int X_2P = 250;
 
 	void Start() {
 
@@ -71,6 +73,23 @@ public class AwardManager : MonoBehaviour {
 				}
 				pod[i].SetActive(true);
 			}
+
+		int num_players = GameManager.Instance.getNumPlayer ();
+		float y = button[0].GetComponent<RectTransform>().position.y;
+		float width = (float)Screen.width/2f;
+		switch(num_players) {
+		case 2: 
+			button[0].GetComponent<RectTransform>().position = new Vector3(-X_2P, y, 0f);  
+			button[1].GetComponent<RectTransform>().position = new Vector3(X_2P, y, 0f);
+			button[2].SetActive(false);
+			button[3].SetActive(false);
+			break;
+		case 3: 
+			button[1].GetComponent<RectTransform>().position = new Vector3(0f, y, 0f); 
+			button[2].GetComponent<RectTransform>().position = button[3].GetComponent<RectTransform>().position;
+			button[3].SetActive(false);
+			break;
+		}
 	}
 
 	void Update() {
