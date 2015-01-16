@@ -1,23 +1,152 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Summary : MonoBehaviour {
 
-	Text[] medals = new Text[4];
+	public GameObject[] pod;
+
+	public GameObject[] medalPrefab;
+	float x;
+	float[] y = new float[4];
+	float z;
 
 	void Start () {
-		for (int i=0; i<4; i++) {
-						medals[i] = GameObject.Find ("P" + (i+1)).GetComponent<Text>();
-						medals [i].text = "";
-				}
 
+		//**************************************  TEST CASES  **************************************
+		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
+		GameManager.Instance.createPlayers (4);
+		for(int i=0; i<4; i++)
+			GameManager.Instance.setColor((GameManager.ePlayers)i, (GameManager.eColors)i);
+		//P1
+		//GOLD
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
+		//SILVER
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
+		//BRONZE
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
 		
-		foreach (GameManager.ePlayers p in GameManager.Instance.getPlayers()) {
-			medals[p.GetHashCode()].text = p.ToString () + " " + GameManager.Instance.getColor (p) 
-			           + " GOLD " + GameManager.Instance.getMedal (p, GameManager.eMedals.Gold)
-			           + " SILVER " + GameManager.Instance.getMedal (p, GameManager.eMedals.Silver)
-			           + " BRONZE " + GameManager.Instance.getMedal (p, GameManager.eMedals.Bronze);
+		//P2
+		//GOLD
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
+		//SILVER
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
+		//BRONZE
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
+		
+		//P3
+		//GOLD
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
+		//SILVER
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
+		//BRONZE
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
+		
+		//P4
+		//GOLD
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
+		//SILVER
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
+		//BRONZE
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
+		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
+
+		//**************************************  TEST CASES  **************************************/
+		x = pod [0].transform.position.x;
+		z = pod [0].transform.position.z;
+		for (int i=0; i<4; i++)
+						y[i] = pod [i].transform.position.y;
+
+		setPositions ();
+	}
+
+	void setPositions() {
+		int num_players = GameManager.Instance.getNumPlayer ();
+		Debug.Log ("Number: " + num_players);
+		
+		switch (num_players) {
+		case 2: pod[0].transform.position = new Vector3(x,y[1],z);pod[1].transform.position = new Vector3(x,y[2],z); pod[2].SetActive(false);pod[3].SetActive(false);break;
+		case 3: pod[0].transform.position = new Vector3(x,(y[0]+y[1])/2f,z);pod[1].transform.position = new Vector3(x,(y[1]+y[2])/2f,z);pod[2].transform.position = new Vector3(x,(y[2]+y[3])/2f,z);pod[3].SetActive(false);break;
+		}
+
+		for (int i=0; i<num_players; i++) {
+			Debug.Log((GameManager.ePlayers)i);
+			if(i!=(num_players-1)) {
+				//PODIUM
+				Debug.Log("winner");
+				pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor ((GameManager.ePlayers)i) + "_podium_winner");
+
+			}else{
+				//OUT
+				Debug.Log("loser");
+				pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor ((GameManager.ePlayers)i) + "_podium_loser");
+			}
+
+			for(int medal = 0; medal<3; medal++) {
+				Debug.Log(((GameManager.eMedals)medal).ToString());
+				for(int tot = GameManager.Instance.getMedal((GameManager.ePlayers)i,(GameManager.eMedals)medal); tot > 0; tot--) {
+					Instantiate(medalPrefab[medal], pod[i].transform.position + new Vector3(((1+4f*medal) * 50f) + (tot * 30f),0f,0f), transform.rotation);
+				}
+			}
+			pod[i].SetActive(true);
 		}
 	}
 

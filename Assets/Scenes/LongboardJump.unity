@@ -4212,7 +4212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed552fad37af946199b0ddfb76d83ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 5
   panel_instructions: {fileID: 1472406589}
   panel_countdown: {fileID: 849542911}
   panel_podium: {fileID: 1291308107}

@@ -4783,7 +4783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed552fad37af946199b0ddfb76d83ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   panel_instructions: {fileID: 1256671516}
   panel_countdown: {fileID: 852122291}
   panel_podium: {fileID: 1027852857}
