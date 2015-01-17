@@ -65,7 +65,7 @@ public class GameManager : Singleton<GameManager> {
 			}
 		}
 
-		if(results.Count > 1) {
+		if(results.Count > 1 && medal.GetHashCode()!=2) {
 			//if more then one, repeat
 			return WhoHasMoreMedals(results, (eMedals)(medal.GetHashCode()+1));
 		}else{

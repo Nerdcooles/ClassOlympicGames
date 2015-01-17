@@ -159,6 +159,7 @@ PlayerSettings:
   flashStrippingLevel: 2
   spritePackerPolicy: 
   scriptingDefineSymbols:
+    1: 3
     7: 
   metroPackageName: rpo
   metroPackageLogo: 

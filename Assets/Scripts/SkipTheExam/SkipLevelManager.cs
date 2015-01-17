@@ -15,8 +15,10 @@ public class SkipLevelManager : MonoBehaviour {
 	
 	void Awake() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		MusicManager.Instance.Source.Stop ();
+		MusicManager.Instance.Source.clip = Resources.Load<AudioClip>(MusicManager.songs[1]);
+		MusicManager.Instance.Source.Play ();
 	}
-
 	void Start() {
 		player_pos = 0;
 		start_time = 0;

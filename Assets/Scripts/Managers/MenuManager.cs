@@ -12,7 +12,7 @@ public static class MenuManager {
 		if (GameManager.Instance.getGameMode () == GameManager.eGameMode.CLASSIC)
 						Summary ();
 		else
-						NewGame ();
+						SelectLevel ();
 	}
 
 	public static void NewGame() {

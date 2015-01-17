@@ -14,7 +14,11 @@ public class ArcheryLevelManager : MonoBehaviour {
 	private LevelManager lvm;
 	private UIManager uim;
 	private Timebar timebar;
-
+	void Awake() {
+		MusicManager.Instance.Source.Stop ();
+		MusicManager.Instance.Source.clip = Resources.Load<AudioClip>(MusicManager.songs[0]);
+		MusicManager.Instance.Source.Play ();
+	}
 	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		uim = GameObject.Find("UIManager").GetComponent<UIManager>();

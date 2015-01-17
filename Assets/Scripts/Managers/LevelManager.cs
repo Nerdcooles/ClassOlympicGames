@@ -94,7 +94,7 @@ public class LevelManager : MonoBehaviour {
 	}
 	
 	IEnumerator WaitForFinish() {
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(1f);
 		panel_finish.SetActive (true);
 		for (int i=0; i<positions.Length; i++) {
 			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
