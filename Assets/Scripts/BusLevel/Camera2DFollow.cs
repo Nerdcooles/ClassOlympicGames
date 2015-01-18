@@ -9,7 +9,7 @@ public class Camera2DFollow : MonoBehaviour {
 		player = new GameObject[4];
 		for (int i=0; i<4; i++) {
 			try{
-				player [i] = GameObject.Find ("Player" + (i + 1));
+				player [i] = GameObject.Find ("p0" + (i + 1));
 			}catch(System.NullReferenceException e){
 				//player disabled
 			}

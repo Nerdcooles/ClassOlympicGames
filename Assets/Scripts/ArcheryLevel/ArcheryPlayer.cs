@@ -3,14 +3,12 @@ using UnityEngine;
 using TouchScript.Gestures;
 using System.Collections;
 
-public class ArcheryPlayer : MonoBehaviour {
-	
-	public GameManager.ePlayers player;
-	private GameManager.eColors color;
+public class ArcheryPlayer : LevelPlayer {
+
+	private ArcheryLevelManager sceneMgr;
 
 	private float pencilPosX = -32.6f;
 	private float pencilPosY = -9f;
-	private GameObject button;
 	private GameObject pencilPrefab;
 	
 	private float force;
@@ -19,38 +17,20 @@ public class ArcheryPlayer : MonoBehaviour {
 	private GameObject pencilInstance;
 	private bool can_shoot;
 
-	private ArcheryLevelManager sceneMgr;
-	private LevelManager lvm;
 
-	private Animator animator;
-	private RuntimeAnimatorController animCtrl;
-
-	void Awake() {
-		sceneMgr = GameObject.Find("ArcheryLevelManager").GetComponent<ArcheryLevelManager>() as ArcheryLevelManager;
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-	}
 	
-	void Start () {
+	protected override void Initialize() {
+		sceneMgr = GameObject.Find("ArcheryLevelManager").GetComponent<ArcheryLevelManager>() as ArcheryLevelManager;
+
 		can_shoot = true;
 		if(transform.rotation.y != 0)
 			pencilPosX = -pencilPosX;
 
-		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
-		try {
-			color = GameManager.Instance.getColor(player);
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_bucket");
-			animator = GetComponent<Animator>();			
-			animator.runtimeAnimatorController = animCtrl;
 			pencilPrefab = Resources.Load <GameObject> ("Prefabs/ArcheryPencil");
-			lvm.OnFinish += endPlayer;
-		}catch{
-			gameObject.SetActive(false);
-		}
-		button.GetComponent<BtnHandler>().OnPressed += startPower;
-		button.GetComponent<BtnHandler>().OnReleased += shoot;
+
 	}
 
-	private void startPower() {
+	protected override void Pressed() {
 		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
 			pencilInstance = Instantiate(pencilPrefab, transform.position + new Vector3(pencilPosX, pencilPosY, 0f) , Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
 			pencilInstance.GetComponent<ArcheryPencil>().setPlayer(player);
@@ -69,7 +49,7 @@ public class ArcheryPlayer : MonoBehaviour {
 				}
 	}
 	
-	private void shoot() {
+	protected override void Released() {
 		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
 			CancelInvoke("SpinPencil");
 			animator.SetBool("isLoading", false);
@@ -77,8 +57,6 @@ public class ArcheryPlayer : MonoBehaviour {
 			StartCoroutine(waitAnimation());
 		}
 	}
-
-	
 
 	private IEnumerator waitAnimation() {
 		yield return new WaitForSeconds(0.1f);
@@ -99,22 +77,6 @@ public class ArcheryPlayer : MonoBehaviour {
 		animator.SetBool("isLoading",false);
 		press_time = Time.time;	
 		can_shoot=true;
-	}
-	
-	public void endPlayer() {
-		//IF NOT LAST PLAYER
-		int num_players = GameManager.Instance.getNumPlayer ();
-		if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
-			//IF SINGLE PLAYER OR NOT LAST PLAYER
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
-		} else {
-			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
-		}
-		animator = GetComponent<Animator>();			
-		animator.runtimeAnimatorController = animCtrl;
-		
-		GameObject medal = Resources.Load<GameObject>("Prefabs/Medal_" + lvm.GetPosition(player));
-		Instantiate(medal, transform.position + new Vector3(0f,90f,0f), transform.rotation);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {

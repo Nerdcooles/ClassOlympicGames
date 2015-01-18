@@ -2,31 +2,18 @@
 using System.Collections;
 
 public class Bus : MonoBehaviour {
-	private LevelManager lvm;
-	public float init_speed = 30f;
-	public float speed = 80f;
-	public float turbo = 2f;
+	LevelManager lvm;
+	int init_speed = 3000;
+	int speed = 8000;
+	int turbo = 2;
 
 	void Awake () {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-	}
-
-	void OnEnable()
-	{
 		lvm.OnCountdown += InitBus;
 		lvm.OnStart += MoveBus;
 		lvm.OnFinish += RemoveCollider;
 	}
-	
-	
-	void OnDisable()
-	{
-		lvm.OnCountdown -= InitBus;
-		lvm.OnStart -= MoveBus;
-		lvm.OnFinish -= RemoveCollider;
 
-	}
-	
 	void InitBus() {
 		rigidbody2D.AddForce(Vector3.right * init_speed);
 	}
@@ -43,7 +30,11 @@ public class Bus : MonoBehaviour {
 		if(other.gameObject.tag == "Player")
 				rigidbody2D.AddForce(Vector3.right * speed * turbo);
 		if (other.gameObject.tag == "Target") {
-			transform.position = transform.position + new Vector3(1f, 0, 0);
+
+			Vector3 final_position = transform.position;
+			final_position.x = other.transform.position.x + 350f;
+			transform.position = final_position;
+
 			collider2D.isTrigger = false;
 			RemoveCollider();
 			rigidbody2D.velocity = Vector2.zero;

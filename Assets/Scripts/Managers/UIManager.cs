@@ -12,7 +12,12 @@ public class UIManager : MonoBehaviour {
 	private int num_players;
 	private Text[] scoreP;
 
+	public Text txt;
+	private float sceneWidth;
+
 	void Awake () {
+		sceneWidth = Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
+
 		#if UNITY_IPHONE || UNITY_ANDROID
 			#if UNITY_EDITOR
 			hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = true;
@@ -20,10 +25,11 @@ public class UIManager : MonoBehaviour {
 			#else	
 			hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = false;
 			hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = false;
-		#endif
+			#endif
 		float res = (float)Screen.width/Screen.height;
 		if(res > 1.5f && GameManager.Instance.getNumPlayer() == 4) {
 			isPhone4p = true;
+			sceneWidth = -380f;
 			hud_tablet.SetActive(false);
 			hud_phone_4p.SetActive(true);
 		}else{
@@ -36,10 +42,9 @@ public class UIManager : MonoBehaviour {
 		#endif
 
 		#if UNITY_EDITOR
-				hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = true;
-				hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = true;
+		hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = true;
+		hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = true;
 		#endif
-
 		initPlayers ();
 		initButtons();
 		try {
@@ -52,7 +57,7 @@ public class UIManager : MonoBehaviour {
 	private void initPlayers() {
 		player = new GameObject[4];
 		for (int i=0; i<4; i++)
-			player [i] = GameObject.Find ("Player" + (i + 1));
+			player [i] = GameObject.Find ("p0" + (i + 1));
 		num_players = GameManager.Instance.getNumPlayer ();
 		switch (num_players) {
 		case 1:
@@ -134,5 +139,11 @@ public class UIManager : MonoBehaviour {
 			button  = hud_tablet.GetComponent<HudKeyboardAdapter>().button;
 				}
 		return button[player.GetHashCode()];
+	}
+
+	public float SceneWidth {
+		get {
+			return sceneWidth;
+		}
 	}
 }
