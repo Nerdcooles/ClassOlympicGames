@@ -42,6 +42,7 @@ public class SkipperPlayer : MonoBehaviour {
 			button.GetComponent<BtnHandler>().OnPressed += Move;
 			button.GetComponent<BtnHandler>().OnReleased += Jump;
 			can_jump = true;
+			lvm.OnFinish += endPlayer;
 		}else{
 			gameObject.SetActive(false);
 		}
@@ -76,6 +77,22 @@ public class SkipperPlayer : MonoBehaviour {
 
 		}
 
+	}
+	
+	public void endPlayer() {
+		//IF NOT LAST PLAYER
+		int num_players = GameManager.Instance.getNumPlayer ();
+		if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
+			//IF SINGLE PLAYER OR NOT LAST PLAYER
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
+		} else {
+			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
+		}
+		animator = GetComponent<Animator>();			
+		animator.runtimeAnimatorController = animCtrl;
+		
+		GameObject medal = Resources.Load<GameObject>("Prefabs/Medal_" + lvm.GetPosition(player));
+		Instantiate(medal, transform.position + new Vector3(0f,90f,0f), transform.rotation);
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {

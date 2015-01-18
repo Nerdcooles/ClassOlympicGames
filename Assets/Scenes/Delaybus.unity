@@ -3617,6 +3617,7 @@ MonoBehaviour:
   panel_finish: {fileID: 1945175499}
   panel_pause: {fileID: 282982671}
   btn_pause: {fileID: 108457898}
+  withRound: 0
 --- !u!1001 &1497380891
 Prefab:
   m_ObjectHideFlags: 0
@@ -4588,7 +4589,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2066299324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 114, y: 101, z: 0}
+  m_LocalPosition: {x: 114, y: 126, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4647,7 +4648,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Size: {x: 28.0198364, y: 432.37207}
-  m_Center: {x: -336.623138, y: 30.3015747}
+  m_Center: {x: -336.623138, y: 0}
 --- !u!1 &2099881459
 GameObject:
   m_ObjectHideFlags: 0

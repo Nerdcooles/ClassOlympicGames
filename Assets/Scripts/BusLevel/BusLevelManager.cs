@@ -60,9 +60,6 @@ public class BusLevelManager : MonoBehaviour {
 
 	IEnumerator WaitLastPlayer() {
 		yield return new WaitForSeconds(WAIT_SECS);
-		foreach (GameManager.ePlayers p in playersToFinish) {
-						lvm.setPodium (p, player_pos++);
-				}
 		if (lvm.getState () != LevelManager.eState.Finish) {
 						Finish ();
 				}

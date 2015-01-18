@@ -107,6 +107,9 @@ public class BucketPlayer : MonoBehaviour {
 				}
 		animator = GetComponent<Animator>();			
 		animator.runtimeAnimatorController = animCtrl;
+		
+		GameObject medal = Resources.Load<GameObject>("Prefabs/Medal_" + lvm.GetPosition(player));
+		Instantiate(medal, transform.position + new Vector3(0f,90f,0f), transform.rotation);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

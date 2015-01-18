@@ -12,6 +12,7 @@ public class RunningPlayer : MonoBehaviour {
 	private GameManager.eColors color;
 	private GameObject button;
 	private BusLevelManager sceneManager;
+	private LevelManager lvm;
 	private Animator animator;
 	private bool finished;
 	private int last;
@@ -23,6 +24,7 @@ public class RunningPlayer : MonoBehaviour {
 
 	void Start () {
 		sceneManager = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
+		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		if (GameManager.Instance.IsPlaying (player)) {
 			button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
 			button.GetComponent<BtnHandler>().OnPressed += move;
@@ -33,6 +35,7 @@ public class RunningPlayer : MonoBehaviour {
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString() + "/animation/" + color.ToString() + "_runner");
 			animator = GetComponent<Animator>();			
 			animator.runtimeAnimatorController = animCtrl;
+			lvm.OnFinish += endPlayer;
 		}else{
 			gameObject.SetActive(false);
 		}
@@ -56,6 +59,29 @@ public class RunningPlayer : MonoBehaviour {
 			x = transform.position.x;
 			stop = false;
 		}
+	}
+	
+	public void endPlayer() {
+		//IF NOT LAST PLAYER
+		try {
+						int num_players = GameManager.Instance.getNumPlayer ();
+						if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
+								//IF SINGLE PLAYER OR NOT LAST PLAYER
+								animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
+						} else {
+								animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
+						}
+						animator = GetComponent<Animator> ();			
+						animator.runtimeAnimatorController = animCtrl;
+			
+						GameObject medal = Resources.Load<GameObject> ("Prefabs/Medal_" + lvm.GetPosition (player));
+						Instantiate (medal, transform.position + new Vector3 (0f, 90f, 0f), transform.rotation);
+				} catch (Exception ex) {
+					animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
+			
+			animator = GetComponent<Animator> ();			
+			animator.runtimeAnimatorController = animCtrl;
+				}
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {

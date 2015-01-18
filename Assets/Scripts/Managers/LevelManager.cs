@@ -102,26 +102,41 @@ public class LevelManager : MonoBehaviour {
 		if (withRound) {
 			RoundManager.Instance.NextRound();
 		}
-		state = eState.Finish;
-		if(OnFinish != null)
-			OnFinish();
-		StartCoroutine ("WaitForFinish");
-	}
-	
-	IEnumerator WaitForFinish() {
-		yield return new WaitForSeconds(1f);
 		panel_finish.SetActive (true);
 		StartCoroutine ("WaitForPodium");
 	}
 
 	IEnumerator WaitForPodium() {
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(2f);
 		finish.enabled = false;
+		state = eState.Finish;
+		if(OnFinish != null)
+			OnFinish();
 		for (int i=0; i<positions.Length; i++) {
 			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
 		}
-		podium.Show ();
+
+		yield return new WaitForSeconds(3f);
+		if (withRound) {
+						if (RoundManager.Instance.Round < 3) {
+								Application.LoadLevel (Application.loadedLevel);
+				yield return new WaitForSeconds(1f);
+			} else {
+								RoundManager.Instance.Reset ();
+						}
+				}
+			podium.Show ();
 	}
+
+	public int GetPosition(GameManager.ePlayers player) {
+		Debug.Log ("Ask position " + player.ToString ());
+		for (int i=0; i<positions.Length; i++) {
+			Debug.Log ("Pos " + i + " " + positions[i].ToString());
+			if(positions[i] == player)
+				return i;
+		}
+		throw new System.ArgumentException ("Player doesn't exist");
+		}
 
 	public void PauseGame() {
 		Debug.Log ("Pause");
@@ -141,18 +156,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void LevelOver() {
-		if (withRound) {
-						if (RoundManager.Instance.Round < 3) {
-								Application.LoadLevel (Application.loadedLevel);
-						} else {
-								RoundManager.Instance.Reset ();
-				
-				MenuManager.LevelOver();
-						}
-		} else {
 			MenuManager.LevelOver();	
-		}
-
 	}
 
 

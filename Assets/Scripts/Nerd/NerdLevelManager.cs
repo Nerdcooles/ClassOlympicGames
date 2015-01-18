@@ -10,9 +10,11 @@ public class NerdLevelManager : MonoBehaviour {
 	private int finished = 0;
 
 	void Awake() {
-		MusicManager.Instance.Source.Stop ();
-		MusicManager.Instance.Source.clip = Resources.Load<AudioClip>(MusicManager.songs[1]);
-		MusicManager.Instance.Source.Play ();
+		if (MusicManager.Instance.Source.clip != Resources.Load<AudioClip> (MusicManager.songs [1])) {
+			MusicManager.Instance.Source.Stop ();
+			MusicManager.Instance.Source.clip = Resources.Load<AudioClip> (MusicManager.songs [1]);
+			MusicManager.Instance.Source.Play ();
+		}
 	}
 	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();

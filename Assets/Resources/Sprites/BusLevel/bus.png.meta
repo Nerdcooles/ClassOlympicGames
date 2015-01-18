@@ -12,6 +12,15 @@ TextureImporter:
     21300014: bus_7
     21300016: bus_8
     21300018: bus_9
+    21300020: bus_10
+    21300022: bus_11
+    21300024: bus_12
+    21300026: bus_13
+    21300028: bus_14
+    21300030: bus_15
+    21300032: bus_16
+    21300034: bus_17
+    21300036: bus_18
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -32,7 +41,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 1024
+  maxTextureSize: 4096
   textureSettings:
     filterMode: 0
     aniso: 1

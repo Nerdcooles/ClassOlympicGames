@@ -42,12 +42,12 @@ public class ArcheryPlayer : MonoBehaviour {
 			animator = GetComponent<Animator>();			
 			animator.runtimeAnimatorController = animCtrl;
 			pencilPrefab = Resources.Load <GameObject> ("Prefabs/ArcheryPencil");
+			lvm.OnFinish += endPlayer;
 		}catch{
 			gameObject.SetActive(false);
 		}
 		button.GetComponent<BtnHandler>().OnPressed += startPower;
 		button.GetComponent<BtnHandler>().OnReleased += shoot;
-		lvm.OnFinish += endPlayer;
 	}
 
 	private void startPower() {
@@ -112,6 +112,9 @@ public class ArcheryPlayer : MonoBehaviour {
 		}
 		animator = GetComponent<Animator>();			
 		animator.runtimeAnimatorController = animCtrl;
+		
+		GameObject medal = Resources.Load<GameObject>("Prefabs/Medal_" + lvm.GetPosition(player));
+		Instantiate(medal, transform.position + new Vector3(0f,90f,0f), transform.rotation);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
