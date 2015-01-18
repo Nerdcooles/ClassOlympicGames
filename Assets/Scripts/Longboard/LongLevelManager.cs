@@ -11,12 +11,12 @@ public class LongLevelManager : MonoBehaviour {
 	private float[] distances;
 	private int finished = 0;
 
-	void Awake() {
-		MusicManager.Instance.Source.Stop ();
-		MusicManager.Instance.Source.clip = Resources.Load<AudioClip>(MusicManager.songs[0]);
-		MusicManager.Instance.Source.Play ();
-	}
 	void Start() {
+		if (MusicManager.Instance.Source.clip != Resources.Load<AudioClip> (MusicManager.songs [0])) {
+						MusicManager.Instance.Source.Stop ();
+						MusicManager.Instance.Source.clip = Resources.Load<AudioClip> (MusicManager.songs [0]);
+						MusicManager.Instance.Source.Play ();
+				}
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
 		distances = new float[num_players];

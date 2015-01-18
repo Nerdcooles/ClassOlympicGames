@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour {
 	public GameObject panel_pause;
 	public GameObject btn_pause;
 
+	public bool withRound;
+
 	public enum eState {Instructions, Countdown, Run, Pause, Finish}
 	private eState state;
 	private eState old_state;
@@ -32,25 +34,30 @@ public class LevelManager : MonoBehaviour {
 	private int num_players;
 
 	void Awake() {
-		if (GameManager.Instance.getNumPlayer() == 0) {
-						Debug.Log("Debug mode");
+				if (GameManager.Instance.getNumPlayer () == 0) {
+						Debug.Log ("Debug mode");
 						GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
 						GameManager.Instance.createPlayers (4);
-						for(int i=0; i<4; i++)
-							GameManager.Instance.setColor((GameManager.ePlayers)i, (GameManager.eColors)i);
+						for (int i=0; i<4; i++)
+								GameManager.Instance.setColor ((GameManager.ePlayers)i, (GameManager.eColors)i);
+				}
+
+				//INSTRUCTIONS
+				instructions = panel_instructions.GetComponent<Image> ();
+
+				//COUNTDOWN
+				countdown = panel_countdown.GetComponent<Countdown> ();
+
+				//FINISH
+				finish = panel_finish.GetComponent<Image> ();
+
+				//PODIUM
+				podium = panel_podium.GetComponent<Podium> ();
+
+				if (withRound) {
+						RoundManager.Instance.Image = GameObject.Find ("Round").GetComponent<Image> ();
+			RoundManager.Instance.Image.sprite = Resources.Load <Sprite> ("Sprites/Round/round_" + RoundManager.Instance.Round);
 		}
-
-		//INSTRUCTIONS
-		instructions = panel_instructions.GetComponent<Image>();
-
-		//COUNTDOWN
-		countdown = panel_countdown.GetComponent<Countdown>();
-
-		//FINISH
-		finish = panel_finish.GetComponent<Image>();
-
-		//PODIUM
-		podium = panel_podium.GetComponent<Podium> ();
 	}
 
 	void Start() {
@@ -58,9 +65,14 @@ public class LevelManager : MonoBehaviour {
 		positions = new GameManager.ePlayers[num_players];
 		for (int i=0; i<num_players; i++)
 						positions [i] = GameManager.ePlayers.none;
-		instructions.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + level.ToString());
-		instructions.enabled = true;
-		state = eState.Instructions;
+
+		if (withRound && RoundManager.Instance.Round != 0) {
+			ShowCountdown();
+		} else {
+						instructions.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + level.ToString ());
+						instructions.enabled = true;
+						state = eState.Instructions;
+		}
 	}
 
 
@@ -87,6 +99,9 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void FinishGame() {
+		if (withRound) {
+			RoundManager.Instance.NextRound();
+		}
 		state = eState.Finish;
 		if(OnFinish != null)
 			OnFinish();
@@ -96,15 +111,15 @@ public class LevelManager : MonoBehaviour {
 	IEnumerator WaitForFinish() {
 		yield return new WaitForSeconds(1f);
 		panel_finish.SetActive (true);
-		for (int i=0; i<positions.Length; i++) {
-			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
-		}
 		StartCoroutine ("WaitForPodium");
 	}
 
 	IEnumerator WaitForPodium() {
 		yield return new WaitForSeconds(1f);
 		finish.enabled = false;
+		for (int i=0; i<positions.Length; i++) {
+			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
+		}
 		podium.Show ();
 	}
 
@@ -123,6 +138,20 @@ public class LevelManager : MonoBehaviour {
 		panel_pause.SetActive (false);
 		btn_pause.SetActive (true);
 		Time.timeScale=1;
+	}
+
+	public void LevelOver() {
+		if (withRound) {
+						if (RoundManager.Instance.Round < 3) {
+								Application.LoadLevel (Application.loadedLevel);
+						} else {
+								RoundManager.Instance.Reset ();
+				
+				MenuManager.LevelOver();
+						}
+		} else {
+			MenuManager.LevelOver();	
+		}
 
 	}
 

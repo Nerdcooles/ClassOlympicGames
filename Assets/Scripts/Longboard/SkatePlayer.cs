@@ -25,9 +25,6 @@ public class SkatePlayer : MonoBehaviour {
 	private bool jumping, can_move, pressed;
 	private float offsetX;
 
-	void Awake() {
-	}
-
 	void Start () {
 		sceneManager = GameObject.Find("LongLevelManager").GetComponent<LongLevelManager>() as LongLevelManager;
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
@@ -43,6 +40,7 @@ public class SkatePlayer : MonoBehaviour {
 			button.GetComponent<BtnHandler>().OnReleased += Jump;
 			jumping = false;
 			can_move = true;
+			pressed = false;
 			footPrefab = Resources.Load <GameObject> ("Prefabs/CementFoot");
 		}else{
 			gameObject.SetActive(false);
@@ -68,10 +66,10 @@ public class SkatePlayer : MonoBehaviour {
 	}
 	
 	private void Jump() {
-		pressed = false;
-		if (!finished && can_move) {
+		if (!finished && can_move && pressed) {
 						jumping = true;
-						rigidbody2D.gravityScale = 40;
+			can_move = false;
+			rigidbody2D.gravityScale = 40;
 						rigidbody2D.velocity = Vector2.zero;
 						rigidbody2D.AddForce (jump, ForceMode2D.Impulse);
 			animator.SetBool("isJumping", true);
@@ -90,11 +88,10 @@ public class SkatePlayer : MonoBehaviour {
 			animator.SetBool("isMoving", false);
 
 		}
-			if (other.name == "cement") {
+			if (other.name == "cement"+ (player.GetHashCode()+1)) {
 			finished = true;	
 			Instantiate(footPrefab, transform.position - new Vector3(0f,50f,-1f), transform.rotation);
 			sceneManager.Score(player, transform.position.x - red_line);
-			can_move = false;
 			rigidbody2D.velocity = Vector2.zero;
 
 			animator.SetBool("isJumping", false);

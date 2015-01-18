@@ -21,7 +21,7 @@ public class Podium : MonoBehaviour {
 	void Update() {
 		if(lvm.getState() == LevelManager.eState.Finish)
 			if((Input.touchCount > 0 || Input.anyKey) && canSkip)
-				MenuManager.LevelOver();
+				lvm.LevelOver();
 	}
 
 	public void Show() {

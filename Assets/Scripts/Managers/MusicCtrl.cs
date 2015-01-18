@@ -8,7 +8,6 @@ public class MusicCtrl : MonoBehaviour {
 			MusicManager.Instance.Source.Stop();
 			MusicManager.Instance.Source.clip = MusicManager.Instance.MenuClip;
 			MusicManager.Instance.Source.Play();
-				}
-
+		}
 	}
 }
