@@ -3,7 +3,7 @@ using System;
 using TouchScript.Gestures;
 
 
-public class SelectMode : MonoBehaviour {
+public class SelectMode : GenericMenu {
 
 	
 	public void StartClassic ()
@@ -17,15 +17,4 @@ public class SelectMode : MonoBehaviour {
 		GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
 		MenuManager.SelectNumber();
 	}
-
-	public void StartScores ()
-	{
-		Debug.Log("Best Scores");
-	}
-
-	public void Back ()
-	{
-		MenuManager.StartHome();
-	}
-	
-}
+}	

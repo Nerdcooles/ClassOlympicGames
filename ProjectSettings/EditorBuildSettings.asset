@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Home.unity
   - enabled: 1
-    path: Assets/Scenes/SelectMode.unity
+    path: Assets/Scenes/Menu/SelectMode.unity
   - enabled: 1
-    path: Assets/Scenes/SelectNumber.unity
+    path: Assets/Scenes/Menu/SelectNumber.unity
+  - enabled: 1
+    path: Assets/Scenes/Menu/SelectPlayer.unity
   - enabled: 1
     path: Assets/Scenes/SelectLevel.unity
-  - enabled: 1
-    path: Assets/Scenes/SelectPlayer.unity
   - enabled: 1
     path: Assets/Scenes/Delaybus.unity
   - enabled: 1

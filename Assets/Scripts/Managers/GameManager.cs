@@ -7,12 +7,14 @@ public class GameManager : Singleton<GameManager> {
 	public enum ePlayers {p01, p02, p03, p04, none};
 	public enum eMedals {Gold, Silver, Bronze};
 	public enum eGameMode {CLASSIC, TRAINING};
-	public enum eLevels {Home, Delaybus, Bucketball, Arteachery, SkipTheTest, LongboardJump, Nerdthrow , Award};
+	public enum eLevels {Menu, Delaybus, Bucketball, Arteachery, SkipTheTest, LongboardJump, Nerdthrow , Award};
 	public enum eColors {blue, green, red, yellow};
-	
+
+	private int currentMenu = 0;
+
 	Dictionary<ePlayers, Player> players = new Dictionary<ePlayers, Player>();
 	private eGameMode gameMode;
-	private eLevels level = eLevels.Home;
+	private eLevels level = eLevels.Menu;
 		
 	protected GameManager () {} // guarantee this will be always a singleton only - can't use the constructor!
 
@@ -94,7 +96,7 @@ public class GameManager : Singleton<GameManager> {
 		}
 
 	public void startMode(eGameMode mode) {
-		level = eLevels.Home;
+		level = eLevels.Menu;
 		this.gameMode = mode;
 	}
 
@@ -140,5 +142,14 @@ public class GameManager : Singleton<GameManager> {
 			level = value;
 		}
 	}
+	
+	public int CurrentMenu {
+		get {
+			return currentMenu;
+		}
+		set {
+			currentMenu = value;
+		}
 
+	}
 }

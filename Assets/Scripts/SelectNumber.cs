@@ -4,13 +4,11 @@ using System;
 using TouchScript.Gestures;
 
 
-public class SelectNumber : MonoBehaviour {
-
-	GameObject btn_1p;
+public class SelectNumber : GenericMenu {
 	
 	void Awake() {
 		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.CLASSIC) {
-			btn_1p = GameObject.Find ("btn_1p");
+			GameObject btn_1p = GameObject.Find ("btn_1p");
 			btn_1p.GetComponent<Button>().interactable = false;
 		}
 	}
@@ -19,10 +17,5 @@ public class SelectNumber : MonoBehaviour {
 	{
 		GameManager.Instance.createPlayers(num_players);
 		MenuManager.SelectPlayer();
-	}
-	
-	public void Back ()
-	{
-		MenuManager.SelectMode();
 	}
 }
