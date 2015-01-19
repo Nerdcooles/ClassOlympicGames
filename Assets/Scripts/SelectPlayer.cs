@@ -4,26 +4,41 @@ using System;
 using TouchScript.Gestures;
 
 
-public class SelectPlayer : MonoBehaviour {
+public class SelectPlayer : GenericMenu {
 
-	public GameObject[] toggle;
-	public GameObject[] checkmark;
+	GameObject[] toggle = new GameObject[4];
+	GameObject[] checkmark = new GameObject[4];
 	
-	private int pos;
-	
+	private int pos = 0;
+
 	void Start() {
-		pos = 0;
+		for(int i=0; i<4; i++){
+			toggle[i] = GameObject.Find("Toggle_p"+(i+1));
+			checkmark[i] = GameObject.Find("Checkmark_p"+(i+1));
+		}
 	}
-
 	public void Select (int player) {
 		toggle[player].GetComponent<Toggle> ().interactable = false;
 
 		switch (player) {
-		case 0: checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/blue_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.blue);break;
-		case 1: checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/green_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.green);break;
-		case 2: checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/red_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.red);break;
-		case 3: checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/yellow_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.yellow);break;
+		case 0: 
+			checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/blue_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.blue);
+			break;
+		case 1:
+			checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/green_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.green);
+			break;
+		case 2: 
+			checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/red_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.red);				
+			break;
+		case 3: 
+			checkmark[player].GetComponent<Image>().sprite = Resources.Load <Sprite> ("Sprites/Buttons/yellow_p0" + (pos+1)); GameManager.Instance.setColor((GameManager.ePlayers)(pos), GameManager.eColors.yellow);
+			break;
 		}
+
+		//sprite button 3 is larger
+		if(pos == 2)
+			checkmark[player].GetComponent<RectTransform>().sizeDelta += new Vector2(26f, 0);
+
 		pos++;
 		CheckNumber();
 	}
@@ -36,10 +51,5 @@ public class SelectPlayer : MonoBehaviour {
 				case GameManager.eGameMode.TRAINING: MenuManager.SelectLevel (); break;
 			}
 		}
-	}
-	
-	public void Back ()
-	{
-		MenuManager.SelectNumber();		
 	}
 }

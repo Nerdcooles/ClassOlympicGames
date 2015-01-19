@@ -5,7 +5,7 @@ public class GenericMenu : MonoBehaviour {
 	
 	Transform canvas;
 	
-	void Start() {
+	void Awake() {
 		GameManager.Instance.CurrentMenu = Application.loadedLevel;
 		canvas = GameObject.Find("Canvas").transform;
 	}

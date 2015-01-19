@@ -6,7 +6,7 @@ using TouchScript.Gestures;
 
 public class SelectNumber : GenericMenu {
 	
-	void Awake() {
+	void Start() {
 		if(GameManager.Instance.getGameMode() == GameManager.eGameMode.CLASSIC) {
 			GameObject btn_1p = GameObject.Find ("btn_1p");
 			btn_1p.GetComponent<Button>().interactable = false;
