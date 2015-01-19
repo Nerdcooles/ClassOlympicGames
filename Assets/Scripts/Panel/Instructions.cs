@@ -1,49 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 using TouchScript.Gestures;
 
-public class Instructions : MonoBehaviour {
+public class Instructions : Panel {
 
-	private LevelManager lvm;
-
-	private bool canSkip = false;
-	private int secToSkip = 2;
-
-	void Awake() {
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-		GetComponent<SpriteRenderer>().sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + lvm.getLevel().ToString());
+	protected override void PrepareToShow() {
+		img.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + lvm.getLevel().ToString());
 	}
 
-	void Start() {
-		gameObject.SetActive(true);
-	}
-
-	void Update() {
-		if(Input.touchCount > 0 || Input.anyKey)
-			ShowCountdown();
-	}
-
-	public void Show(){
-		gameObject.SetActive (true);
-		InvokeRepeating ("WaitToSkip", 0.1f, 1);
-	}
-
-	public void Hide(){
-		gameObject.SetActive (false);
-	}
-
-	private void ShowCountdown() {
-		if(canSkip)
-		lvm.ShowCountdown ();
-	}
-
-	private void WaitToSkip() {
-		secToSkip--;
-		if (secToSkip < 0) {
-			canSkip=true;
-			CancelInvoke("WaitToSkip");
-
+	protected override void Skip() {
+		if(lvm.State == LevelManager.eState.Instructions)
+			lvm.ShowCountdown();
+		if(lvm.State == LevelManager.eState.Pause) {
+			this.Hide();
+			lvm.Pause.Show();
 		}
 	}
 

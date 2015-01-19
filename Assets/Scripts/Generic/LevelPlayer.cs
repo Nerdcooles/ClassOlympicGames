@@ -5,6 +5,7 @@ public class LevelPlayer : MonoBehaviour {
 
 	public GameManager.ePlayers player;
 	protected GameManager.eColors color;
+	protected bool finished;
 
 	protected GameObject button;
 
@@ -30,7 +31,7 @@ public class LevelPlayer : MonoBehaviour {
 				} else {
 						gameObject.SetActive (false);
 				}
-
+		finished = false;
 		Initialize ();
 	}
 
@@ -47,6 +48,7 @@ public class LevelPlayer : MonoBehaviour {
 	}
 	
 	protected void EndPlayer() {
+		finished = true;
 				try {
 						//IF NOT LAST PLAYER
 						int num_players = GameManager.Instance.getNumPlayer ();

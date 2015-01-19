@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour {
 	public GameObject panel_podium;
 	public GameObject panel_finish;
 	public GameObject panel_pause;
-	public GameObject btn_pause;
+	public GameObject panel_exit;
 
 	public bool withRound;
 
@@ -20,11 +20,13 @@ public class LevelManager : MonoBehaviour {
 	private eState state;
 	private eState old_state;
 
-	private Image instructions;
-	private Countdown countdown;
-	private Image finish;
-	private Podium podium;
-
+	private Panel instructions;
+	private Panel countdown;
+	private Panel finish;
+	private Panel podium;
+	private Panel pause;
+	private Panel exit;
+	
 	public delegate void StateChange();
 	public event StateChange OnCountdown;
 	public event StateChange OnStart;
@@ -43,21 +45,24 @@ public class LevelManager : MonoBehaviour {
 				}
 
 				//INSTRUCTIONS
-				instructions = panel_instructions.GetComponent<Image> ();
+				instructions = panel_instructions.GetComponent<Panel> ();
 
 				//COUNTDOWN
-				countdown = panel_countdown.GetComponent<Countdown> ();
+				countdown = panel_countdown.GetComponent<Panel> ();
 
 				//FINISH
-				finish = panel_finish.GetComponent<Image> ();
+				finish = panel_finish.GetComponent<Panel> ();
 
 				//PODIUM
-				podium = panel_podium.GetComponent<Podium> ();
+				podium = panel_podium.GetComponent<Panel> ();
 
+				pause = panel_pause.GetComponent<Panel>();
+
+		exit = panel_exit.GetComponent<Panel>();
 				if (withRound) {
 						RoundManager.Instance.Image = GameObject.Find ("Round").GetComponent<Image> ();
-			RoundManager.Instance.Image.sprite = Resources.Load <Sprite> ("Sprites/Round/round_" + RoundManager.Instance.Round);
-		}
+						RoundManager.Instance.Image.sprite = Resources.Load <Sprite> ("Sprites/Round/round_" + RoundManager.Instance.Round);
+				}
 	}
 
 	void Start() {
@@ -69,30 +74,22 @@ public class LevelManager : MonoBehaviour {
 		if (withRound && RoundManager.Instance.Round != 0) {
 			ShowCountdown();
 		} else {
-						instructions.sprite = Resources.Load <Sprite> ("Sprites/Instructions/" + level.ToString ());
-						instructions.enabled = true;
-						state = eState.Instructions;
+			state = eState.Instructions;
+			instructions.Show();
 		}
-	}
-
-
-	void Update() {
-		if (state == eState.Instructions)
-				if (Input.anyKeyDown)
-						ShowCountdown ();
 	}
 	
 	public void ShowCountdown() {
-		panel_instructions.SetActive (false);
-		btn_pause.SetActive (true);
+		Time.timeScale=1;
+		instructions.Hide ();
 		state = eState.Countdown;
 		if(OnCountdown != null)
 			OnCountdown();
-		countdown.StartCountdown ();
+		countdown.Show ();
 	}
 
 	public void StartGame() {
-		panel_countdown.SetActive (false);
+		countdown.Hide ();
 		state = eState.Run;
 		if(OnStart != null)
 			OnStart();
@@ -102,13 +99,13 @@ public class LevelManager : MonoBehaviour {
 		if (withRound) {
 			RoundManager.Instance.NextRound();
 		}
-		panel_finish.SetActive (true);
+		finish.Show();
 		StartCoroutine ("WaitForPodium");
 	}
 
 	IEnumerator WaitForPodium() {
 		yield return new WaitForSeconds(2f);
-		finish.enabled = false;
+		finish.Hide();
 		state = eState.Finish;
 		if(OnFinish != null)
 			OnFinish();
@@ -125,13 +122,11 @@ public class LevelManager : MonoBehaviour {
 								RoundManager.Instance.Reset ();
 						}
 				}
-			podium.Show ();
+		podium.Show ();
 	}
 
 	public int GetPosition(GameManager.ePlayers player) {
-		Debug.Log ("Ask position " + player.ToString ());
 		for (int i=0; i<positions.Length; i++) {
-			Debug.Log ("Pos " + i + " " + positions[i].ToString());
 			if(positions[i] == player)
 				return i;
 		}
@@ -140,39 +135,43 @@ public class LevelManager : MonoBehaviour {
 
 	public void PauseGame() {
 		Debug.Log ("Pause");
-		old_state = state;
+		if(old_state!=eState.Pause)
+			old_state = state;
 		state = eState.Pause;
-		btn_pause.SetActive (false);
-		panel_pause.SetActive (true);
+		pause.Show();
 		Time.timeScale=0;
+	}
+
+	public void ShowInstructions() {
+		pause.Hide();
+		instructions.Show();
 	}
 
 	public void ResumeGame() {
 		Debug.Log ("Resume");
 		state = old_state;
-		panel_pause.SetActive (false);
-		btn_pause.SetActive (true);
+		pause.Hide();
 		Time.timeScale=1;
 	}
 
 	public void LevelOver() {
-			MenuManager.LevelOver();	
+		MenuManager.LevelOver();	
 	}
-
-
+	
 	public void RestartGame() {
 		Time.timeScale=1;
 		Application.LoadLevel (Application.loadedLevel);
+	}
+	
+	public void QuitGame() {
+		pause.Hide();
+		exit.Show();
 	}
 
 	public void MainMenu() {
 		Time.timeScale=1;
 		MenuManager.NewGame ();
 		}
-
-	public eState getState() {
-		return state;
-	}
 
 	public GameManager.eLevels getLevel() {
 		return level;
@@ -185,4 +184,16 @@ public class LevelManager : MonoBehaviour {
 	public GameManager.ePlayers getPodium(int position) {
 				return positions [position];
 		}
+
+	public eState State {
+		get {
+			return state;
+		}
+	}
+
+	public Panel Pause {
+		get {
+			return pause;
+		}
+	}
 }

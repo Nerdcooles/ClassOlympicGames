@@ -6,8 +6,6 @@ using TouchScript.Gestures;
 public class RunningPlayer : LevelPlayer {
 
 	private BusLevelManager sceneMgr;
-	
-	private bool finished;
 
 	float destination;
 	float step = 50f;
@@ -17,22 +15,22 @@ public class RunningPlayer : LevelPlayer {
 		sceneMgr = GameObject.Find("BusLevelManager").GetComponent<BusLevelManager>() as BusLevelManager;
 
 		destination = transform.position.x;
-		finished = false;
 	}
 
 	void Update() {
-		if (!finished && (destination - transform.position.x) > 1f) {
-			transform.position = Vector3.Lerp (transform.position, new Vector3 (destination, transform.position.y, transform.position.z), speed * Time.deltaTime);
-			animator.SetBool("isMoving", true);
-		}else{
-			animator.SetBool("isMoving", false);
+		if(!finished) {
+			if ( (destination - transform.position.x) > 1f) {
+				transform.position = Vector3.Lerp (transform.position, new Vector3 (destination, transform.position.y, transform.position.z), speed * Time.deltaTime);
+				animator.SetBool("isMoving", true);
+			}else{
+				animator.SetBool("isMoving", false);
+			}
 		}
 	}
 
 	protected override void Pressed() {
 		if (!finished)
-			destination = transform.position.x + step;
-		
+			destination = transform.position.x + step;	
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
@@ -41,7 +39,7 @@ public class RunningPlayer : LevelPlayer {
 			finished = true;
 
 			Vector3 final_position = transform.position;
-			final_position.x = other.transform.position.x + 20f;
+			final_position.x = other.transform.position.x + 100f;
 			transform.position = final_position;
 
 			int pos = sceneMgr.Score(player);

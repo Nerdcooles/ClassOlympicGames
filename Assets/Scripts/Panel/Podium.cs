@@ -2,34 +2,21 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Podium : MonoBehaviour {
-	public GameObject[] pod;
+public class Podium : Panel {
 
-	private LevelManager lvm;
+	public GameObject[] pod = new GameObject[3];
+
 	private RuntimeAnimatorController animCtrl;
-
-	private bool canSkip = false;
-	private int secToSkip = 2;
-
-	
-	void Start() {
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
-		gameObject.SetActive (false);
-		GetComponent<Image> ().enabled = true;
-	}
-	
-	void Update() {
-		if(lvm.getState() == LevelManager.eState.Finish)
-			if((Input.touchCount > 0 || Input.anyKey) && canSkip)
-				lvm.LevelOver();
+		
+	protected override void Skip() {
+		lvm.LevelOver();
 	}
 
-	public void Show() {
-		gameObject.SetActive (true);
+	protected override void PrepareToShow() {
 		int num_players = GameManager.Instance.getNumPlayer ();
-		for (int i=0; i<num_players; i++) {
-			GameManager.ePlayers player = lvm.getPodium(i);
-			if(player != GameManager.ePlayers.none) {
+		for (int i=0; i<pod.Length; i++) {
+			try {
+				GameManager.ePlayers player = lvm.getPodium(i);
 				if(i==num_players-1 && i!=0) {
 					//LOSER
 					animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_loser");
@@ -39,19 +26,9 @@ public class Podium : MonoBehaviour {
 				}
 				pod[i].GetComponent<Animator>().runtimeAnimatorController = animCtrl;
 				pod[i].SetActive(true);
+			}catch{
+				//player not classified
 			}
-		}
-		gameObject.SetActive (true);
-
-		InvokeRepeating ("WaitToSkip", 0.1f, 0.5f);
-	}
-	
-	private void WaitToSkip() {
-		secToSkip--;
-		if (secToSkip < 0) {
-			canSkip=true;
-			CancelInvoke("WaitToSkip");
-			
 		}
 	}
 }

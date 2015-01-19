@@ -60,7 +60,7 @@ public class SkipLevelManager : MonoBehaviour {
 		foreach (GameManager.ePlayers p in playersToFinish) {
 						lvm.setPodium (p, player_pos++);
 				}
-		if (lvm.getState () != LevelManager.eState.Finish) {
+		if (lvm.State != LevelManager.eState.Finish) {
 						Finish ();
 				}
 	}

@@ -31,7 +31,7 @@ public class ArcheryPlayer : LevelPlayer {
 	}
 
 	protected override void Pressed() {
-		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
+		if(lvm.State == LevelManager.eState.Run && can_shoot) {
 			pencilInstance = Instantiate(pencilPrefab, transform.position + new Vector3(pencilPosX, pencilPosY, 0f) , Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
 			pencilInstance.GetComponent<ArcheryPencil>().setPlayer(player);
 			direction = (UnityEngine.Random.Range(0,2) * 2 - 1);
@@ -50,7 +50,7 @@ public class ArcheryPlayer : LevelPlayer {
 	}
 	
 	protected override void Released() {
-		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
+		if(lvm.State == LevelManager.eState.Run && can_shoot) {
 			CancelInvoke("SpinPencil");
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);

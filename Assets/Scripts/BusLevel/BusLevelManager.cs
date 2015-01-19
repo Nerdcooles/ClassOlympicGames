@@ -60,7 +60,7 @@ public class BusLevelManager : MonoBehaviour {
 
 	IEnumerator WaitLastPlayer() {
 		yield return new WaitForSeconds(WAIT_SECS);
-		if (lvm.getState () != LevelManager.eState.Finish) {
+		if (lvm.State != LevelManager.eState.Finish) {
 						Finish ();
 				}
 	}

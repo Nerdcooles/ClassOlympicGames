@@ -33,7 +33,7 @@ public class BucketPlayer : LevelPlayer {
 	}
 		
 	protected override void Pressed() {
-		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
+		if(lvm.State == LevelManager.eState.Run && can_shoot) {
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 			animator.SetBool("isShooting", false);
@@ -41,7 +41,7 @@ public class BucketPlayer : LevelPlayer {
 	}
 
 	protected override void Released() {
-		if(lvm.getState() == LevelManager.eState.Run && can_shoot) {
+		if(lvm.State == LevelManager.eState.Run && can_shoot) {
 			force = (float)Math.Round((Time.time - press_time), 1) * GRAVITY;
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);

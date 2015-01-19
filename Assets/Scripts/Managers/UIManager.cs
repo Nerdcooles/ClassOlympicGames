@@ -12,12 +12,15 @@ public class UIManager : MonoBehaviour {
 	private int num_players;
 	private Text[] scoreP;
 
-	public Text txt;
 	private float sceneWidth;
+	private float sceneHeight;
 
 	void Awake () {
-		sceneWidth = Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
+		sceneWidth = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
+		sceneHeight = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).y;
 
+		GameObject pause_btn = GameObject.Find("Pause_btn");
+		pause_btn.transform.position = new Vector3(sceneWidth - 40, SceneHeight- 40, pause_btn.transform.position.z);
 		#if UNITY_IPHONE || UNITY_ANDROID
 			#if UNITY_EDITOR
 			hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = true;
@@ -29,7 +32,7 @@ public class UIManager : MonoBehaviour {
 		float res = (float)Screen.width/Screen.height;
 		if(res > 1.5f && GameManager.Instance.getNumPlayer() == 4) {
 			isPhone4p = true;
-			sceneWidth = -380f;
+			sceneWidth = 380f;
 			hud_tablet.SetActive(false);
 			hud_phone_4p.SetActive(true);
 		}else{
@@ -144,6 +147,12 @@ public class UIManager : MonoBehaviour {
 	public float SceneWidth {
 		get {
 			return sceneWidth;
+		}
+	}
+	
+	public float SceneHeight {
+		get {
+			return sceneHeight;
 		}
 	}
 }

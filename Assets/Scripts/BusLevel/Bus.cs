@@ -32,7 +32,7 @@ public class Bus : MonoBehaviour {
 		if (other.gameObject.tag == "Target") {
 
 			Vector3 final_position = transform.position;
-			final_position.x = other.transform.position.x + 350f;
+			final_position.x = other.transform.position.x + 420f;
 			transform.position = final_position;
 
 			collider2D.isTrigger = false;
