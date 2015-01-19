@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/SelectPlayer.unity
   - enabled: 1
-    path: Assets/Scenes/SelectLevel.unity
+    path: Assets/Scenes/Menu/SelectLevel.unity
   - enabled: 1
     path: Assets/Scenes/Delaybus.unity
   - enabled: 1

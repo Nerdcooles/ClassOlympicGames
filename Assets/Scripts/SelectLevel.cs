@@ -3,7 +3,7 @@ using System;
 using TouchScript.Gestures;
 
 
-public class SelectLevel : MonoBehaviour {
+public class SelectLevel : GenericMenu {
 
 	public void startBus()
 	{
@@ -33,9 +33,5 @@ public class SelectLevel : MonoBehaviour {
 	public void startLongboard()
 	{
 		MenuManager.StartLevel(GameManager.eLevels.LongboardJump);
-	}
-
-	public void Back() {
-		MenuManager.SelectPlayer();
 	}
 }
