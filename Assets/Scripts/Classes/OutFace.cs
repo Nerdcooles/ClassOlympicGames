@@ -16,7 +16,7 @@ public class OutFace : MonoBehaviour {
 			spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 			spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Characters/" + color + "/" + color + "_out");
 			leftSide = -GameObject.Find("UIManager").GetComponent<UIManager>().SceneWidth;
-			transform.position += new Vector3(leftSide + 50f, character.transform.position.y, 0f);
+			transform.position += new Vector3(leftSide + 80f, character.transform.position.y, 0f);
 			spriteRenderer.enabled = false;
 		}else{
 			gameObject.SetActive(false);
