@@ -15,26 +15,29 @@ public class LevelPlayer : MonoBehaviour {
 	protected RuntimeAnimatorController animCtrl;
 
 	void Start() {
-		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-		lvm.OnFinish += EndPlayer;
-		lvm.OnStart += StartPlayer;
-
-		button = GameObject.Find ("UIManager").GetComponent<UIManager> ().getButton (player);
-		button.GetComponent<BtnHandler> ().OnPressed += Pressed;
-		button.GetComponent<BtnHandler> ().OnReleased += Released;
 
 		if (GameManager.Instance.IsPlaying (player)) {
+						lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+						lvm.OnFinish += EndPlayer;
+						lvm.OnStart += StartPlayer;
+						
+						button = GameObject.Find ("btn_" + player.ToString());
+						button.GetComponent<BtnHandler> ().OnPressed += Pressed;
+						button.GetComponent<BtnHandler> ().OnReleased += Released;
+
+						lvm.OnPause += button.GetComponent<BtnHandler>().DisableButton;
+						lvm.OnResume += button.GetComponent<BtnHandler>().EnableButton;
+
 						color = GameManager.Instance.getColor (player);
 						animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Characters/" + color.ToString () + "/" + color.ToString () + "_anim");
 						animator = GetComponent<Animator> ();			
 						animator.runtimeAnimatorController = animCtrl;
+						finished = false;
+						Initialize ();
 				} else {
 						gameObject.SetActive (false);
 				}
-		finished = false;
-		Initialize ();
 	}
-
 	protected virtual void Initialize() {
 	}
 
@@ -54,12 +57,10 @@ public class LevelPlayer : MonoBehaviour {
 						int num_players = GameManager.Instance.getNumPlayer ();
 						if (num_players == 1 || lvm.getPodium (num_players - 1) != this.player) {
 								//IF SINGLE PLAYER OR NOT LAST PLAYER
-								animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_winner");
-						} else {
-								animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
-						}
-						animator = GetComponent<Animator> ();			
-						animator.runtimeAnimatorController = animCtrl;
+								animator.SetBool("isWinner", true);
+			} else {
+				animator.SetBool("isLoser", true);
+			}
 			
 						GameObject medal = Resources.Load<GameObject> ("Prefabs/Medal_" + lvm.GetPosition (player));
 						Instantiate (medal, transform.position + new Vector3 (0f, 90f, 0f), transform.rotation);

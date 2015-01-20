@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour {
 	public GameObject panel_podium;
 	public GameObject panel_finish;
 	public GameObject panel_pause;
-	public GameObject panel_exit;
 
 	public bool withRound;
 
@@ -25,11 +24,12 @@ public class LevelManager : MonoBehaviour {
 	private Panel finish;
 	private Panel podium;
 	private Panel pause;
-	private Panel exit;
-	
+
 	public delegate void StateChange();
 	public event StateChange OnCountdown;
 	public event StateChange OnStart;
+	public event StateChange OnPause;
+	public event StateChange OnResume;
 	public event StateChange OnFinish;
 
 	private GameManager.ePlayers[] positions;
@@ -58,7 +58,6 @@ public class LevelManager : MonoBehaviour {
 
 				pause = panel_pause.GetComponent<Panel>();
 
-		exit = panel_exit.GetComponent<Panel>();
 				if (withRound) {
 						RoundManager.Instance.Image = GameObject.Find ("Round").GetComponent<Image> ();
 						RoundManager.Instance.Image.sprite = Resources.Load <Sprite> ("Sprites/Round/round_" + RoundManager.Instance.Round);
@@ -137,6 +136,9 @@ public class LevelManager : MonoBehaviour {
 		Debug.Log ("Pause");
 		if(old_state!=eState.Pause)
 			old_state = state;
+		
+		if(OnPause != null)
+			OnPause();
 		state = eState.Pause;
 		pause.Show();
 		Time.timeScale=0;
@@ -149,6 +151,8 @@ public class LevelManager : MonoBehaviour {
 
 	public void ResumeGame() {
 		Debug.Log ("Resume");
+		if(OnResume != null)
+			OnResume();
 		state = old_state;
 		pause.Hide();
 		Time.timeScale=1;
@@ -161,11 +165,6 @@ public class LevelManager : MonoBehaviour {
 	public void RestartGame() {
 		Time.timeScale=1;
 		Application.LoadLevel (Application.loadedLevel);
-	}
-	
-	public void QuitGame() {
-		pause.Hide();
-		exit.Show();
 	}
 
 	public void MainMenu() {

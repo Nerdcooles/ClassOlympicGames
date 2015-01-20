@@ -5,11 +5,13 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
-	public GameObject hud_tablet, hud_phone_4p;
-	private GameObject[] player;
+	private GameObject[] player = new GameObject[4];
+	private GameObject[] button = new GameObject[4];
+
 	private const int X_2P = 250;
-	bool isPhone4p = false;
+
 	private int num_players;
+
 	private Text[] scoreP;
 
 	private float sceneWidth;
@@ -19,35 +21,6 @@ public class UIManager : MonoBehaviour {
 		sceneWidth = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
 		sceneHeight = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).y;
 
-		GameObject pause_btn = GameObject.Find("Pause_btn");
-		pause_btn.transform.position = new Vector3(sceneWidth - 40, SceneHeight- 40, pause_btn.transform.position.z);
-		#if UNITY_IPHONE || UNITY_ANDROID
-			#if UNITY_EDITOR
-			hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = true;
-			hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = true;
-			#else	
-			hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = false;
-			hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = false;
-			#endif
-		float res = (float)Screen.width/Screen.height;
-		if(res > 1.5f && GameManager.Instance.getNumPlayer() == 4) {
-			isPhone4p = true;
-			sceneWidth = 380f;
-			hud_tablet.SetActive(false);
-			hud_phone_4p.SetActive(true);
-		}else{
-			hud_tablet.SetActive(true);
-			hud_phone_4p.SetActive(false);
-		}
-		#else
-		hud_tablet.SetActive(true);
-		hud_phone_4p.SetActive(false);
-		#endif
-
-		#if UNITY_EDITOR
-		hud_tablet.GetComponent<HudKeyboardAdapter> ().enabled = true;
-		hud_phone_4p.GetComponent<HudKeyboardAdapter> ().enabled = true;
-		#endif
 		initPlayers ();
 		initButtons();
 		try {
@@ -86,16 +59,29 @@ public class UIManager : MonoBehaviour {
 		}
 		}
 	private void initButtons() {
-		GameObject[] button  = hud_tablet.GetComponent<HudKeyboardAdapter>().button;
+
+		for (int i=0; i<4; i++)
+			button [i] = GameObject.Find ("btn_p0" + (i + 1));
+
 		float y = button[0].GetComponent<RectTransform>().position.y;
 		float width = (float)Screen.width/2f;
 		switch(num_players) {
-		case 1: button[0].GetComponent<RectTransform>().position = new Vector3(0f, y, 0f); break;
-		case 2: button[0].GetComponent<RectTransform>().position = new Vector3(-X_2P, y, 0f);  
-			button[1].GetComponent<RectTransform>().position = new Vector3(X_2P, y, 0f);break;
+		case 1: 
+			button[0].GetComponent<RectTransform>().position = new Vector3(0f, y, 0f); break;
+		case 2: 
+			button[0].GetComponent<RectTransform>().position = new Vector3(-sceneWidth/2f, y, 0f);  
+			button[1].GetComponent<RectTransform>().position = new Vector3(sceneWidth/2f, y, 0f);break;
 		case 3: 
 			button[1].GetComponent<RectTransform>().position = new Vector3(0f, y, 0f); 
-			button[2].GetComponent<RectTransform>().position = button[3].GetComponent<RectTransform>().position;break;
+			button[2].GetComponent<RectTransform>().position = button[3].GetComponent<RectTransform>().position;
+			break;
+		case 4: 
+			button[0].GetComponent<RectTransform>().position = new Vector3(-sceneWidth*3f/4f, y, 0f);  
+			button[1].GetComponent<RectTransform>().position = new Vector3(-sceneWidth/4f, y, 0f);
+			button[2].GetComponent<RectTransform>().position = new Vector3(sceneWidth/4f, y, 0f);  
+			button[3].GetComponent<RectTransform>().position = new Vector3(sceneWidth*3f/4f, y, 0f);
+
+			break;
 		}
 	}
 	
@@ -134,16 +120,6 @@ public class UIManager : MonoBehaviour {
 
 		}
 
-	public GameObject getButton(GameManager.ePlayers player) {
-		GameObject[] button;
-		if (isPhone4p) {
-			button  = hud_phone_4p.GetComponent<HudKeyboardAdapter>().button;
-				} else {
-			button  = hud_tablet.GetComponent<HudKeyboardAdapter>().button;
-				}
-		return button[player.GetHashCode()];
-	}
-
 	public float SceneWidth {
 		get {
 			return sceneWidth;
@@ -154,5 +130,9 @@ public class UIManager : MonoBehaviour {
 		get {
 			return sceneHeight;
 		}
+	}
+
+	public GameObject getButton(GameManager.ePlayers player) {
+		return button[player.GetHashCode()];
 	}
 }

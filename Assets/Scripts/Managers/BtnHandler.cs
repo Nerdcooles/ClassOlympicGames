@@ -35,6 +35,15 @@ public class BtnHandler : MonoBehaviour {
 			gameObject.SetActive (false);
 		}
 	}
+
+	void Update() {
+		if (Input.GetButtonDown ("Player" + (player.GetHashCode()+1))){
+			Press(null,null);
+		}
+		if (Input.GetButtonUp ("Player" + (player.GetHashCode()+1))){
+			Release(null,null);
+		}
+	}
 	private void OnEnable()
 	{
 		gameObject.GetComponent<PressGesture>().Pressed += Press;
@@ -51,11 +60,11 @@ public class BtnHandler : MonoBehaviour {
 		lvm.OnFinish -= DisableButton;
 	}
 	
-	void EnableButton() {
+	public void EnableButton() {
 		enabled = true;
 	}
 	
-	void DisableButton() {
+	public void DisableButton() {
 		enabled = false;
 		s_renderer.sprite = s_released;
 	}

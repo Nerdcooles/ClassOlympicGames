@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class BusLevelManager : MonoBehaviour {
 		
-	public AudioClip soundtrack;
-
 	private int player_pos;
 	private float start_time;
 	private float first_time;
