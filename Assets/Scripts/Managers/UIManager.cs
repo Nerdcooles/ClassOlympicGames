@@ -23,7 +23,11 @@ public class UIManager : MonoBehaviour {
 
 		initPlayers ();
 		initButtons();
-		initScoring();
+		try {
+						initScoring ();
+				} catch (System.Exception ex) {
+			Debug.Log("No scoring view");
+				}
 
 	} 
 

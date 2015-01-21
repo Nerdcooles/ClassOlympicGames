@@ -26,7 +26,7 @@ public class BucketLevelManager : MonoBehaviour {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		uim = GameObject.Find("UIManager").GetComponent<UIManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
-		//timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
+		timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
 		seconds = START_SEC;
 		//init points
 		points = new int[num_players];
@@ -47,7 +47,7 @@ public class BucketLevelManager : MonoBehaviour {
 
 	void Timer() {
 		float perc = (START_SEC - seconds) / START_SEC;
-		//timebar.setPercentage (perc);
+		timebar.setPercentage (perc);
 		seconds-=0.1f;
 		if(seconds <= 0){
 			lvm.FinishGame();

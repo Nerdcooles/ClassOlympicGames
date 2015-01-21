@@ -5,7 +5,7 @@ public class Summary : MonoBehaviour {
 
 	public GameObject[] pod;
 
-	public GameObject[] medalPrefab;
+	GameObject[] medalPrefab = new GameObject[3];
 	float x;
 	float[] y = new float[4];
 	float z;
@@ -59,6 +59,12 @@ public class Summary : MonoBehaviour {
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
 
 		//**************************************  TEST CASES  **************************************/
+
+		for(int i=0;i<3;i++){
+			medalPrefab[i] = Resources.Load<GameObject> ("Prefabs/Medal_" + i);
+			medalPrefab[i].GetComponent<MedalMovement>().enabled = false;
+
+		}
 		x = pod [0].transform.position.x;
 		z = pod [0].transform.position.z;
 		for (int i=0; i<4; i++)

@@ -65,7 +65,8 @@ public class LevelPlayer : MonoBehaviour {
 			}
 			
 			GameObject medal = Resources.Load<GameObject> ("Prefabs/Medal_" + lvm.GetPosition (player));
-			Instantiate (medal, transform.position + new Vector3 (0f, 90f, 0f), transform.rotation);
+			medal.GetComponent<MedalMovement>().enabled = true;
+			Instantiate (medal, transform.position + new Vector3 (0f, 0f, 1f), transform.rotation);
 		} catch (System.Exception ex) {
 			animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + color.ToString () + "_podium_loser");
 			
