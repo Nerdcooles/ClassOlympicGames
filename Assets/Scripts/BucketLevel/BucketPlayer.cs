@@ -16,6 +16,7 @@ public class BucketPlayer : LevelPlayer {
 	private float press_time;
 	private Vector3 direction;
 	private bool can_shoot;
+	private bool pressed = false;
 
 	protected override void Initialize(){
 		sceneMgr = GameObject.Find("BucketLevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
@@ -34,17 +35,19 @@ public class BucketPlayer : LevelPlayer {
 		
 	protected override void Pressed() {
 		if(lvm.State == LevelManager.eState.Run && can_shoot) {
+			pressed = true;
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
 		}
 	}
 
 	protected override void Released() {
-		if(lvm.State == LevelManager.eState.Run && can_shoot) {
+		if(lvm.State == LevelManager.eState.Run && can_shoot && pressed) {
 			force = (float)Math.Round((Time.time - press_time), 1) * GRAVITY;
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
 			StartCoroutine(waitAnimation());
+			pressed = false;
 		}
 	}
 	
@@ -65,5 +68,15 @@ public class BucketPlayer : LevelPlayer {
 		animator.SetBool("isShooting",false);
 		press_time = Time.time;	
 		can_shoot=true;
+	}
+	
+	
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.tag == "Bullet"&& other.gameObject.GetComponent<BucketBall>().getPlayer() != player) {
+			Destroy(other);
+			animator.SetBool("isHitted",true);
+			can_shoot = false;
+			pressed = false;
+		}
 	}
 }
