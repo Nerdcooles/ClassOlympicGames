@@ -15,13 +15,12 @@ public class BucketPlayer : LevelPlayer {
 	private float angle;
 	private float press_time;
 	private Vector3 direction;
-	private bool can_shoot;
+	private bool can_shoot = true;
 	private bool pressed = false;
 
 	protected override void Initialize(){
 		sceneMgr = GameObject.Find("BucketLevelManager").GetComponent<BucketLevelManager>() as BucketLevelManager;
 
-						can_shoot = true;
 						if(transform.position.y < 0)
 							angle = 65f;
 						else 

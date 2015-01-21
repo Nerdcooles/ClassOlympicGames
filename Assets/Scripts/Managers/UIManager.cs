@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 	private float sceneWidth;
 	private float sceneHeight;
 
-	void Awake () {
+	void Start () {
 		sceneWidth = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
 		sceneHeight = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).y;
 
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour {
 		try {
 						initScoring ();
 				} catch (System.Exception ex) {
-			Debug.Log("No scoring view");
+					Debug.Log("No scoring view");
 				}
 
 	} 
@@ -101,9 +101,9 @@ public class UIManager : MonoBehaviour {
 			if(i<num_players) {
 				scoreP[i].text = "0";
 				scoreP[i].color = GameManager.Instance.getSysColor((GameManager.ePlayers)i);
-			}else
+			}else {
 				scoreP[i].gameObject.SetActive(false);
-			
+			}
 		}
 
 		float mid = (scoreP [1].GetComponent<RectTransform> ().position.x + scoreP [2].GetComponent<RectTransform> ().position.x) / 2f;

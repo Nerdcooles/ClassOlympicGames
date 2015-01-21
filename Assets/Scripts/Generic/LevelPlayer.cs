@@ -18,7 +18,7 @@ public class LevelPlayer : MonoBehaviour {
 
 		if (GameManager.Instance.IsPlaying (player)) {
 						lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-						lvm.OnFinish += EndPlayer;
+						lvm.OnTimeIsUp += EndPlayer;
 						lvm.OnStart += StartPlayer;
 						lvm.OnShowMedals += ShowMedal;
 						
@@ -51,7 +51,10 @@ public class LevelPlayer : MonoBehaviour {
 	
 	protected void EndPlayer() {
 		finished = true;
-		}
+		animator.SetBool("isLoading", false);
+		animator.SetBool("isShooting", false);
+		animator.SetBool("isHitted", false);
+	}
 
 	protected void ShowMedal() {
 		try {

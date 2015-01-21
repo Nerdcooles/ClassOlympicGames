@@ -7,15 +7,11 @@ public class ArcheryPencil : MonoBehaviour {
 	private GameManager.ePlayers player;
 	private LevelManager lvm;
 	private ArcheryLevelManager alvm;
-	
-	private bool shooted;
-	float dir;
-	
+
 	void Start () {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		alvm = GameObject.Find("ArcheryLevelManager").GetComponent<ArcheryLevelManager>() as ArcheryLevelManager;
 		lvm.OnFinish += DestroyMe;
-		shooted = false;
 	}
 	
 	
@@ -36,20 +32,17 @@ public class ArcheryPencil : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.tag == "Target") {
-			DestroyMe();	
-			alvm.Score(player);
-		}
-		if(other.tag == "Bound") {
-			DestroyMe();
-		}
-		if (other.tag == "Bullet") {
-			DestroyMe();
-			Destroy (other.gameObject);
-		}
-	}
-
-	public void shoot() {
-		shooted = true;
+//		if(other.tag == "Target") {
+//			other.GetComponent<ArcheryTeacher>().Hitted();
+//			DestroyMe();	
+//			alvm.Score(player);
+//		}
+//		if(other.tag == "Bound") {
+//			DestroyMe();
+//		}
+//		if (other.tag == "Bullet") {
+//			DestroyMe();
+//			Destroy (other.gameObject);
+//		}
 	}
 }

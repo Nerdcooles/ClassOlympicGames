@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Bucketball.unity
   - enabled: 1
-    path: Assets/Scenes/Arteachery.unity
+    path: Assets/Scenes/Levels/Arteachery.unity
   - enabled: 1
     path: Assets/Scenes/Summary.unity
   - enabled: 1

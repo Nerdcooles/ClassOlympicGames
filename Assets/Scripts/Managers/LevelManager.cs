@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour {
 	public event StateChange OnStart;
 	public event StateChange OnPause;
 	public event StateChange OnResume;
+	public event StateChange OnTimeIsUp;
 	public event StateChange OnFinish;
 	public event StateChange OnShowMedals;
 
@@ -97,6 +98,8 @@ public class LevelManager : MonoBehaviour {
 
 	public void FinishGame() {
 		state = eState.Finish;
+		if(OnTimeIsUp != null)
+			OnTimeIsUp();
 		if (withRound) {
 			RoundManager.Instance.NextRound();
 		}
