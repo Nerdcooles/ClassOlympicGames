@@ -36,7 +36,6 @@ public class BucketPlayer : LevelPlayer {
 		if(lvm.State == LevelManager.eState.Run && can_shoot) {
 			press_time = Time.time;	
 			animator.SetBool("isLoading", true);
-			animator.SetBool("isShooting", false);
 		}
 	}
 
@@ -63,6 +62,7 @@ public class BucketPlayer : LevelPlayer {
 	public void endHitted() {
 		animator.SetBool("isHitted",false);
 		animator.SetBool("isLoading",false);
+		animator.SetBool("isShooting",false);
 		press_time = Time.time;	
 		can_shoot=true;
 	}

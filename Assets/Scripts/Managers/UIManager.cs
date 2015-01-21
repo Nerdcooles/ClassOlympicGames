@@ -23,39 +23,43 @@ public class UIManager : MonoBehaviour {
 
 		initPlayers ();
 		initButtons();
-		try {
-			initScoring();
-		}catch(System.NullReferenceException e) {
-			Debug.Log("No scoring on screen");
-		}
+		initScoring();
+
 	} 
 
 	private void initPlayers() {
 		player = new GameObject[4];
-		for (int i=0; i<4; i++)
+		for (int i=0; i<4; i++) {
 			player [i] = GameObject.Find ("p0" + (i + 1));
+		}
 		num_players = GameManager.Instance.getNumPlayer ();
 		switch (num_players) {
-		case 1:
-			player [0].transform.position = player[2].transform.position;
-			player [0].transform.rotation = player[2].transform.rotation;
+			case 1:
+				player [0].transform.position = player[2].transform.position;
+				player [0].transform.rotation = player[2].transform.rotation;
+			player[1].SetActive(false);
+			player[2].SetActive(false);
+			player[3].SetActive(false);
+				break;
+			case 2:
+				player [0].transform.position = player [1].transform.position;
+				player [0].transform.rotation = player [1].transform.rotation;
+				player [1].transform.position = player [2].transform.position;
+				player [1].transform.rotation = player [2].transform.rotation;
 			
-			break;
-		case 2:
-			player [0].transform.position = player [1].transform.position;
-			player [0].transform.rotation = player [1].transform.rotation;
-			player [1].transform.position = player [2].transform.position;
-			player [1].transform.rotation = player [2].transform.rotation;
-			
-			break;
-		case 3:
-			player [0].transform.position = player [1].transform.position;
-			player [0].transform.rotation = player [1].transform.rotation;
-			player [1].transform.position = player [2].transform.position;
-			player [1].transform.rotation = player [2].transform.rotation;
-			player [2].transform.position = player [3].transform.position;
+			player[2].SetActive(false);
+			player[3].SetActive(false);
+				break;
+			case 3:
+				player [0].transform.position = player [1].transform.position;
+				player [0].transform.rotation = player [1].transform.rotation;
+				player [1].transform.position = player [2].transform.position;
+				player [1].transform.rotation = player [2].transform.rotation;
+				player [2].transform.position = player [3].transform.position;
 			player [2].transform.rotation = player [3].transform.rotation;
-			break;
+
+			player[3].SetActive(false);
+				break;
 		}
 		}
 	private void initButtons() {
@@ -70,7 +74,8 @@ public class UIManager : MonoBehaviour {
 			button[0].GetComponent<RectTransform>().position = new Vector3(0f, y, 0f); break;
 		case 2: 
 			button[0].GetComponent<RectTransform>().position = new Vector3(-sceneWidth/2f, y, 0f);  
-			button[1].GetComponent<RectTransform>().position = new Vector3(sceneWidth/2f, y, 0f);break;
+			button[1].GetComponent<RectTransform>().position = new Vector3(sceneWidth/2f, y, 0f);
+			break;
 		case 3: 
 			button[1].GetComponent<RectTransform>().position = new Vector3(0f, y, 0f); 
 			button[2].GetComponent<RectTransform>().position = button[3].GetComponent<RectTransform>().position;

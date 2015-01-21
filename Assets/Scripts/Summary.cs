@@ -12,7 +12,7 @@ public class Summary : MonoBehaviour {
 
 	void Start () {
 
-		//**************************************  TEST CASES  **************************************
+		/**************************************  TEST CASES  **************************************
 		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
 		GameManager.Instance.createPlayers (4);
 		for(int i=0; i<4; i++)

@@ -52,7 +52,7 @@ public static class MenuManager {
 	}
 	
 	public static void StartGame() {
-		GameManager.Instance.Level = (GameManager.eLevels)1;
+		GameManager.Instance.Level = (GameManager.eLevels)(GameManager.Instance.Level.GetHashCode()+1);
 		Application.LoadLevel(GameManager.Instance.Level.ToString());
 	}
 

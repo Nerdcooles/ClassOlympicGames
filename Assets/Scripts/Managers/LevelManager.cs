@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour {
 	public event StateChange OnPause;
 	public event StateChange OnResume;
 	public event StateChange OnFinish;
+	public event StateChange OnShowMedals;
 
 	private GameManager.ePlayers[] positions;
 	private int num_players;
@@ -95,6 +96,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void FinishGame() {
+		state = eState.Finish;
 		if (withRound) {
 			RoundManager.Instance.NextRound();
 		}
@@ -105,13 +107,14 @@ public class LevelManager : MonoBehaviour {
 	IEnumerator WaitForPodium() {
 		yield return new WaitForSeconds(2f);
 		finish.Hide();
-		state = eState.Finish;
 		if(OnFinish != null)
 			OnFinish();
 		for (int i=0; i<positions.Length; i++) {
 			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
 		}
-
+		yield return new WaitForSeconds(1f);
+		if(OnShowMedals!=null)
+			OnShowMedals();
 		yield return new WaitForSeconds(3f);
 		if (withRound) {
 						if (RoundManager.Instance.Round < 3) {

@@ -26,7 +26,7 @@ public class BucketLevelManager : MonoBehaviour {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		uim = GameObject.Find("UIManager").GetComponent<UIManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
-		timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
+		//timebar = GameObject.Find ("Timebar").GetComponent<Timebar> ();
 		seconds = START_SEC;
 		//init points
 		points = new int[num_players];
@@ -38,12 +38,7 @@ public class BucketLevelManager : MonoBehaviour {
 		}		
 
 		lvm.OnStart += StartTimer;
-	}
-	
-	
-	void OnDisable()
-	{
-		lvm.OnStart -= StartTimer;
+		lvm.OnFinish += FindWinners;
 	}
 
 	void StartTimer() {
@@ -52,18 +47,20 @@ public class BucketLevelManager : MonoBehaviour {
 
 	void Timer() {
 		float perc = (START_SEC - seconds) / START_SEC;
-		timebar.setPercentage (perc);
+		//timebar.setPercentage (perc);
 		seconds-=0.1f;
 		if(seconds <= 0){
-			Finished ();
+			lvm.FinishGame();
 			CancelInvoke("Timer");
 			return;
 		}
 	}
 
-	void Finished() {
+	void FindWinners() {
 		for(int pos=0; pos<num_players; pos++) {
 			int max = points.Max ();
+			if(max == 0)
+				return;
 			float min_time = Time.time;
 			GameManager.ePlayers winner = (GameManager.ePlayers)pos;
 			for (int i=0; i<points.Length; i++){
@@ -74,10 +71,8 @@ public class BucketLevelManager : MonoBehaviour {
 			}
 			points[winner.GetHashCode()] = -1;
 			times[winner.GetHashCode()] = -1;
-			lvm.setPodium(winner, pos);
+				lvm.setPodium(winner, pos);
 		}
-
-		lvm.FinishGame();
 	}
 
 	public void Score(GameManager.ePlayers player) {
