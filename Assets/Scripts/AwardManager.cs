@@ -60,10 +60,11 @@ public class AwardManager : MonoBehaviour {
 
 		//**************************************  TEST CASES  **************************************/
 
-		List<GameManager.ePlayers> winners = GameManager.Instance.getWinners ();
-
-		for (int i=0; i<winners.Count; i++) {
-			GameManager.ePlayers player = winners[i];
+		try{
+			List<GameManager.ePlayers> winners = GameManager.Instance.getWinners (false);
+			
+			for (int i=0; i<winners.Count; i++) {
+				GameManager.ePlayers player = winners[i];
 				if(i!=3) {
 					//PODIUM
 					pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_winner");
@@ -73,6 +74,9 @@ public class AwardManager : MonoBehaviour {
 				}
 				pod[i].SetActive(true);
 			}
+		}catch(DrawException ex){
+
+		}
 
 		int num_players = GameManager.Instance.getNumPlayer ();
 		float y = button[0].GetComponent<RectTransform>().position.y;

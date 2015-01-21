@@ -78,7 +78,7 @@ public class GameManager : Singleton<GameManager> {
 	*/
 
 	/*CUSTOM RANK: EACH MEDALS HAS A VALUE*/
-	public List<ePlayers> getWinners() {
+	public List<ePlayers> getWinners(bool drawAllowed) {
 		List<Player> playersToCtrl = new List<Player>();
 		List<ePlayers> winners = new List<ePlayers> ();
 		
@@ -92,7 +92,7 @@ public class GameManager : Singleton<GameManager> {
 			ePlayers winner = ePlayers.none;
 
 			foreach(Player p in playersToCtrl) {
-				if(p.Points == max)
+				if(p.Points == max && !drawAllowed)
 					throw new DrawException("More than one player with same points");
 				if(p.Points > max) {
 					winner = p.Number;

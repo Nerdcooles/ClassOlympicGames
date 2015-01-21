@@ -12,7 +12,7 @@ public class Summary : MonoBehaviour {
 
 	void Start () {
 
-		/**************************************  TEST CASES  **************************************
+		//**************************************  TEST CASES  **************************************
 		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
 		GameManager.Instance.createPlayers (4);
 		for(int i=0; i<4; i++)
@@ -51,9 +51,7 @@ public class Summary : MonoBehaviour {
 		//GOLD
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
 		//SILVER
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
 		//BRONZE
@@ -70,7 +68,7 @@ public class Summary : MonoBehaviour {
 	}
 
 	void setPositions() {
-		List<GameManager.ePlayers> winners = GameManager.Instance.getWinners();
+		List<GameManager.ePlayers> winners = GameManager.Instance.getWinners(true);
 
 		int pos = 0;
 		foreach(GameManager.ePlayers p in winners) {
