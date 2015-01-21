@@ -29,10 +29,11 @@ public class ArcheryPlayer : LevelPlayer {
 			pencilPrefab = Resources.Load <GameObject> ("Prefabs/ArcheryPencil");
 		lvm.OnTimeIsUp += RemovePencilInstances;
 
+		animator.SetBool("isHappy", true);
 	}
 
 	protected override void Pressed() {
-		if(lvm.State == LevelManager.eState.Run && can_shoot) {
+		if(lvm.State == LevelManager.eState.Run && can_shoot && pencilInstance==null) {
 			pressed = true;
 			can_shoot = false;
 			pencilInstance = Instantiate(pencilPrefab, transform.position + new Vector3(pencilPosX, pencilPosY, 0f) , Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
@@ -46,8 +47,9 @@ public class ArcheryPlayer : LevelPlayer {
 	}
 	
 	void SpinPencil() {
-			pencilInstance.transform.Rotate (direction*Vector3.forward, Time.deltaTime * 180, Space.Self);
-
+		if(lvm.State != LevelManager.eState.Run)
+			return;
+		pencilInstance.transform.Rotate (direction*Vector3.forward, Time.deltaTime * 180, Space.Self);
 	}
 	
 	protected override void Released() {
@@ -57,6 +59,7 @@ public class ArcheryPlayer : LevelPlayer {
 			animator.SetBool("isLoading", false);
 			animator.SetBool("isShooting", true);
 			StartCoroutine(waitAnimation());
+			can_shoot = true;
 		}
 	}
 
@@ -68,7 +71,6 @@ public class ArcheryPlayer : LevelPlayer {
 	
 	public void endShooting() {
 		animator.SetBool("isShooting",false);
-		can_shoot = true;
 	}
 	
 	public void endHitted() {
