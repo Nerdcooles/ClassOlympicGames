@@ -31,6 +31,7 @@ public class GameManager : Singleton<GameManager> {
 		return ps;
 	}
 
+	/* CLASSIC RANK: WHO HAS MORE GOLDS WINS
 	public List<ePlayers> getWinners() {
 		List<Player> playersToCtrl = new List<Player>();
 		List<ePlayers> winners = new List<ePlayers> ();
@@ -73,6 +74,38 @@ public class GameManager : Singleton<GameManager> {
 		}else{
 			return results[0];
 		}
+	}
+	*/
+
+	/*CUSTOM RANK: EACH MEDALS HAS A VALUE*/
+	public List<ePlayers> getWinners() {
+		List<Player> playersToCtrl = new List<Player>();
+		List<ePlayers> winners = new List<ePlayers> ();
+		
+		//populate list to control
+		for (int i=0; i<players.Count; i++)
+			playersToCtrl.Add (players [(ePlayers)i]);
+		
+		
+		while (playersToCtrl.Count > 0) {
+			int max = -1;
+			ePlayers winner = ePlayers.none;
+
+			foreach(Player p in playersToCtrl) {
+				if(p.Points == max)
+					throw new DrawException("More than one player with same points");
+				if(p.Points > max) {
+					winner = p.Number;
+					max = p.Points;
+				}
+			}
+				
+			winners.Add(winner);
+
+			playersToCtrl.Remove(players[winner]);
+		}
+		
+		return winners;
 	}
 
 	public void addMedal(ePlayers player, eMedals medal) {
@@ -151,5 +184,17 @@ public class GameManager : Singleton<GameManager> {
 			currentMenu = value;
 		}
 
+	}
+}
+
+public class DrawException: System.Exception
+{
+	public DrawException()
+	{
+	}
+	
+	public DrawException(string message)
+		: base(message)
+	{
 	}
 }

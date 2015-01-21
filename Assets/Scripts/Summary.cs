@@ -20,24 +20,9 @@ public class Summary : MonoBehaviour {
 		//P1
 		//GOLD
 		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
 		//SILVER
 		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Silver);
 		//BRONZE
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Bronze);
 		
 		//P2
@@ -47,65 +32,31 @@ public class Summary : MonoBehaviour {
 		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Gold);
 		//SILVER
 		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Silver);
 		//BRONZE
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p02, GameManager.eMedals.Bronze);
-		
+
 		//P3
 		//GOLD
 		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Gold);
 		//SILVER
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Silver);
 		//BRONZE
 		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p03, GameManager.eMedals.Bronze);
-		
+
 		//P4
 		//GOLD
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Gold);
 		//SILVER
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Silver);
 		//BRONZE
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
-		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
 		GameManager.Instance.addMedal (GameManager.ePlayers.p04, GameManager.eMedals.Bronze);
 
@@ -119,20 +70,22 @@ public class Summary : MonoBehaviour {
 	}
 
 	void setPositions() {
-		int num_players = GameManager.Instance.getNumPlayer ();
+		List<GameManager.ePlayers> winners = GameManager.Instance.getWinners();
 
-		switch (num_players) {
-		case 2: pod[0].transform.position = new Vector3(x,y[1],z);pod[1].transform.position = new Vector3(x,y[2],z); pod[2].SetActive(false);pod[3].SetActive(false);break;
-		case 3: pod[0].transform.position = new Vector3(x,(y[0]+y[1])/2f,z);pod[1].transform.position = new Vector3(x,(y[1]+y[2])/2f,z);pod[2].transform.position = new Vector3(x,(y[2]+y[3])/2f,z);pod[3].SetActive(false);break;
+		int pos = 0;
+		foreach(GameManager.ePlayers p in winners) {
+			pod[p.GetHashCode()].transform.position = new Vector3(x,y[pos],z);
+			pos++;
 		}
 
-		for (int i=0; i<num_players; i++) {
+		for (int i=0; i<winners.Count; i++) {
 
 			pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor ((GameManager.ePlayers)i) + "_podium_winner");
 
-			for(int medal = 0; medal<3; medal++) {
-				for(int tot = GameManager.Instance.getMedal((GameManager.ePlayers)i,(GameManager.eMedals)medal); tot > 0; tot--) {
-					Instantiate(medalPrefab[medal], pod[i].transform.position + new Vector3(((1+4f*medal) * 50f) + (tot * 30f),0f,0f), transform.rotation);
+			for(int material = 0; material<3; material++) {
+				int tot = GameManager.Instance.getMedal((GameManager.ePlayers)i,(GameManager.eMedals)material);
+				for(int num=0; num < tot; num++) {
+					Instantiate(medalPrefab[material], pod[i].transform.position + new Vector3((140+material*200) + (num/2)*40,-20 + 40*(num%2),0f), transform.rotation);
 				}
 			}
 			pod[i].SetActive(true);

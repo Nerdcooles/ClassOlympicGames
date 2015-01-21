@@ -170,7 +170,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: red_idle
-  m_Speed: 1
+  m_Speed: .800000012
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: a4e40bee5622c4738b89968ed3be3466, type: 2}

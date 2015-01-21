@@ -2,6 +2,8 @@
 
 public class Player{
 
+	const int gold_value = 4, silver_value = 2, bronze_value = 1;
+
 	GameManager.eColors color;
 	GameManager.ePlayers number;
 
@@ -31,6 +33,12 @@ public class Player{
 		int num;
 		medals.TryGetValue(medal, out num); 	
 		return num;
+	}
+	
+	public int Points {
+		get {
+			return getMedals(GameManager.eMedals.Gold)*gold_value + getMedals(GameManager.eMedals.Silver)*silver_value + getMedals(GameManager.eMedals.Bronze)*bronze_value;
+		}
 	}
 
 	public GameManager.ePlayers Number {
