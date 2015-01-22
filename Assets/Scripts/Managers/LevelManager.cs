@@ -7,11 +7,16 @@ using System.Linq;
 
 public class LevelManager : MonoBehaviour {
 	public GameManager.eLevels level;
+
+	private Transform panels;
 	public GameObject panel_instructions;
 	public GameObject panel_countdown;
 	public GameObject panel_podium;
 	public GameObject panel_finish;
 	public GameObject panel_pause;
+
+	private GameObject pausePrefab;
+	private GameObject instructionPrefab;
 
 	public bool withRound;
 
@@ -19,11 +24,9 @@ public class LevelManager : MonoBehaviour {
 	private eState state;
 	private eState old_state;
 
-	private Panel instructions;
 	private Panel countdown;
 	private Panel finish;
 	private Panel podium;
-	private Panel pause;
 
 	public delegate void StateChange();
 	public event StateChange OnCountdown;
@@ -45,10 +48,10 @@ public class LevelManager : MonoBehaviour {
 						for (int i=0; i<4; i++)
 								GameManager.Instance.setColor ((GameManager.ePlayers)i, (GameManager.eColors)i);
 				}
+				panels = GameObject.Find("Panels").transform;
 
-				//INSTRUCTIONS
-				instructions = panel_instructions.GetComponent<Panel> ();
-
+				pausePrefab = Resources.Load<GameObject>("Panels/Pause");
+				instructionPrefab = Resources.Load<GameObject>("Instructions/" + level.ToString());
 				//COUNTDOWN
 				countdown = panel_countdown.GetComponent<Panel> ();
 
@@ -57,8 +60,6 @@ public class LevelManager : MonoBehaviour {
 
 				//PODIUM
 				podium = panel_podium.GetComponent<Panel> ();
-
-				pause = panel_pause.GetComponent<Panel>();
 
 				if (withRound) {
 						RoundManager.Instance.Image = GameObject.Find ("Round").GetComponent<Image> ();
@@ -76,13 +77,12 @@ public class LevelManager : MonoBehaviour {
 			ShowCountdown();
 		} else {
 			state = eState.Instructions;
-			instructions.Show();
+			ShowInstructions();
 		}
 	}
 	
 	public void ShowCountdown() {
 		Time.timeScale=1;
-		instructions.Hide ();
 		state = eState.Countdown;
 		if(OnCountdown != null)
 			OnCountdown();
@@ -147,13 +147,21 @@ public class LevelManager : MonoBehaviour {
 		if(OnPause != null)
 			OnPause();
 		state = eState.Pause;
-		pause.Show();
+		panel_pause = Instantiate(pausePrefab) as GameObject;
+		panel_pause.transform.SetParent(panels, false);
 		Time.timeScale=0;
 	}
 
 	public void ShowInstructions() {
-		pause.Hide();
-		instructions.Show();
+		Time.timeScale=0;
+		panel_instructions = Instantiate(instructionPrefab) as GameObject;
+		panel_instructions.transform.SetParent(panels, false);
+	}
+	
+	public void SkipInstructions() {
+		Destroy(panel_instructions);
+		if(state == eState.Instructions)
+			ShowCountdown();
 	}
 
 	public void ResumeGame() {
@@ -161,10 +169,9 @@ public class LevelManager : MonoBehaviour {
 		if(OnResume != null)
 			OnResume();
 		state = old_state;
-		pause.Hide();
+		Destroy(panel_pause);
 		Time.timeScale=1;
 	}
-
 	public void LevelOver() {
 		MenuManager.LevelOver();	
 	}
@@ -194,12 +201,6 @@ public class LevelManager : MonoBehaviour {
 	public eState State {
 		get {
 			return state;
-		}
-	}
-
-	public Panel Pause {
-		get {
-			return pause;
 		}
 	}
 }
