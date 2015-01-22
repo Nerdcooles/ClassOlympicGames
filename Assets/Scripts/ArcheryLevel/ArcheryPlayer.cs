@@ -37,6 +37,7 @@ public class ArcheryPlayer : LevelPlayer {
 			pressed = true;
 			can_shoot = false;
 			pencilInstance = Instantiate(pencilPrefab, transform.position + new Vector3(pencilPosX, pencilPosY, 0f) , Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f))) as GameObject;
+			pencilInstance.collider2D.enabled = false;
 			pencilInstance.GetComponent<ArcheryPencil>().setPlayer(player);
 			direction = (UnityEngine.Random.Range(0,2) * 2 - 1);
 			press_time = Time.time;	
@@ -65,8 +66,11 @@ public class ArcheryPlayer : LevelPlayer {
 
 	private IEnumerator waitAnimation() {
 		yield return new WaitForSeconds(0.1f);
+		if(pencilInstance!=null) {
+			pencilInstance.collider2D.enabled = true;
 			pencilInstance.rigidbody2D.AddForce(pencilInstance.transform.right * 500, ForceMode2D.Impulse);
 			pencilInstance = null;
+		}
 	}
 	
 	public void endShooting() {

@@ -7,24 +7,24 @@ public class SkipperPlayer : LevelPlayer {
 
 	private SkipLevelManager sceneManager;
 
-	private const int MAX = 500;
 	public Vector2 jump;
-	public float normal_vel;
-	public float slow_vel;
-	public float fast_vel;
-	private int speed = 0;
-	private bool finished;
-	private int last;
-	private float press_time;
+	float speed = 250;
+	float turbo = 350;
+	float vel;
 
-	private bool can_jump, pressed;
+	private int last;
+
+	private bool pressedInJump = false;
+	private bool onTheFloor, pressed;
+
 	private float offsetX;
 
 	protected override void Initialize() {
 		sceneManager = GameObject.Find("SkipLevelManager").GetComponent<SkipLevelManager>() as SkipLevelManager;
-		offsetX = Camera.main.transform.position.x - transform.position.x;
+		offsetX = Camera.main.transform.position.x + GameObject.Find("UIManager").GetComponent<UIManager>().SceneWidth;
 		finished = false;
-		can_jump = true;
+		onTheFloor = true;
+		vel = speed;
 	}
 
 	void Update() {
@@ -33,34 +33,50 @@ public class SkipperPlayer : LevelPlayer {
 			transform.position = Vector3.Lerp (transform.position, newPos, 10 * Time.deltaTime);
 			animator.SetBool("isMoving", true);
 		}
+	}
 
+	void FixedUpdate() {
+		if(pressed) {
+			animator.SetBool("isMoving", true);
+			rigidbody2D.velocity = (Vector2.right * vel);
+		}
+	}
+
+	IEnumerator RandomWait() {
+		yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.5f));
+		pressed = true;
+		pressedInJump = false;
 	}
 
 	protected override void Pressed() {
-		if (!finished && can_jump) {
-			pressed = true;
-			rigidbody2D.gravityScale = 0;
-			rigidbody2D.velocity = (Vector2.right * normal_vel);
-			animator.SetBool("isMoving", true);
+		if (!finished) {
+			if(onTheFloor) {
+				pressed = true;
+			}else{
+				pressedInJump = true;
+				rigidbody2D.AddForce (-Vector2.up * 300, ForceMode2D.Impulse);
+			}
 		}
 	}
 	
 	protected override void Released() {
-		if (!finished && can_jump && pressed) {
-			pressed = false;
-						can_jump = false;
-						rigidbody2D.gravityScale = 40;
-						rigidbody2D.velocity = Vector2.zero;
-						rigidbody2D.AddForce (jump, ForceMode2D.Impulse);
-			animator.SetBool("isJumping", true);
-
+		if (!finished) {
+			if(onTheFloor && pressed) {
+				pressed = false;
+				onTheFloor = false;
+				rigidbody2D.velocity = (Vector2.right * (vel-50));
+				rigidbody2D.AddForce (jump, ForceMode2D.Impulse);
+				animator.SetBool("isJumping", true);
+			}
 		}
-
 	}
 	
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Target") {
-			finished = true;			
+			finished = true;		
+
+			gameObject.collider2D.enabled = false;
+
 			int pos = sceneManager.Score(player);
 			if(pos != GameManager.Instance.getNumPlayer() - 1)
 				animator.SetBool("isWinner", true);
@@ -69,21 +85,24 @@ public class SkipperPlayer : LevelPlayer {
 		}
 		if (other.gameObject.tag == "Respawn") {
 			pressed = false;
+			vel = speed;
 			Destroy(other);	
-			rigidbody2D.gravityScale = 40;
-			rigidbody2D.velocity = (Vector2.right * slow_vel);
+			rigidbody2D.velocity = Vector2.zero;
 			animator.SetBool("isMoving", false);
 			animator.SetBool("isJumping", false);
 		}
 		if (other.gameObject.tag == "Bonus") {
 			Destroy(other);	
-			rigidbody2D.velocity = (Vector2.right * fast_vel);
+			vel = turbo;
 		}
 		if (other.gameObject.tag == "Floor") {
-			can_jump = true;
+			onTheFloor = true;
+			if(pressedInJump) {
+				pressed = true;
+				pressedInJump = false;
+			}
 			animator.SetBool("isJumping", false);
 			animator.SetBool("isMoving", false);
-
 		}
 	}
 }

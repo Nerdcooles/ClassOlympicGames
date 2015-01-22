@@ -57,12 +57,9 @@ public class SkipLevelManager : MonoBehaviour {
 
 	IEnumerator WaitLastPlayer() {
 		yield return new WaitForSeconds(WAIT_SECS);
-		foreach (GameManager.ePlayers p in playersToFinish) {
-						lvm.setPodium (p, player_pos++);
-				}
 		if (lvm.State != LevelManager.eState.Finish) {
-						Finish ();
-				}
+			Finish ();
+		}
 	}
 
 	void Finish() {

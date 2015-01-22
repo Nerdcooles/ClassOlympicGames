@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 	private float sceneWidth;
 	private float sceneHeight;
 
-	void Start () {
+	void Awake () {
 		sceneWidth = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
 		sceneHeight = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).y;
 

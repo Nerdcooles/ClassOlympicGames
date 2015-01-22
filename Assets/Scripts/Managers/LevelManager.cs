@@ -69,9 +69,9 @@ public class LevelManager : MonoBehaviour {
 	void Start() {
 		num_players = GameManager.Instance.getNumPlayer ();
 		positions = new GameManager.ePlayers[num_players];
-		for (int i=0; i<num_players; i++)
-						positions [i] = GameManager.ePlayers.none;
-
+		for (int i=0; i<positions.Length; i++) {
+			positions[i] = GameManager.ePlayers.none;
+		}
 		if (withRound && RoundManager.Instance.Round != 0) {
 			ShowCountdown();
 		} else {
@@ -113,7 +113,8 @@ public class LevelManager : MonoBehaviour {
 		if(OnFinish != null)
 			OnFinish();
 		for (int i=0; i<positions.Length; i++) {
-			GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
+			if(positions[i]!=GameManager.ePlayers.none)
+				GameManager.Instance.addMedal (positions [i], (GameManager.eMedals)i);
 		}
 		yield return new WaitForSeconds(1f);
 		if(OnShowMedals!=null)

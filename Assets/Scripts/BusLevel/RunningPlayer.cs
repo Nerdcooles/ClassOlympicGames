@@ -39,7 +39,7 @@ public class RunningPlayer : LevelPlayer {
 			finished = true;
 
 			Vector3 final_position = transform.position;
-			final_position.x = other.transform.position.x + 100f;
+			final_position.x = other.transform.position.x + 120f;
 			transform.position = final_position;
 
 			int pos = sceneMgr.Score(player);
