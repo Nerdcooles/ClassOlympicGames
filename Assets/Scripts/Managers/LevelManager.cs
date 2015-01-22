@@ -209,7 +209,8 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void setPodium(GameManager.ePlayers player, int position) {
-		positions [position] = player;
+		if(player != GameManager.ePlayers.none)
+			positions [position] = player;
 	}
 
 	public GameManager.ePlayers getPodium(int position) {

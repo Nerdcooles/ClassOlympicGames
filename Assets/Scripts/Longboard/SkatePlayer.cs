@@ -8,8 +8,8 @@ public class SkatePlayer : LevelPlayer {
 	private LongLevelManager sceneMgr;
 
 	public float red_line = -150f;
-	Vector2 jump = new Vector2(200.1234f,900);
-	float speed = 700;
+	Vector2 jump = new Vector2(0,900);
+	float speed = 600;
 	private GameObject footPrefab;
 	private bool jumped, pressedInJump, pressed;
 
@@ -49,9 +49,6 @@ public class SkatePlayer : LevelPlayer {
 		if (!finished) {
 			if(!jumped) {
 				pressed = true;
-			}else{
-				pressedInJump = true;
-				rigidbody2D.AddForce (-Vector2.up * 500, ForceMode2D.Impulse);
 			}
 		}
 	}
@@ -93,8 +90,8 @@ public class SkatePlayer : LevelPlayer {
 					rigidbody2D.velocity = Vector2.zero;
 					
 					animator.SetBool("isJumping", false);
-				animator.SetBool("isMoving", false);
-				animator.SetBool("isLoser", true);
+					animator.SetBool("isMoving", false);
+					animator.SetBool("isLoser", true);
 			}
 		}
 	}

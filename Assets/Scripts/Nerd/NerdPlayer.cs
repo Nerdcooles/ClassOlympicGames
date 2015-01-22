@@ -24,10 +24,8 @@ public class NerdPlayer : LevelPlayer {
 		nerdInstance.GetComponent<Nerd> ().Player = player;
 		animator.SetBool("isLoading", true);
 	}
-
-	//pencilInstance.transform.Rotate (Vector3.forward, Time.deltaTime * 180, Space.Self);
-
 	
+
 	protected override void Pressed() {
 		if(lvm.State == LevelManager.eState.Run && !shooted) {
 			animator.SetBool("isLoading", false);

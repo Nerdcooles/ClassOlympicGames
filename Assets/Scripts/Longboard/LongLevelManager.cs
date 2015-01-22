@@ -9,6 +9,7 @@ public class LongLevelManager : MonoBehaviour {
 	private LevelManager lvm;
 	private List<GameManager.ePlayers> notClassified;
 	private float[] distances;
+	float[] times;
 	private int finished = 0;
 
 	void Start() {
@@ -20,6 +21,8 @@ public class LongLevelManager : MonoBehaviour {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
 		distances = new float[num_players];
+		times = new float[num_players];
+
 		notClassified = new List<GameManager.ePlayers> ();
 	}
 	
@@ -27,8 +30,11 @@ public class LongLevelManager : MonoBehaviour {
 		finished++;
 		if (distance == 0)
 						notClassified.Add (player);
-				else
+				else {
 						distances [player.GetHashCode()] = distance;
+			times[player.GetHashCode()] = Time.time;
+
+		}
 		if (finished == num_players)
 						Finish ();
 	}
@@ -42,22 +48,30 @@ public class LongLevelManager : MonoBehaviour {
 	}
 
 	void CheckPodium() {
-
-		for(int podium=0; podium < 3 && podium < num_players;) {
+		for(int player=0; player<num_players; player++) {
 			float max = distances.Max ();
+			Debug.Log("Max: " + max);
 
-			if(max == 0) {
-					return;
+			if(max == 0)
+				return;
+
+			float min_time = Time.time+1;
+			Debug.Log("Min time: " + min_time);
+			GameManager.ePlayers winner = GameManager.ePlayers.none;
+			for (int i=0; i<distances.Length; i++){
+				Debug.Log("Check distance " + distances [i] + " at " + times[i] + "(min time is " + min_time + ")");
+				if (distances [i] == max && times [i] < min_time) {
+					Debug.Log("GOOD " + ((GameManager.ePlayers)i).ToString());
+					winner = (GameManager.ePlayers)i;
+					min_time = times[i];
+				}
 			}
-				for (int player=0; player<distances.Count(); player++) {
-
-						if(distances[player]==max){
-							distances[player] = -1;
-							lvm.setPodium((GameManager.ePlayers)player, podium);
-							podium++;
-						}
-				 }
-		 }
+			if(winner!=GameManager.ePlayers.none) {
+				distances[winner.GetHashCode()] = -1;
+				times[winner.GetHashCode()] = -1;
+				lvm.setPodium(winner, player);
+			}
+		}
 	}
 
 }
