@@ -9,14 +9,16 @@ public class LevelManager : MonoBehaviour {
 	public GameManager.eLevels level;
 
 	private Transform panels;
-	public GameObject panel_instructions;
+	private GameObject panel_instructions;
 	public GameObject panel_countdown;
-	public GameObject panel_podium;
+	private GameObject panel_podium;
 	public GameObject panel_finish;
 	public GameObject panel_pause;
 
-	private GameObject pausePrefab;
+
 	private GameObject instructionPrefab;
+	private GameObject pausePrefab;
+	private GameObject podiumPrefab;
 
 	public bool withRound;
 
@@ -26,7 +28,6 @@ public class LevelManager : MonoBehaviour {
 
 	private Panel countdown;
 	private Panel finish;
-	private Panel podium;
 
 	public delegate void StateChange();
 	public event StateChange OnCountdown;
@@ -51,15 +52,13 @@ public class LevelManager : MonoBehaviour {
 				panels = GameObject.Find("Panels").transform;
 
 				pausePrefab = Resources.Load<GameObject>("Panels/Pause");
-				instructionPrefab = Resources.Load<GameObject>("Instructions/" + level.ToString());
+		instructionPrefab = Resources.Load<GameObject>("Instructions/" + level.ToString());
+		podiumPrefab = Resources.Load<GameObject>("Panels/Podium");
 				//COUNTDOWN
 				countdown = panel_countdown.GetComponent<Panel> ();
 
 				//FINISH
 				finish = panel_finish.GetComponent<Panel> ();
-
-				//PODIUM
-				podium = panel_podium.GetComponent<Panel> ();
 
 				if (withRound) {
 						RoundManager.Instance.Image = GameObject.Find ("Round").GetComponent<Image> ();
@@ -128,7 +127,7 @@ public class LevelManager : MonoBehaviour {
 								RoundManager.Instance.Reset ();
 						}
 				}
-		podium.Show ();
+		ShowPodium();
 	}
 
 	public int GetPosition(GameManager.ePlayers player) {
@@ -153,7 +152,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void ShowInstructions() {
-		Time.timeScale=0;
 		panel_instructions = Instantiate(instructionPrefab) as GameObject;
 		panel_instructions.transform.SetParent(panels, false);
 	}
@@ -162,6 +160,11 @@ public class LevelManager : MonoBehaviour {
 		Destroy(panel_instructions);
 		if(state == eState.Instructions)
 			ShowCountdown();
+	}
+	
+	public void ShowPodium() {
+		panel_podium = Instantiate(podiumPrefab) as GameObject;
+		panel_podium.transform.SetParent(panels, false);
 	}
 
 	public void ResumeGame() {

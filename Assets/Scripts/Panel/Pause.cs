@@ -28,6 +28,7 @@ public class Pause : MonoBehaviour {
 	public void Exit() {
 		GameObject exit_panel = Instantiate(Resources.Load<GameObject>("Panels/Exit")) as GameObject;
 		exit_panel.transform.SetParent(transform.parent.transform, false);
+		exit_panel.GetComponent<RectTransform>().position = gameObject.GetComponent<RectTransform>().position;
 	}
 
 
