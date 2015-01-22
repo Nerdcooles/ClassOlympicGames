@@ -18,7 +18,6 @@ public class Nerd : MonoBehaviour {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		nlvm = GameObject.Find("NerdLevelManager").GetComponent<NerdLevelManager>() as NerdLevelManager;
 		rigidbody2D.gravityScale = 0;
-
 	}
 
 	void Update() {
@@ -41,7 +40,6 @@ public class Nerd : MonoBehaviour {
 			transform.Rotate (direction * Vector3.forward, Time.deltaTime * 180, Space.Self);
 		}
 	}
-
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.name == "floor"+(player.GetHashCode()+1)) {

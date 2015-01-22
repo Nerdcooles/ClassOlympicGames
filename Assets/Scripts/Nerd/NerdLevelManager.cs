@@ -7,6 +7,8 @@ public class NerdLevelManager : MonoBehaviour {
 	private int num_players;
 	private LevelManager lvm;
 	private float[] distances;
+	float[] times;
+
 	private int finished = 0;
 	
 	void Awake() {
@@ -20,11 +22,15 @@ public class NerdLevelManager : MonoBehaviour {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		num_players = GameManager.Instance.getNumPlayer ();
 		distances = new float[num_players];
+		times = new float[num_players];
+
 	}
 	
 	public void Score(GameManager.ePlayers player, float distance) {
 		finished++;
 		distances [player.GetHashCode()] = distance;
+		times[player.GetHashCode()] = Time.time;
+
 		if (finished == num_players)
 			Finish ();
 	}
@@ -35,19 +41,28 @@ public class NerdLevelManager : MonoBehaviour {
 	}
 	
 	void CheckPodium() {
-		
-		for(int podium=0; podium < 3 && podium < num_players; podium++) {
+		for(int player=0; player<num_players; player++) {
 			float max = distances.Max ();
+			Debug.Log("Max: " + max);
 			
-			if(max == 0) {
+			if(max == 0)
 				return;
-			}
-			for (int player=0; player<distances.Count(); player++) {
-				
-				if(distances[player]==max){
-					distances[player] = -1;
-					lvm.setPodium((GameManager.ePlayers)player, podium);
+			
+			float min_time = Time.time+1;
+			Debug.Log("Min time: " + min_time);
+			GameManager.ePlayers winner = GameManager.ePlayers.none;
+			for (int i=0; i<distances.Length; i++){
+				Debug.Log("Check distance " + distances [i] + " at " + times[i] + "(min time is " + min_time + ")");
+				if (distances [i] == max && times [i] < min_time) {
+					Debug.Log("GOOD " + ((GameManager.ePlayers)i).ToString());
+					winner = (GameManager.ePlayers)i;
+					min_time = times[i];
 				}
+			}
+			if(winner!=GameManager.ePlayers.none) {
+				distances[winner.GetHashCode()] = -2000;
+				times[winner.GetHashCode()] = -1;
+				lvm.setPodium(winner, player);
 			}
 		}
 	}

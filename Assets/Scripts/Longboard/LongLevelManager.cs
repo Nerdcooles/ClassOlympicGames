@@ -32,7 +32,7 @@ public class LongLevelManager : MonoBehaviour {
 						notClassified.Add (player);
 				else {
 						distances [player.GetHashCode()] = distance;
-			times[player.GetHashCode()] = Time.time;
+						times[player.GetHashCode()] = Time.time;
 
 		}
 		if (finished == num_players)

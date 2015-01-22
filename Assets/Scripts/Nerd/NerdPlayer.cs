@@ -17,10 +17,7 @@ public class NerdPlayer : LevelPlayer {
 	protected override void Initialize() {
 		sceneMgr = GameObject.Find("NerdLevelManager").GetComponent<NerdLevelManager>() as NerdLevelManager;
 		nerdPrefab = Resources.Load <GameObject> ("Prefabs/Nerd");
-	}
-
-	void StartPlayer() {
-		nerdInstance = Instantiate(nerdPrefab, transform.position - new Vector3(20f, 20f, 0), Quaternion.Euler(new Vector3(0, 0, -25f))) as GameObject;
+		nerdInstance = Instantiate(nerdPrefab, transform.position - new Vector3(20f, 20f, 0), Quaternion.Euler(new Vector3(0, 0, UnityEngine.Random.Range(280, 350)))) as GameObject;
 		nerdInstance.GetComponent<Nerd> ().Player = player;
 		animator.SetBool("isLoading", true);
 	}
