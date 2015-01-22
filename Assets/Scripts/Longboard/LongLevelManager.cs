@@ -43,7 +43,7 @@ public class LongLevelManager : MonoBehaviour {
 
 	void CheckPodium() {
 
-		for(int podium=0; podium < 3 && podium < num_players; podium++) {
+		for(int podium=0; podium < 3 && podium < num_players;) {
 			float max = distances.Max ();
 
 			if(max == 0) {
@@ -54,6 +54,7 @@ public class LongLevelManager : MonoBehaviour {
 						if(distances[player]==max){
 							distances[player] = -1;
 							lvm.setPodium((GameManager.ePlayers)player, podium);
+							podium++;
 						}
 				 }
 		 }

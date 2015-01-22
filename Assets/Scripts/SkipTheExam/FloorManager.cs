@@ -5,7 +5,7 @@ public class FloorManager : MonoBehaviour {
 
 	public GameObject[] floors;
 
-	void Start () {
+	void Awake () {
 		switch (GameManager.Instance.getNumPlayer ()) {
 		case 1: 
 			floors[0].transform.position = floors[2].transform.position;
@@ -23,10 +23,5 @@ public class FloorManager : MonoBehaviour {
 			floors[2].transform.position = floors[3].transform.position;
 			floors[3].SetActive(false); break;
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

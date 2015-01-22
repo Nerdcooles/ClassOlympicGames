@@ -7,13 +7,11 @@ public class SkipperPlayer : LevelPlayer {
 
 	private SkipLevelManager sceneManager;
 
-	public Vector2 jump;
+	Vector2 jump = new Vector2(0,600);
 	float speed = 250;
 	float turbo = 350;
 	float vel;
-
-	private int last;
-
+	
 	private bool pressedInJump = false;
 	private bool onTheFloor, pressed;
 
