@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!74 &7462680
+--- !u!74 &7447616
 AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -13,7 +13,23 @@ AnimationClip:
   m_RotationCurves: []
   m_CompressedRotationCurves: []
   m_PositionCurves: []
-  m_ScaleCurves: []
+  m_ScaleCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 1
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 173161520
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: 
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -22,7 +38,13 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings: []
+    genericBindings:
+    - path: 0
+      attribute: 3
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -41,10 +63,67 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
-  m_EditorCurves: []
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.x
+    path: 
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: 
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: 
+    classID: 224
+    script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events: []
---- !u!74 &7462682
+--- !u!74 &7447618
 AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -62,10 +141,10 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: 1, y: 1, z: 1}
+        value: {x: 1.20000005, y: 1.20000005, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 48
+        tangentMode: 1952805747
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -107,7 +186,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: 1.20000005
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -121,7 +200,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: 1.20000005
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -147,7 +226,7 @@ AnimationClip:
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events: []
---- !u!74 &7462684
+--- !u!74 &7447620
 AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -191,7 +270,7 @@ AnimationClip:
   m_EditorCurves: []
   m_EulerEditorCurves: []
   m_Events: []
---- !u!74 &7462686
+--- !u!74 &7447622
 AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -240,7 +319,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Btn_level
+  m_Name: btn_zoomed
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: Normal
@@ -270,7 +349,7 @@ AnimatorController:
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
-    m_StateMachine: {fileID: 110762680}
+    m_StateMachine: {fileID: 110747616}
     m_Mask: {fileID: 0}
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
@@ -279,7 +358,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1101 &110162680
+--- !u!1101 &110147616
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -287,7 +366,7 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 0}
-  m_DstState: {fileID: 110262680}
+  m_DstState: {fileID: 110247616}
   m_TransitionDuration: .100000001
   m_TransitionOffset: 0
   m_Conditions:
@@ -299,7 +378,7 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110162682
+--- !u!1101 &110147618
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -307,7 +386,7 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 0}
-  m_DstState: {fileID: 110262682}
+  m_DstState: {fileID: 110247618}
   m_TransitionDuration: .100000001
   m_TransitionOffset: 0
   m_Conditions:
@@ -319,7 +398,7 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110162684
+--- !u!1101 &110147620
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -327,7 +406,7 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 0}
-  m_DstState: {fileID: 110262684}
+  m_DstState: {fileID: 110247620}
   m_TransitionDuration: .100000001
   m_TransitionOffset: 0
   m_Conditions:
@@ -339,7 +418,7 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110162686
+--- !u!1101 &110147622
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -347,7 +426,7 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 0}
-  m_DstState: {fileID: 110262686}
+  m_DstState: {fileID: 110247622}
   m_TransitionDuration: .100000001
   m_TransitionOffset: 0
   m_Conditions:
@@ -359,7 +438,7 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1102 &110262680
+--- !u!1102 &110247616
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
@@ -368,13 +447,13 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7462680}
-  m_ParentStateMachine: {fileID: 110762680}
+  - {fileID: 7447616}
+  m_ParentStateMachine: {fileID: 110747616}
   m_Position: {x: 200, y: 0, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110262682
+--- !u!1102 &110247618
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
@@ -383,13 +462,13 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7462682}
-  m_ParentStateMachine: {fileID: 110762680}
+  - {fileID: 7447618}
+  m_ParentStateMachine: {fileID: 110747616}
   m_Position: {x: 235, y: 65, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110262684
+--- !u!1102 &110247620
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
@@ -398,13 +477,13 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7462684}
-  m_ParentStateMachine: {fileID: 110762680}
+  - {fileID: 7447620}
+  m_ParentStateMachine: {fileID: 110747616}
   m_Position: {x: 270, y: 130, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110262686
+--- !u!1102 &110247622
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
@@ -413,47 +492,47 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7462686}
-  m_ParentStateMachine: {fileID: 110762680}
+  - {fileID: 7447622}
+  m_ParentStateMachine: {fileID: 110747616}
   m_Position: {x: 305, y: 195, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1107 &110762680
+--- !u!1107 &110747616
 StateMachine:
   serializedVersion: 2
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 110262680}
+  m_DefaultState: {fileID: 110247616}
   m_States:
-  - {fileID: 110262680}
-  - {fileID: 110262682}
-  - {fileID: 110262684}
-  - {fileID: 110262686}
+  - {fileID: 110247616}
+  - {fileID: 110247618}
+  - {fileID: 110247620}
+  - {fileID: 110247622}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
+      first: {fileID: 110247622}
+      second: []
+    data:
+      first: {fileID: 110247620}
+      second: []
+    data:
+      first: {fileID: 110247618}
+      second: []
+    data:
+      first: {fileID: 110247616}
+      second: []
+    data:
       first: {fileID: 0}
       second:
-      - {fileID: 110162680}
-      - {fileID: 110162682}
-      - {fileID: 110162684}
-      - {fileID: 110162686}
-    data:
-      first: {fileID: 110262680}
-      second: []
-    data:
-      first: {fileID: 110262682}
-      second: []
-    data:
-      first: {fileID: 110262684}
-      second: []
-    data:
-      first: {fileID: 110262686}
-      second: []
+      - {fileID: 110147616}
+      - {fileID: 110147618}
+      - {fileID: 110147620}
+      - {fileID: 110147622}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
