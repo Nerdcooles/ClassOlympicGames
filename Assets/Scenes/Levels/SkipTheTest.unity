@@ -707,6 +707,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c061ec6e7de4deebc5e2365c97ac38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lvm: {fileID: 0}
+  img: {fileID: 0}
+  canSkip: 0
+  secToSkip: 2
+  initial_countdown: 3
+  sprite: []
 --- !u!114 &282028474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,10 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed552fad37af946199b0ddfb76d83ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
-  panel_countdown: {fileID: 282028471}
-  panel_finish: {fileID: 2013339278}
-  panel_pause: {fileID: 0}
+  level: 4
   withRound: 0
 --- !u!4 &534137702
 Transform:
@@ -3541,7 +3544,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Size: {x: 5, y: 500}
-  m_Center: {x: 120, y: 0}
+  m_Center: {x: 110, y: 0}
 --- !u!4 &1482925229
 Transform:
   m_ObjectHideFlags: 0
@@ -4960,6 +4963,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4edfc163a4b941bb972c6fe39bc43d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lvm: {fileID: 0}
+  img: {fileID: 0}
+  canSkip: 0
+  secToSkip: 2
 --- !u!114 &2013339281
 MonoBehaviour:
   m_ObjectHideFlags: 0

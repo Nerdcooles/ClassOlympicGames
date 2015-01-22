@@ -10,11 +10,13 @@ public class LevelManager : MonoBehaviour {
 
 	private Transform panels;
 	private GameObject panel_instructions;
-	public GameObject panel_countdown;
 	private GameObject panel_podium;
-	public GameObject panel_finish;
-	public GameObject panel_pause;
+	private GameObject panel_pause;
 
+	private GameObject pause_btn;
+
+	private Image finish;
+	private Image countdown;
 
 	private GameObject instructionPrefab;
 	private GameObject pausePrefab;
@@ -25,10 +27,7 @@ public class LevelManager : MonoBehaviour {
 	public enum eState {Instructions, Countdown, Run, Pause, Finish}
 	private eState state;
 	private eState old_state;
-
-	private Panel countdown;
-	private Panel finish;
-
+	
 	public delegate void StateChange();
 	public event StateChange OnCountdown;
 	public event StateChange OnStart;
@@ -40,6 +39,7 @@ public class LevelManager : MonoBehaviour {
 
 	private GameManager.ePlayers[] positions;
 	private int num_players;
+	private int initial_countdown = 3;
 
 	void Awake() {
 				if (GameManager.Instance.getNumPlayer () == 0) {
@@ -50,15 +50,16 @@ public class LevelManager : MonoBehaviour {
 								GameManager.Instance.setColor ((GameManager.ePlayers)i, (GameManager.eColors)i);
 				}
 				panels = GameObject.Find("Panels").transform;
+				countdown = GameObject.Find("Countdown").GetComponent<Image>();
+				countdown.enabled = false;
+				finish = GameObject.Find("Finish").GetComponent<Image>();
+				finish.enabled = false;
 
 				pausePrefab = Resources.Load<GameObject>("Panels/Pause");
-		instructionPrefab = Resources.Load<GameObject>("Instructions/" + level.ToString());
-		podiumPrefab = Resources.Load<GameObject>("Panels/Podium");
-				//COUNTDOWN
-				countdown = panel_countdown.GetComponent<Panel> ();
+				instructionPrefab = Resources.Load<GameObject>("Instructions/" + level.ToString());
+				podiumPrefab = Resources.Load<GameObject>("Panels/Podium");
 
-				//FINISH
-				finish = panel_finish.GetComponent<Panel> ();
+				pause_btn = GameObject.Find("Pause_btn");
 
 				if (withRound) {
 						RoundManager.Instance.Image = GameObject.Find ("Round").GetComponent<Image> ();
@@ -85,11 +86,24 @@ public class LevelManager : MonoBehaviour {
 		state = eState.Countdown;
 		if(OnCountdown != null)
 			OnCountdown();
-		countdown.Show ();
+		countdown.enabled = true;
+		InvokeRepeating ("CountDown", 0.1f, 0.8f);
+
+	}
+
+	private void CountDown() {
+		if(initial_countdown<0) {
+			countdown.enabled = false;
+			StartGame();
+			CancelInvoke("CountDown");
+			return;
+		}
+		countdown.sprite = Resources.Load <Sprite> ("Sprites/Common/countdown_" + initial_countdown);
+		initial_countdown--;
 	}
 
 	public void StartGame() {
-		countdown.Hide ();
+		countdown.enabled = false;
 		state = eState.Run;
 		if(OnStart != null)
 			OnStart();
@@ -102,13 +116,13 @@ public class LevelManager : MonoBehaviour {
 		if (withRound) {
 			RoundManager.Instance.NextRound();
 		}
-		finish.Show();
+		finish.enabled = true;
 		StartCoroutine ("WaitForPodium");
 	}
 
 	IEnumerator WaitForPodium() {
 		yield return new WaitForSeconds(2f);
-		finish.Hide();
+		finish.enabled = false;
 		if(OnFinish != null)
 			OnFinish();
 		for (int i=0; i<positions.Length; i++) {
@@ -163,6 +177,7 @@ public class LevelManager : MonoBehaviour {
 	}
 	
 	public void ShowPodium() {
+		pause_btn.SetActive(false);
 		panel_podium = Instantiate(podiumPrefab) as GameObject;
 		panel_podium.transform.SetParent(panels, false);
 	}

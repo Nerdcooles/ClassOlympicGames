@@ -20,7 +20,10 @@ public class SkatePlayer : LevelPlayer {
 	private bool jumping, can_move, pressed;
 
 	protected override void Initialize() {
-		sceneMgr = GameObject.Find("LongLevelManager").GetComponent<LongLevelManager>() as LongLevelManager;
+		Vector3 position = transform.position;
+		position.x = -GameObject.Find("UIManager").GetComponent<UIManager>().SceneWidth + 50;
+		transform.position = position;
+			sceneMgr = GameObject.Find("LongLevelManager").GetComponent<LongLevelManager>() as LongLevelManager;
 			finished = false;
 			jumping = false;
 			can_move = true;
