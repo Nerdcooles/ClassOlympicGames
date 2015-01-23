@@ -34,7 +34,7 @@ public class LongLevelManager : MonoBehaviour {
 						distances [player.GetHashCode()] = distance;
 						times[player.GetHashCode()] = Time.time;
 
-		}
+				}
 		if (finished == num_players)
 						Finish ();
 	}

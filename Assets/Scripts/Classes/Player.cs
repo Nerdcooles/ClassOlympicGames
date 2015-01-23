@@ -2,7 +2,7 @@
 
 public class Player{
 
-	const int gold_value = 4, silver_value = 2, bronze_value = 1;
+	const int gold_value = 5, silver_value = 2, bronze_value = 1;
 
 	GameManager.eColors color;
 	GameManager.ePlayers number;

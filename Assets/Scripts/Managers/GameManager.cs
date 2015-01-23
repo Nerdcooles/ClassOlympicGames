@@ -120,6 +120,12 @@ public class GameManager : Singleton<GameManager> {
 		return 0;
 	}
 
+	public int GetPoints(ePlayers player) {
+		if (players.ContainsKey(player))
+			return players[player].Points;
+		return 0;
+	}
+
 	public bool IsPlaying(ePlayers player) {
 		if (players.ContainsKey (player)) {
 						return true;

@@ -8,7 +8,7 @@ public class Instructions : MonoBehaviour {
 
 	LevelManager lvm;
 	private bool canSkip = false;
-	private int secToSkip = 1;
+	private int secToSkip = 2;
 	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		InvokeRepeating ("WaitToSkip", 0.1f, 1f);

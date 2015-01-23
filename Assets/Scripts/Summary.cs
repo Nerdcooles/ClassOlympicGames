@@ -9,6 +9,8 @@ public class Summary : MonoBehaviour {
 	float x;
 	float[] y = new float[4];
 	float z;
+	private bool canSkip = false;
+	private int secToSkip = 2;
 
 	void Start () {
 
@@ -96,11 +98,19 @@ public class Summary : MonoBehaviour {
 		}
 	}
 
+	
+	
 	void Update() {
-		if (Input.anyKeyDown)
-						Skip ();
+		if((Input.touchCount > 0 || Input.anyKey) && canSkip)
+			MenuManager.NextLevel ();
+	}
+	
+	private void WaitToSkip() {
+		secToSkip--;
+		if (secToSkip < 0) {
+			canSkip=true;
+			CancelInvoke("WaitToSkip");
+			
 		}
-	public void Skip() {
-		MenuManager.NextLevel ();
 	}
 }
