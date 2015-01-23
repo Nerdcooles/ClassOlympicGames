@@ -24,7 +24,7 @@ public class AwardManager : MonoBehaviour {
 	void Start() {
 		podiumPrefab = Resources.Load<GameObject> ("Prefabs/Podium") as GameObject;
 
-		//**************************************  TEST CASES  **************************************
+		/**************************************  TEST CASES  **************************************
 		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
 		GameManager.Instance.createPlayers (4);
 		for(int i=0; i<4; i++)
