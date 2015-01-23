@@ -171,7 +171,6 @@ public class LevelManager : MonoBehaviour {
 	}
 	
 	public void SkipInstructions() {
-		Destroy(panel_instructions);
 		if(state == eState.Instructions)
 			ShowCountdown();
 	}
