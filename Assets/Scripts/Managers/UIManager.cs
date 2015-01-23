@@ -21,13 +21,17 @@ public class UIManager : MonoBehaviour {
 		sceneWidth = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).x;
 		sceneHeight = -Camera.main.ScreenToWorldPoint(new Vector3(0f,0f,0f)).y;
 
-		initPlayers ();
+		try {
+						initPlayers ();
+				} catch (System.Exception ex) {
+			Debug.Log("Award level");
+		}
 		initButtons();
 		try {
 						initScoring ();
-				} catch (System.Exception ex) {
+		} catch (System.Exception ex) {
 					Debug.Log("No scoring view");
-				}
+		}
 
 	} 
 

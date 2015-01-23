@@ -40,7 +40,7 @@ public static class MenuManager {
 	}
 
 	public static void Credits() {
-		Debug.Log("credits");
+		Application.LoadLevel("Credits");
 	}
 	
 	public static void Summary() {

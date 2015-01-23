@@ -21,14 +21,17 @@ public class AwardManager : MonoBehaviour {
 	private bool canSkip = false;
 	private int secToSkip = 2;
 
+//	void Awake() {
+//		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
+//		GameManager.Instance.createPlayers (2);
+//		for(int i=0; i<2; i++)
+//			GameManager.Instance.setColor((GameManager.ePlayers)i, (GameManager.eColors)i);
+//
+//	}
 	void Start() {
 		podiumPrefab = Resources.Load<GameObject> ("Prefabs/Podium") as GameObject;
 
 		/**************************************  TEST CASES  **************************************
-		GameManager.Instance.startMode (GameManager.eGameMode.TRAINING);
-		GameManager.Instance.createPlayers (4);
-		for(int i=0; i<4; i++)
-			GameManager.Instance.setColor((GameManager.ePlayers)i, (GameManager.eColors)i);
 		//P1
 		//GOLD
 		GameManager.Instance.addMedal (GameManager.ePlayers.p01, GameManager.eMedals.Gold);
@@ -247,17 +250,12 @@ public class AwardManager : MonoBehaviour {
 
 				position++;
 
-//				if(i!=3) {
-//					//PODIUM
-//					pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_winner");
-//				}else{
-//					//OUT
-//					pod[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_loser");
-//				}
-//				pod[i].SetActive(true);
 		}
 
 	}
+
+		InvokeRepeating ("WaitToSkip", 0.1f, 1f);
+
 	}
 
 	void Update() {

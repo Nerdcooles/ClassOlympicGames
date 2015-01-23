@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class Summary : MonoBehaviour {
 
 	public GameObject[] pod;
-
+	public GameObject[] pos;
 	GameObject[] medalPrefab = new GameObject[3];
 	float x;
 	float[] y = new float[4];
@@ -78,10 +79,11 @@ public class Summary : MonoBehaviour {
 	void setPositions() {
 		List<GameManager.ePlayers> winners = GameManager.Instance.getWinners(true);
 
-		int pos = 0;
+		int position = 0;
 		foreach(GameManager.ePlayers p in winners) {
-			pod[p.GetHashCode()].transform.position = new Vector3(x,y[pos],z);
-			pos++;
+			pod[p.GetHashCode()].transform.position = new Vector3(x,y[position],z);
+			pos[p.GetHashCode()].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Podium/Summary_"+position);
+			position++;
 		}
 
 		for (int i=0; i<winners.Count; i++) {
@@ -96,10 +98,12 @@ public class Summary : MonoBehaviour {
 			}
 			pod[i].SetActive(true);
 		}
+		InvokeRepeating ("WaitToSkip", 0.1f, 1f);
+
 	}
 
 	
-	
+
 	void Update() {
 		if((Input.touchCount > 0 || Input.anyKey) && canSkip)
 			MenuManager.NextLevel ();

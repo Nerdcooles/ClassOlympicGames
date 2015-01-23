@@ -133,14 +133,7 @@ public class LevelManager : MonoBehaviour {
 		if(OnShowMedals!=null)
 			OnShowMedals();
 		yield return new WaitForSeconds(3f);
-		if (withRound) {
-						if (RoundManager.Instance.Round < 3) {
-								Application.LoadLevel (Application.loadedLevel);
-				yield return new WaitForSeconds(1f);
-			} else {
-								RoundManager.Instance.Reset ();
-						}
-				}
+
 		ShowPodium();
 	}
 
@@ -190,6 +183,18 @@ public class LevelManager : MonoBehaviour {
 		Time.timeScale=1;
 	}
 	public void LevelOver() {
+		StartCoroutine("CheckIfRound");
+	}
+
+	IEnumerator CheckIfRound() {
+		if (withRound) {
+			if (RoundManager.Instance.Round < 3) {
+				Application.LoadLevel (Application.loadedLevel);
+				yield return new WaitForSeconds(1f);
+			} else {
+				RoundManager.Instance.Reset ();
+			}
+		}
 		MenuManager.LevelOver();	
 	}
 	

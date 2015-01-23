@@ -5,7 +5,7 @@ public class Bus : MonoBehaviour {
 	LevelManager lvm;
 	int init_speed = 3000;
 	int speed = 8000;
-	int turbo = 2;
+	float turbo = 1.3f;
 
 	void Awake () {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();

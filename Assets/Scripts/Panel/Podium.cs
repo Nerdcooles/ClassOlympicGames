@@ -15,9 +15,13 @@ public class Podium : MonoBehaviour {
 	void Start() {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>() as LevelManager;
 		int num_players = GameManager.Instance.getNumPlayer ();
+		int nc = 0;
 		for (int position=0; position<pod.Length; position++) {
 			try {
 				GameManager.ePlayers player = lvm.getPodium(position);
+				if(player == GameManager.ePlayers.none)
+					nc++;
+
 				if(position==num_players-1 && position!=0) {
 					//LOSER
 					animCtrl = Resources.Load <RuntimeAnimatorController> ("Sprites/Podium/" + GameManager.Instance.getColor (player) + "_podium_loser");
@@ -33,9 +37,11 @@ public class Podium : MonoBehaviour {
 				medlaInstance.transform.SetParent(gameObject.transform, false);
 				medlaInstance.transform.position = pod[position].transform.position;
 			}catch{
-				//player not classified
 			}
 		}
+
+		if(nc == 3)
+			GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Podium/bg_podium_nc");
 		InvokeRepeating ("WaitToSkip", 0.1f, 1f);
 
 	}

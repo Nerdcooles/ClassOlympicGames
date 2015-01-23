@@ -2286,9 +2286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  panel_countdown: {fileID: 849542911}
-  panel_finish: {fileID: 1945175499}
-  panel_pause: {fileID: 0}
   withRound: 0
 --- !u!1001 &1497380891
 Prefab:
@@ -2958,7 +2955,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Size: {x: 28.0198364, y: 432.37207}
-  m_Center: {x: -380, y: 0}
+  m_Center: {x: -430, y: 0}
 --- !u!1 &2099881459
 GameObject:
   m_ObjectHideFlags: 0

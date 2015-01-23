@@ -20,7 +20,11 @@ public class BtnHandler : MonoBehaviour {
 	private bool enabled;
 
 	void Awake() {
+		try {
 		lvm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		}catch {
+			//award level
+		}
 		enabled = false;
 	}
 
@@ -29,7 +33,7 @@ public class BtnHandler : MonoBehaviour {
 			color = GameManager.Instance.getColor(player);
 			s_released = Resources.Load <Sprite> ("Sprites/Buttons/" + color.ToString() + "_" + player.ToString());
 			s_pressed = Resources.Load <Sprite> ("Sprites/Buttons/" + color.ToString() + "_" + player.ToString() + "_pressed");
-		s_renderer = gameObject.GetComponent<Image> ();
+			s_renderer = gameObject.GetComponent<Image> ();
 			s_renderer.sprite = s_released;
 		} catch {
 			gameObject.SetActive (false);
@@ -48,16 +52,20 @@ public class BtnHandler : MonoBehaviour {
 	{
 		gameObject.GetComponent<PressGesture>().Pressed += Press;
 		gameObject.GetComponent<ReleaseGesture>().Released += Release;
+		if(lvm != null) {
 		lvm.OnStart += EnableButton;
-		lvm.OnFinish += DisableButton;
+		lvm.OnTimeIsUp += DisableButton;
+		}
 	}
 	
 	private void OnDisable()
 	{
 		gameObject.GetComponent<PressGesture>().Pressed -= Press;
-		gameObject.GetComponent<ReleaseGesture>().Released -= Release;	
+		gameObject.GetComponent<ReleaseGesture>().Released -= Release;
+		if(lvm != null) {
 		lvm.OnStart -= EnableButton;
-		lvm.OnFinish -= DisableButton;
+			lvm.OnTimeIsUp -= DisableButton;
+		}
 	}
 	
 	public void EnableButton() {
