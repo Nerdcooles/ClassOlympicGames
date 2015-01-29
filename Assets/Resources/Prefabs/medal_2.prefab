@@ -12,7 +12,7 @@ GameObject:
   - 95: {fileID: 9564444}
   - 114: {fileID: 11421736}
   m_Layer: 0
-  m_Name: Medal_2
+  m_Name: medal_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

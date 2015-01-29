@@ -439,7 +439,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 370.899994, y: -202.899994}
-  m_SizeDelta: {x: 194, y: 95}
+  m_SizeDelta: {x: 229, y: 152}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &695212824
 MonoBehaviour:
@@ -458,7 +458,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
