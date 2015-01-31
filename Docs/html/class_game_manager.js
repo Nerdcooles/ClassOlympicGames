@@ -42,7 +42,7 @@ var class_game_manager =
     [ "GetPlayers", "class_game_manager.html#a480dd25f59477600b9bcdc576c36d7cf", null ],
     [ "GetPoints", "class_game_manager.html#a02c45ad13f21abcef3a87c8081312388", null ],
     [ "GetSysColor", "class_game_manager.html#aec05836b0ecd4961a579ae19bf2fe856", null ],
-    [ "getWinners", "class_game_manager.html#abbcd332b657f26723d319d942fcaa9d5", null ],
+    [ "GetWinners", "class_game_manager.html#a779310f81caec3ce5f7ce96da4cd647e", null ],
     [ "IsPlaying", "class_game_manager.html#abd10e5db0aa502b18e8f19fc59c5587b", null ],
     [ "LevelOver", "class_game_manager.html#ad5ae8ae2e2fe74743e89e70b47563639", null ],
     [ "SetColor", "class_game_manager.html#ae422a9d290202f9698954ff925f2447e", null ],

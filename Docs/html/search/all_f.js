@@ -47,7 +47,6 @@ var searchData=
   ['startlongboard',['startLongboard',['../class_select_level.html#ad27a722b1d473913ae941c4cdcc6c285',1,'SelectLevel']]],
   ['startmode',['StartMode',['../class_game_manager.html#ab5a92a2f4354da85cf2964d1ad065ca9',1,'GameManager']]],
   ['startnerd',['startNerd',['../class_select_level.html#ad34da5a7e02239cf5c8e9e13f82cb77b',1,'SelectLevel']]],
-  ['startplayer',['StartPlayer',['../class_player_character.html#a994e5a3542688482f39443435fdcb4d7',1,'PlayerCharacter.StartPlayer()'],['../class_delayrace_player.html#aac0493df9fd708447d241ee7f3878e5d',1,'DelayracePlayer.StartPlayer()'],['../class_longboard_player.html#a43a40c523dffac1e7764d71a657fe86b',1,'LongboardPlayer.StartPlayer()'],['../class_skipthetest_player.html#a154ffcf33d2a8eea4f5fba366610ccd2',1,'SkipthetestPlayer.StartPlayer()']]],
   ['startpt',['StartPt',['../class_nerdthrow_nerd.html#a4f4108964d148dcda74fc5d046d1d651',1,'NerdthrowNerd']]],
   ['startskip',['startSkip',['../class_select_level.html#afd7a585de5e9a60cf45f14a8cfbc970b',1,'SelectLevel']]],
   ['starttraining',['StartTraining',['../class_select_mode.html#acf551d48dbb362cc801f48c9c3369526',1,'SelectMode']]],

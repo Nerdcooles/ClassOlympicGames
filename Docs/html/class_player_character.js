@@ -1,11 +1,12 @@
 var class_player_character =
 [
-    [ "EndPlayer", "class_player_character.html#aeb8369831cede36b9474eb27122326b3", null ],
     [ "Initialize", "class_player_character.html#a5529365646767a16e6c714c653ef305f", null ],
+    [ "OnCountdown", "class_player_character.html#a7870459b3b872cb25e3b49f582227ecc", null ],
+    [ "OnFinish", "class_player_character.html#a54d71ef5b4dd65305f405a8e0cef8990", null ],
+    [ "OnStart", "class_player_character.html#a28ae18fa09dfe8c6193ef42d496498fe", null ],
     [ "Pressed", "class_player_character.html#acdbd93363eec3be68759741c79c12073", null ],
     [ "Released", "class_player_character.html#aa5283e89e1ef5addb767c44c512006fa", null ],
     [ "ShowMedal", "class_player_character.html#a7b98aabbfefc5cc5865e2126adc9ebab", null ],
-    [ "StartPlayer", "class_player_character.html#a994e5a3542688482f39443435fdcb4d7", null ],
     [ "animator", "class_player_character.html#a97c6b3aa7c959b2f830d9166ff75e35c", null ],
     [ "animCtrl", "class_player_character.html#ac7d60e0bb0c6628225b1e9c5986728ae", null ],
     [ "button", "class_player_character.html#a490b132f8682551b0d48f3c36fb90a6d", null ],

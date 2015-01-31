@@ -3,6 +3,9 @@ var dir_4a007d3a48187b18025bd2f78879fcc5 =
     [ "BtnHandler.cs", "_btn_handler_8cs.html", [
       [ "BtnHandler", "class_btn_handler.html", "class_btn_handler" ]
     ] ],
+    [ "FloorManager.cs", "_floor_manager_8cs.html", [
+      [ "FloorManager", "class_floor_manager.html", "class_floor_manager" ]
+    ] ],
     [ "GameManager.cs", "_game_manager_8cs.html", [
       [ "GameManager", "class_game_manager.html", "class_game_manager" ],
       [ "DrawException", "class_draw_exception.html", "class_draw_exception" ]

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['addmedal',['addMedal',['../class_player.html#a32322d41dbb9769922f798633dc7514d',1,'Player.addMedal()'],['../class_game_manager.html#a7bf7826c7904414167ab18cb31857f03',1,'GameManager.AddMedal()']]],
+  ['addmedal',['AddMedal',['../class_player.html#a5c922141313a733afa6d9c452f44ba7e',1,'Player.AddMedal()'],['../class_game_manager.html#a7bf7826c7904414167ab18cb31857f03',1,'GameManager.AddMedal()']]],
   ['alpha',['alpha',['../class_bucketball_player.html#ab66514b0a50971e725ad575e77ed549b',1,'BucketballPlayer']]],
   ['animator',['animator',['../class_player_character.html#a97c6b3aa7c959b2f830d9166ff75e35c',1,'PlayerCharacter']]],
   ['animctrl',['animCtrl',['../class_player_character.html#ac7d60e0bb0c6628225b1e9c5986728ae',1,'PlayerCharacter']]],
