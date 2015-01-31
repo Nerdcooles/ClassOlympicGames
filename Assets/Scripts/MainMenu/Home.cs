@@ -1,18 +1,1 @@
-﻿using UnityEngine;
-using TouchScript.Gestures;
-using System;
-
-
-public class Home : GenericMenu {
-
-	public void StartGame()
-	{
-		MenuManager.SelectMode();
-	}
-
-	public void Credits()
-	{
-		MenuManager.Credits();
-	}
-
-}
+﻿using UnityEngine;using TouchScript.Gestures;using System;/** * Home page behaviour */public class Home : GenericMenu{	public void StartGame ()	{		MenuManager.SelectMode ();	}	public void Credits ()	{		MenuManager.Credits ();	}}

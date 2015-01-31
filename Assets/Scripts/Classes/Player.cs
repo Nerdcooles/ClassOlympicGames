@@ -1,52 +1,1 @@
-﻿using System.Collections.Generic;
-
-public class Player{
-
-	const int gold_value = 5, silver_value = 2, bronze_value = 1;
-
-	GameManager.eColors color;
-	GameManager.ePlayers number;
-
-	Dictionary<GameManager.eMedals, int> medals = new Dictionary<GameManager.eMedals, int>();
-
-	public Player() {
-		for(int i=0; i<3; i++) {
-			medals.Add((GameManager.eMedals)i, 0); 
-		}
-	}
-
-	public void setColor(GameManager.eColors color) {
-		this.color = color;
-	}
-
-	public GameManager.eColors getColor() {
-		return color;
-	}
-
-	public void addMedal(GameManager.eMedals medal) {
-		int oldMedals;
-		medals.TryGetValue(medal, out oldMedals); 
-		medals[medal] = oldMedals + 1;	
-	}
-
-	public int getMedals(GameManager.eMedals medal) {
-		int num;
-		medals.TryGetValue(medal, out num); 	
-		return num;
-	}
-	
-	public int Points {
-		get {
-			return getMedals(GameManager.eMedals.Gold)*gold_value + getMedals(GameManager.eMedals.Silver)*silver_value + getMedals(GameManager.eMedals.Bronze)*bronze_value;
-		}
-	}
-
-	public GameManager.ePlayers Number {
-		get {
-			return number;
-		}
-		set {
-			number = value;
-		}
-	}
-}
+﻿using System.Collections.Generic;/** * Class to manage player's number, color and medals */public class Player{	const int gold_value = 5, silver_value = 2, bronze_value = 1;	GameManager.ePlayers number;	GameManager.eColors color;	Dictionary<GameManager.eMedals, int> medals = new Dictionary<GameManager.eMedals, int> ();	public Player ()	{		for (int i=0; i<3; i++) {			medals.Add ((GameManager.eMedals)i, 0); 		}	}	public void AddMedal (GameManager.eMedals medal)	{		int oldMedals;		medals.TryGetValue (medal, out oldMedals); 		medals [medal] = oldMedals + 1;		}	public int GetMedals (GameManager.eMedals medal)	{		int num;		medals.TryGetValue (medal, out num); 			return num;	}		public int Points {		get {			return GetMedals (GameManager.eMedals.Gold) * gold_value + GetMedals (GameManager.eMedals.Silver) * silver_value + GetMedals (GameManager.eMedals.Bronze) * bronze_value;		}	}	public GameManager.ePlayers Number {		get {			return number;		}		set {			number = value;		}	}	public GameManager.eColors Color {		get {			return color;		}		set {			color = value;		}	}}

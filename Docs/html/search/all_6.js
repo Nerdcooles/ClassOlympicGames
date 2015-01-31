@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['gamemanager',['GameManager',['../class_game_manager.html',1,'GameManager'],['../class_game_manager.html#aba36fa5d78b798e6707bd23c5ee55f19',1,'GameManager.GameManager()']]],
+  ['gamemanager_2ecs',['GameManager.cs',['../_game_manager_8cs.html',1,'']]],
+  ['genericmenu',['GenericMenu',['../class_generic_menu.html',1,'']]],
+  ['genericmenu_2ecs',['GenericMenu.cs',['../_generic_menu_8cs.html',1,'']]],
+  ['gesture',['Gesture',['../class_btn_handler.html#aecd3e150815820e7def0432eda9be247',1,'BtnHandler']]],
+  ['getbutton',['getButton',['../class_screen_manager.html#a85743d1875889b0b23ce7fe2bc5a793c',1,'ScreenManager']]],
+  ['getcolor',['GetColor',['../class_game_manager.html#aafb0052e7646fb716a095dd101345e97',1,'GameManager']]],
+  ['getgamemode',['GetGameMode',['../class_game_manager.html#a6ab5de1dbdae82ce3288ed143813c3a8',1,'GameManager']]],
+  ['getlevel',['getLevel',['../class_level_manager.html#a8bbc57e8f408bd01b57aa38a7d6b5e31',1,'LevelManager']]],
+  ['getmedal',['GetMedal',['../class_game_manager.html#ae7e9b233b83b6d0af2d679301cf0f3b3',1,'GameManager']]],
+  ['getmedals',['getMedals',['../class_player.html#ac61c2bec726abee0c6ca5a98ee8fc337',1,'Player']]],
+  ['getnumplayer',['GetNumPlayer',['../class_game_manager.html#acb90620309f66e9f56c7eb528fccb088',1,'GameManager']]],
+  ['getplayer',['getPlayer',['../class_arteachery_pencil.html#ab6ad79f08ee6f48c3b3e6969829309b9',1,'ArteacheryPencil.getPlayer()'],['../class_bucketball_ball.html#a34e17be452a2d03b42bad6f23b6b119d',1,'BucketballBall.getPlayer()']]],
+  ['getplayers',['GetPlayers',['../class_game_manager.html#a480dd25f59477600b9bcdc576c36d7cf',1,'GameManager']]],
+  ['getpodium',['getPodium',['../class_level_manager.html#a80a9dd60cbe617918a7542d3c2433a5a',1,'LevelManager']]],
+  ['getpoints',['GetPoints',['../class_game_manager.html#a02c45ad13f21abcef3a87c8081312388',1,'GameManager']]],
+  ['getposition',['GetPosition',['../class_level_manager.html#a00732c254e2d8092301f17ef3f26b395',1,'LevelManager']]],
+  ['getsyscolor',['GetSysColor',['../class_game_manager.html#aec05836b0ecd4961a579ae19bf2fe856',1,'GameManager']]],
+  ['getwinners',['getWinners',['../class_game_manager.html#abbcd332b657f26723d319d942fcaa9d5',1,'GameManager']]],
+  ['gold',['Gold',['../class_game_manager.html#ad7e5f5288461230646c5c6339c681730a9768feb3fdb1f267b06093bc572952dd',1,'GameManager']]],
+  ['green',['green',['../class_game_manager.html#aa798177dcd732cc20705436929d97bb5a9f27410725ab8cc8854a2769c7a516b8',1,'GameManager']]]
+];

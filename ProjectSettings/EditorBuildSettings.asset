@@ -22,9 +22,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Arteachery.unity
   - enabled: 1
-    path: Assets/Scenes/Summary.unity
+    path: Assets/Scenes/Menu/Summary.unity
   - enabled: 1
-    path: Assets/Scenes/Award.unity
+    path: Assets/Scenes/Menu/Award.unity
   - enabled: 1
     path: Assets/Scenes/Levels/SkipTheTest.unity
   - enabled: 1
@@ -32,4 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/LongboardJump.unity
   - enabled: 1
-    path: Assets/Scenes/Credits.unity
+    path: Assets/Scenes/Menu/Credits.unity

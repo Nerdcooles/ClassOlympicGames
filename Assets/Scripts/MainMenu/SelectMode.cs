@@ -1,20 +1,1 @@
-﻿using UnityEngine;
-using System;
-using TouchScript.Gestures;
-
-
-public class SelectMode : GenericMenu {
-
-	
-	public void StartClassic ()
-	{
-		GameManager.Instance.startMode(GameManager.eGameMode.CLASSIC);
-		MenuManager.SelectNumber();
-	}
-	
-	public void StartTraining ()
-	{
-		GameManager.Instance.startMode(GameManager.eGameMode.TRAINING);
-		MenuManager.SelectNumber();
-	}
-}	
+using UnityEngine;using System;using TouchScript.Gestures;/** * Select mode page behavior */public class SelectMode : GenericMenu{	public void StartClassic ()	{		GameManager.Instance.StartMode (GameManager.eGameMode.CLASSIC);		MenuManager.SelectNumber ();	}		public void StartTraining ()	{		GameManager.Instance.StartMode (GameManager.eGameMode.TRAINING);		MenuManager.SelectNumber ();	}}	

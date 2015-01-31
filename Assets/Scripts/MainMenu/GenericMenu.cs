@@ -1,23 +1,1 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class GenericMenu : MonoBehaviour {
-	
-	Transform canvas;
-	
-	void Awake() {
-		GameManager.Instance.CurrentMenu = Application.loadedLevel;
-		canvas = GameObject.Find("Canvas").transform;
-	}
-	
-	
-	public void Exit() {
-		GameObject exit_panel = Instantiate(Resources.Load<GameObject>("Panels/Exit")) as GameObject;
-		exit_panel.transform.SetParent(canvas, false);
-	}
-
-	public void Back() {
-		Application.LoadLevel(GameManager.Instance.CurrentMenu-1);
-	}
-
-}
+﻿using UnityEngine;using System.Collections;/** * Generic menu page behavior */public class GenericMenu : MonoBehaviour{		Transform canvas;		void Awake ()	{		GameManager.Instance.CurrentMenu = Application.loadedLevel;		canvas = GameObject.Find ("Canvas").transform;	}		/**	 * Instatiate exit popup	 */	public void Exit ()	{		GameObject exit_panel = Instantiate (Resources.Load<GameObject> ("Panels/Exit")) as GameObject;		exit_panel.transform.SetParent (canvas, false);	}	/**	 * Go to previous page	 */	public void Back ()	{		Application.LoadLevel (GameManager.Instance.CurrentMenu - 1);	}}
